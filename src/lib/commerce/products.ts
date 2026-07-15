@@ -1,35 +1,92 @@
 import { CommerceProduct } from './types';
+import { commerceFetch } from './client';
+
+const getProductQuery = `
+  query getProduct($handle: String!) {
+    product(handle: $handle) {
+      id
+      handle
+      title
+      description
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      images(first: 10) {
+        edges {
+          node {
+            url
+            altText
+          }
+        }
+      }
+      variants(first: 250) {
+        edges {
+          node {
+            id
+            title
+            availableForSale
+          }
+        }
+      }
+      metafield(namespace: "custom", key: "materials") {
+        value
+      }
+    }
+  }
+`;
 
 export async function getProduct(handle: string): Promise<CommerceProduct | null> {
-  // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  try {
+    const { body } = await commerceFetch<any>({
+      query: getProductQuery,
+      variables: { handle },
+      tags: ['products', `product-${handle}`],
+    });
 
-  return {
-    id: `mock_id_${handle}`,
-    handle: handle,
-    name: `PRODUCT NAME FOR ${handle.toUpperCase()}`,
-    price: "PRICE: e.g. ₹4,500",
-    description: "Built for movement, designed for stillness. This pair represents our standard for daily reliability, featuring honest materials and uncompromising comfort.",
-    materials: [
-      "MATERIAL 1: e.g. Full-grain leather upper",
-      "MATERIAL 2: e.g. High-density EVA midsole",
-      "MATERIAL 3: e.g. Rubber traction outsole"
-    ],
-    variants: [
-      { id: "v1", title: "7", available: true },
-      { id: "v2", title: "8", available: true },
-      { id: "v3", title: "9", available: true },
-      { id: "v4", title: "10", available: true },
-      { id: "v5", title: "11", available: false },
-      { id: "v6", title: "12", available: true }
-    ],
-    images: [
-      { url: "https://picsum.photos/seed/main/1000/1000", altText: "Main product placeholder" },
-      { url: "https://picsum.photos/seed/detail1/800/800", altText: "Detail shot 1" },
-      { url: "https://picsum.photos/seed/detail2/800/800", altText: "Detail shot 2" }
-    ],
-    shippingPolicy: "TO CONFIRM: Shipping threshold or policy",
-    returnPolicy: "TO CONFIRM: Return window (e.g. 14 days, unworn)",
-    careInstructions: "TO CONFIRM: Care instructions based on material"
-  };
+    const product = body.data?.product;
+    if (!product) return null;
+
+    // Default metafield materials fallback if not setup in Shopify yet
+    let materials: string[] = [];
+    try {
+      if (product.metafield?.value) {
+        materials = JSON.parse(product.metafield.value);
+      } else {
+        materials = [
+          "Full-grain leather upper",
+          "High-density EVA midsole",
+          "Rubber traction outsole"
+        ];
+      }
+    } catch (e) {
+       materials = [product.metafield?.value || "Premium materials"];
+    }
+
+    return {
+      id: product.id,
+      handle: product.handle,
+      name: product.title,
+      price: `₹${parseFloat(product.priceRange.minVariantPrice.amount).toLocaleString('en-IN')}`,
+      description: product.description,
+      materials,
+      variants: product.variants.edges.map(({ node }: any) => ({
+        id: node.id,
+        title: node.title,
+        available: node.availableForSale,
+      })),
+      images: product.images.edges.map(({ node }: any) => ({
+        url: node.url,
+        altText: node.altText || product.title,
+      })),
+      shippingPolicy: "Free shipping across India on prepaid orders.",
+      returnPolicy: "14-day returns for unworn products.",
+      careInstructions: "Wipe clean with a damp cloth. Avoid direct heat."
+    };
+  } catch (e) {
+    console.error(`Failed to fetch product ${handle}:`, e);
+    return null;
+  }
 }

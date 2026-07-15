@@ -27,17 +27,17 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
         
         {/* Product Imagery - Functional & Clear */}
         <div className="w-full md:w-3/5 p-8 md:p-24 flex flex-col gap-8 border-r border-umber/20">
-          <div className="w-full aspect-square bg-[#D8CFB5] relative group overflow-hidden">
-            <img src={product.images[0]?.url || "https://picsum.photos/seed/main/1000/1000"} alt={product.images[0]?.altText || "Main product placeholder"} className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+          <div className="w-full aspect-square bg-umber relative group overflow-hidden rounded-2xl">
+            <img src={product.images[0]?.url || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80"} alt={product.images[0]?.altText || "Main product placeholder"} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             <div className="absolute inset-0 bg-charcoal/10 pointer-events-none" />
           </div>
           <div className="grid grid-cols-2 gap-8">
-            <div className="w-full aspect-square bg-[#D8CFB5] relative overflow-hidden group">
-              <img src={product.images[1]?.url || "https://picsum.photos/seed/detail1/800/800"} alt={product.images[1]?.altText || "Detail shot 1"} className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+            <div className="w-full aspect-square bg-umber relative overflow-hidden group rounded-2xl">
+              <img src={product.images[1]?.url || "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=800&q=80"} alt={product.images[1]?.altText || "Detail shot 1"} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-charcoal/10 pointer-events-none" />
             </div>
-            <div className="w-full aspect-square bg-[#D8CFB5] relative overflow-hidden group">
-              <img src={product.images[2]?.url || "https://picsum.photos/seed/detail2/800/800"} alt={product.images[2]?.altText || "Detail shot 2"} className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+            <div className="w-full aspect-square bg-umber relative overflow-hidden group rounded-2xl">
+              <img src={product.images[2]?.url || "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80"} alt={product.images[2]?.altText || "Detail shot 2"} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-charcoal/10 pointer-events-none" />
             </div>
           </div>
@@ -97,16 +97,16 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
 
           {/* Low friction Add to Cart. No fake scarcity. */}
           <button 
-            className="w-full py-5 bg-charcoal text-dust font-display uppercase tracking-widest text-lg hover:bg-[#2C2622] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 focus-visible:ring-offset-dust"
+            className="w-full py-5 bg-clay text-dust font-display uppercase tracking-widest text-lg hover:scale-[1.02] transition-transform duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay focus-visible:ring-offset-2 focus-visible:ring-offset-dust shadow-lg shadow-clay/20 rounded-xl"
           >
             {selectedSize ? `Add to Cart` : "Select a Size"}
           </button>
 
           {/* Trust Signals */}
-          <div className="mt-8 pt-8 border-t border-umber/20 flex flex-col gap-4 opacity-75 text-sm">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2">✓ <strong>Free Shipping:</strong> <Placeholder text={product.shippingPolicy} /></div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2">✓ <strong>Honest Returns:</strong> <Placeholder text={product.returnPolicy} /></div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2">✓ <strong>Care:</strong> <Placeholder text={product.careInstructions} /></div>
+          <div className="mt-8 p-6 bg-umber/10 backdrop-blur-md border border-umber/20 flex flex-col gap-4 text-sm rounded-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">✓ <strong className="text-charcoal/80">Free Shipping:</strong> <span className="opacity-75"><Placeholder text={product.shippingPolicy} /></span></div>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">✓ <strong className="text-charcoal/80">Honest Returns:</strong> <span className="opacity-75"><Placeholder text={product.returnPolicy} /></span></div>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">✓ <strong className="text-charcoal/80">Care:</strong> <span className="opacity-75"><Placeholder text={product.careInstructions} /></span></div>
           </div>
         </div>
       </div>

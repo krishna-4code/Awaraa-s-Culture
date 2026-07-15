@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getCollection } from "@/lib/commerce";
 
 export async function Collection() {
@@ -15,8 +16,14 @@ export async function Collection() {
           <div key={cat.id} className={`flex flex-col ${i % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 md:gap-24 items-center`}>
             
             {/* Image Placeholder */}
-            <div className="w-full md:w-1/2 aspect-[4/5] bg-[#2C2622] relative group overflow-hidden rounded-sm">
-              <img src={cat.imageUrl} alt={`${cat.title} category`} className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+            <div className="w-full md:w-1/2 aspect-[4/5] bg-umber relative group overflow-hidden rounded-2xl">
+              <Image 
+                src={cat.imageUrl} 
+                alt={`${cat.title} category`} 
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105" 
+              />
               <div className="absolute inset-0 bg-charcoal/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none" />
             </div>
             

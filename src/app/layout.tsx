@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Syne, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: "Awaraa's Culture",
-    template: "%s - Awaraa's Culture"
+    template: "%s — Awaraa's Culture"
   },
   description: "Movement with purpose, not aimless wandering.",
   alternates: {
@@ -42,6 +44,8 @@ export const metadata: Metadata = {
   }
 };
 
+import { CartProvider } from "@/components/CartContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,7 +56,15 @@ export default function RootLayout({
       <body
         className={`${syne.variable} ${jakarta.variable} font-sans antialiased bg-charcoal text-dust`}
       >
-        <SmoothScroll>{children}</SmoothScroll>
+        <CartProvider>
+          <Nav />
+          <SmoothScroll>
+            <div className="flex flex-col min-h-screen">
+              {children}
+            </div>
+            <Footer />
+          </SmoothScroll>
+        </CartProvider>
         
         {/* Global Structured Data */}
         <script

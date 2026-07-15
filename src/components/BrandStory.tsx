@@ -37,23 +37,22 @@ export function BrandStory() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full min-h-screen bg-charcoal text-dust flex items-center justify-end px-8 md:px-24 py-24 z-10 overflow-hidden">
-      {/* The canvas from the Hero section will visually appear on the left because it is pinned and moves left. */}
-      {/* This section contains the text that fades in on the right. */}
+    <section ref={containerRef} className="relative w-full bg-charcoal text-dust flex flex-col md:flex-row pt-32 pb-24 z-10 overflow-hidden">
       
-      <div className="w-full md:w-1/2 lg:w-5/12 flex flex-col gap-12 relative z-20">
+      {/* Massive Text (Pinned Left on Desktop, Top on Mobile) */}
+      <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:pl-24 md:pr-12 gap-16 relative z-20 pb-16 md:pb-0">
         <div ref={textRef} className="flex flex-col gap-6">
-          <h2 className="font-display text-4xl md:text-5xl uppercase tracking-wide text-clay">
+          <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] uppercase tracking-wide text-clay leading-none">
             The Wanderer
           </h2>
-          <p className="font-sans text-lg md:text-xl leading-relaxed text-sand">
+          <p className="font-sans text-lg md:text-xl leading-relaxed text-sand max-w-xl">
             <strong className="text-dust">Awaraa</strong> (आवारा) means wanderer. Someone always in motion—geographically, culturally, socially. 
             We build footwear for the restless who know exactly where they're going. Comfort, durability, and quiet confidence rather than logo-driven status.
           </p>
         </div>
 
         <div className="flex flex-col gap-6">
-          <h3 className="font-sans text-sm uppercase tracking-widest text-sand border-b border-umber pb-2">
+          <h3 className="font-sans text-sm uppercase tracking-widest text-sand border-b border-umber pb-2 max-w-sm">
             Our Core Values
           </h3>
           <ul ref={valuesRef} className="font-display text-2xl md:text-3xl flex flex-col gap-4">
@@ -73,6 +72,18 @@ export function BrandStory() {
               <span className="text-clay text-lg">05</span> Long-term loyalty
             </li>
           </ul>
+        </div>
+      </div>
+
+      {/* Photography Overflowing Right (Bottom on Mobile, Right on Desktop) */}
+      <div className="w-full md:w-1/2 relative min-h-[50vh] md:min-h-screen -mr-8 md:-mr-24">
+        {/* Full color, zero grayscale */}
+        <div className="absolute inset-0 bg-umber w-full h-full md:rounded-l-3xl overflow-hidden">
+          <img 
+            src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1200&q=80" 
+            alt="The wanderer in motion" 
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
     </section>
