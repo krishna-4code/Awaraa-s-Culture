@@ -34,7 +34,7 @@ export default async function Image() {
             textTransform: 'uppercase',
           }}
         >
-          Awaraa's Culture
+          Awaraa&apos;s Culture
         </div>
         <div
           style={{

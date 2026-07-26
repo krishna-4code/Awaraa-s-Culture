@@ -284,7 +284,7 @@ export function Hero() {
           {/* Real accessible text in DOM */}
           <div ref={textOverlayRef} className="relative z-10 flex flex-col items-center justify-center h-full pt-20 pointer-events-none mix-blend-difference text-dust">
             <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-bold uppercase tracking-widest mb-6 text-center leading-none">
-              Awaraa's Culture
+              Awaraa&apos;s Culture
             </h1>
             <p className="font-sans text-xl md:text-2xl tracking-wide text-center max-w-3xl px-4 text-sand mix-blend-normal">
               MOVEMENT WITH PURPOSE, NOT AIMLESS WANDERING.

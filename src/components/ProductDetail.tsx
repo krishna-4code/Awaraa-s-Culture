@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Placeholder } from "@/components/Placeholder";
 import { CommerceProduct } from "@/lib/commerce/types";
@@ -15,7 +16,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
       {/* Simple Navigation */}
       <nav className="w-full py-8 px-8 md:px-24 border-b border-umber/20 flex justify-between items-center">
         <Link href="/" className="font-display font-bold uppercase tracking-widest text-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 focus-visible:ring-offset-dust">
-          Awaraa's Culture
+          Awaraa&apos;s Culture
         </Link>
         <Link href="/" className="text-sm uppercase tracking-widest border-b border-charcoal/50 hover:border-charcoal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 focus-visible:ring-offset-dust">
           Back to Archive
@@ -28,16 +29,16 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
         {/* Product Imagery - Functional & Clear */}
         <div className="w-full md:w-3/5 p-8 md:p-24 flex flex-col gap-8 border-r border-umber/20">
           <div className="w-full aspect-square bg-umber relative group overflow-hidden rounded-2xl">
-            <img src={product.images[0]?.url || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80"} alt={product.images[0]?.altText || "Main product placeholder"} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <Image src={product.images[0]?.url || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80"} alt={product.images[0]?.altText || "Main product placeholder"} fill sizes="(max-width: 768px) 100vw, 60vw" priority className="object-cover transition-transform duration-700 group-hover:scale-105" />
             <div className="absolute inset-0 bg-charcoal/10 pointer-events-none" />
           </div>
           <div className="grid grid-cols-2 gap-8">
             <div className="w-full aspect-square bg-umber relative overflow-hidden group rounded-2xl">
-              <img src={product.images[1]?.url || "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=800&q=80"} alt={product.images[1]?.altText || "Detail shot 1"} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src={product.images[1]?.url || "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=800&q=80"} alt={product.images[1]?.altText || "Detail shot 1"} fill sizes="(max-width: 768px) 50vw, 30vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-charcoal/10 pointer-events-none" />
             </div>
             <div className="w-full aspect-square bg-umber relative overflow-hidden group rounded-2xl">
-              <img src={product.images[2]?.url || "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80"} alt={product.images[2]?.altText || "Detail shot 2"} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src={product.images[2]?.url || "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80"} alt={product.images[2]?.altText || "Detail shot 2"} fill sizes="(max-width: 768px) 50vw, 30vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-charcoal/10 pointer-events-none" />
             </div>
           </div>

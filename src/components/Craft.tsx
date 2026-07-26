@@ -1,4 +1,5 @@
 import { Placeholder } from "@/components/Placeholder";
+import Image from "next/image";
 
 export function Craft() {
   return (
@@ -7,10 +8,12 @@ export function Craft() {
       {/* Photography Sticky Left (Bottom on mobile, Sticky Left on Desktop) */}
       <div className="w-full md:w-1/2 md:sticky md:top-0 h-[50vh] md:h-screen order-2 md:order-1 -ml-8 md:-ml-24 z-0">
         <div className="absolute inset-0 bg-umber w-full h-full md:rounded-r-3xl overflow-hidden shadow-2xl">
-          <img 
+          <Image 
             src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1200&q=80" 
             alt="Craft and sourcing process" 
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
           />
         </div>
       </div>
@@ -26,9 +29,9 @@ export function Craft() {
               Our Sourcing Model
             </h3>
             <p className="font-sans text-lg leading-relaxed text-sand">
-              We don't own factories or pretend to stitch every sole by hand. We are curators first. 
+              We don&apos;t own factories or pretend to stitch every sole by hand. We are curators first. 
               We partner with trusted, established wholesalers to select footwear that meets a strict 
-              standard for durability, daily comfort, and quiet confidence. Premium shouldn't require a markup.
+              standard for durability, daily comfort, and quiet confidence. Premium shouldn&apos;t require a markup.
             </p>
           </div>
         </div>

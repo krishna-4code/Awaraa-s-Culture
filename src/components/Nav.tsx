@@ -13,7 +13,7 @@ export function Nav() {
           href="/" 
           className="font-display font-bold text-xl tracking-widest uppercase text-dust hover:text-clay transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
         >
-          Awaraa's Culture
+          Awaraa&apos;s Culture
         </Link>
 
         <div className="flex items-center gap-8 font-sans text-sm uppercase tracking-widest text-dust">

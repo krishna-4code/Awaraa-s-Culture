@@ -2,6 +2,8 @@
  
 import { useEffect } from 'react';
  
+import Link from 'next/link';
+
 export default function Error({
   error,
   reset,
@@ -25,12 +27,12 @@ export default function Error({
         >
           Try again
         </button>
-        <a 
+        <Link 
           href="/"
           className="font-sans uppercase tracking-widest text-sm border-b border-dust pb-1 hover:text-clay hover:border-clay transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
         >
           Return Home
-        </a>
+        </Link>
       </div>
     </main>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/components/CartContext";
 
 export default function CartPage() {
@@ -44,7 +45,7 @@ export default function CartPage() {
               {cart.lines.map((line) => (
                 <div key={line.id} className="flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center w-full pb-8 border-b border-umber/10">
                   <div className="w-32 h-40 bg-umber flex-shrink-0 relative rounded-2xl overflow-hidden">
-                    <img src={line.merchandise.product.images?.[0]?.url || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80"} alt={line.merchandise.product.name} className="w-full h-full object-cover" />
+                    <Image src={line.merchandise.product.images?.[0]?.url || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80"} alt={line.merchandise.product.name} fill sizes="(max-width: 768px) 100px, 128px" className="object-cover" />
                   </div>
                   
                   <div className="flex-grow flex flex-col gap-2">

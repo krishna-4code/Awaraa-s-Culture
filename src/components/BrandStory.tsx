@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -47,7 +48,7 @@ export function BrandStory() {
           </h2>
           <p className="font-sans text-lg md:text-xl leading-relaxed text-sand max-w-xl">
             <strong className="text-dust">Awaraa</strong> (आवारा) means wanderer. Someone always in motion—geographically, culturally, socially. 
-            We build footwear for the restless who know exactly where they're going. Comfort, durability, and quiet confidence rather than logo-driven status.
+            We build footwear for the restless who know exactly where they&apos;re going. Comfort, durability, and quiet confidence rather than logo-driven status.
           </p>
         </div>
 
@@ -79,10 +80,12 @@ export function BrandStory() {
       <div className="w-full md:w-1/2 relative min-h-[50vh] md:min-h-screen -mr-8 md:-mr-24">
         {/* Full color, zero grayscale */}
         <div className="absolute inset-0 bg-umber w-full h-full md:rounded-l-3xl overflow-hidden">
-          <img 
+          <Image 
             src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1200&q=80" 
             alt="The wanderer in motion" 
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
           />
         </div>
       </div>
