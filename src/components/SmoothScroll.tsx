@@ -11,17 +11,33 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Sync Lenis RAF with GSAP Ticker for butter-smooth 60/120fps animation sync
-    const update = (time: number) => {
-      lenisRef.current?.lenis?.raf(time * 1000);
+    const lenis = lenisRef.current?.lenis;
+    if (!lenis) return;
+
+    // Sync Lenis scroll events with GSAP ScrollTrigger cleanly (no double RAF loop)
+    lenis.on("scroll", ScrollTrigger.update);
+
+    // Smooth Anchor Link Click Handler
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (href && href.startsWith("#") && href.length > 1) {
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (element) {
+          lenis.scrollTo(element, { offset: -80, duration: 1.0 });
+        }
+      }
     };
 
-    gsap.ticker.add(update);
-    // Eliminate lag spikes when scrolling fast
-    gsap.ticker.lagSmoothing(0);
+    document.addEventListener("click", handleAnchorClick);
 
     return () => {
-      gsap.ticker.remove(update);
+      lenis.off("scroll", ScrollTrigger.update);
+      document.removeEventListener("click", handleAnchorClick);
     };
   }, []);
 
@@ -30,11 +46,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       ref={lenisRef}
       root
       options={{
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential smooth momentum
+        lerp: 0.08, // Gold standard linear interpolation for ultra-smooth 60/120fps physics
+        duration: 1.0,
         smoothWheel: true,
         wheelMultiplier: 1.0,
-        touchMultiplier: 1.5,
+        touchMultiplier: 1.8,
         infinite: false,
       }}
     >

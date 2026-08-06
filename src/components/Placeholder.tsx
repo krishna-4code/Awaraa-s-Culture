@@ -1,7 +1,10 @@
 export function Placeholder({ text }: { text: string }) {
+  // Strip any accidental brackets
+  const cleanText = text.replace(/\[\[|\]\]/g, "");
+
   return (
-    <span className="inline-block bg-red-900/30 text-red-400 border border-red-500/50 px-2 py-0.5 font-mono text-sm uppercase tracking-normal font-bold">
-      {text}
+    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-sans font-semibold bg-bright-amber/10 text-bright-amber border border-bright-amber/20 tracking-wide">
+      {cleanText}
     </span>
   );
 }

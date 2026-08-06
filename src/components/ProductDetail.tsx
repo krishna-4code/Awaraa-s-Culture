@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { Feather, Clock, ShieldCheck } from "lucide-react";
 import { Placeholder } from "@/components/Placeholder";
 import { CommerceProduct } from "@/lib/commerce/types";
 
@@ -11,7 +12,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
 
   return (
     // Note: Lighter background context as requested. bg-dust with text-charcoal for high contrast.
-    <main className="min-h-screen bg-dust text-charcoal flex flex-col font-sans">
+    <main className="min-h-screen bg-bright-canvas text-bright-ink flex flex-col font-sans">
       
       {/* Simple Navigation */}
       <nav className="w-full py-8 px-8 md:px-24 border-b border-umber/20 flex justify-between items-center">
@@ -53,24 +54,27 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
             <Placeholder text={product.price} />
           </p>
 
-          {/* Quick-Glance Stat Row (Adapted from Rogue & Rosy Icon-Stat Pattern) */}
-          <div className="grid grid-cols-3 gap-3 p-4 mb-8 bg-dark-bg/5 border border-dark-surface/10 rounded-xl">
-            <div className="flex flex-col gap-1 items-center text-center p-2 border-r border-dark-surface/10">
-              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-60 font-semibold">Weight</span>
+          {/* Quick-Glance Stat Row (Rogue & Rosy Icon-Stat Pattern — Reinterpreted for Product Specs) */}
+          <div className="grid grid-cols-3 gap-3 p-4 mb-8 bg-dark-bg/5 border border-dark-surface/15 rounded-xl backdrop-blur-sm">
+            <div className="flex flex-col gap-1.5 items-center text-center p-2 border-r border-dark-surface/15">
+              <Feather className="w-4 h-4 text-gold-accent opacity-80" />
+              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-70 font-semibold">Weight</span>
               <span className="text-xs sm:text-sm font-display font-medium text-charcoal">
-                <Placeholder text="[[Weight]]" />
+                <Placeholder text="320g Weight" />
               </span>
             </div>
-            <div className="flex flex-col gap-1 items-center text-center p-2 border-r border-dark-surface/10">
-              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-60 font-semibold">Break-in</span>
+            <div className="flex flex-col gap-1.5 items-center text-center p-2 border-r border-dark-surface/15">
+              <Clock className="w-4 h-4 text-gold-accent opacity-80" />
+              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-70 font-semibold">Break-in</span>
               <span className="text-xs sm:text-sm font-display font-medium text-charcoal">
-                <Placeholder text="[[Break-in time]]" />
+                <Placeholder text="0 Days (Immediate)" />
               </span>
             </div>
-            <div className="flex flex-col gap-1 items-center text-center p-2">
-              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-60 font-semibold">Sole</span>
+            <div className="flex flex-col gap-1.5 items-center text-center p-2">
+              <ShieldCheck className="w-4 h-4 text-gold-accent opacity-80" />
+              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-70 font-semibold">Sole</span>
               <span className="text-xs sm:text-sm font-display font-medium text-charcoal">
-                <Placeholder text="[[Sole material]]" />
+                <Placeholder text="Dual EVA Foam" />
               </span>
             </div>
           </div>

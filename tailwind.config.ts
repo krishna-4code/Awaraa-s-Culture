@@ -11,6 +11,18 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // Bright/Playful CPG Brand Tokens (explore/bright-genre)
+        bright: {
+          canvas: "#FFFDF6",
+          card: "#F4EFE6",
+          amber: "#FF5E1E",
+          lime: "#88C057",
+          coral: "#FF6B8B",
+          sun: "#FDE047",
+          ink: "#111827",
+          muted: "#6B7280",
+          border: "#E5E0D4",
+        },
         dark: {
           bg: "#0B0B0B",
           secondary: "#161616",
@@ -45,6 +57,27 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-jakarta)", "sans-serif"],
         display: ["var(--font-syne)", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
+        accent: ["var(--font-bricolage)", "sans-serif"],
+      },
+      animation: {
+        "marquee-infinite": "marquee 22s linear infinite",
+        "sticker-float": "float 3.5s ease-in-out infinite",
+        "spring-pop": "springPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+          "50%": { transform: "translateY(-8px) rotate(1.5deg)" },
+        },
+        springPop: {
+          "0%": { transform: "scale(0.94)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
       },
     },
   },

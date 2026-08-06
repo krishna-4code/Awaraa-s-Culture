@@ -2,44 +2,36 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="w-full bg-charcoal text-sand py-20 px-8 border-t border-umber/20 font-sans">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+    <footer className="w-full bg-bright-ink text-white py-16 px-6 font-sans border-t-4 border-bright-amber">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
         
-        <div className="flex flex-col gap-4">
-          <h2 className="font-display text-2xl uppercase tracking-widest text-dust">Awaraa&apos;s Culture</h2>
-          <p className="text-sm max-w-xs opacity-80">Movement with purpose, not aimless wandering.</p>
+        <div className="flex flex-col gap-3">
+          <h2 className="font-display font-extrabold text-3xl tracking-tight">
+            Awaraa&apos;s Culture<span className="text-bright-amber">.</span>
+          </h2>
+          <p className="font-sans text-sm text-gray-300 max-w-sm">
+            Purposeful movement, honest comfort. Delhi NCR &apos;s price-conscious CPG footwear brand.
+          </p>
         </div>
 
-        <div className="flex flex-wrap gap-8 text-sm uppercase tracking-widest">
-          <Link 
-            href="/about" 
-            className="hover:text-clay transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
-          >
-            Story
+        <div className="flex flex-wrap gap-6 font-sans text-xs uppercase font-bold tracking-wider text-gray-300">
+          <Link href="#squad" className="hover:text-bright-sun transition-colors">
+            The Squad
           </Link>
-          <Link 
-            href="/faq" 
-            className="hover:text-clay transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
-          >
-            FAQ
+          <Link href="#matrix" className="hover:text-bright-sun transition-colors">
+            Craft Matrix
           </Link>
-          <Link 
-            href="/contact" 
-            className="hover:text-clay transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
-          >
-            Contact
-          </Link>
-          <Link 
-            href="/privacy" 
-            className="hover:text-clay transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
-          >
-            Privacy
+          <Link href="/cart" className="hover:text-bright-sun transition-colors">
+            Cart
           </Link>
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-umber/10 text-xs opacity-60 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/10 font-sans text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center gap-4">
         <span>© {new Date().getFullYear()} Awaraa&apos;s Culture. All rights reserved.</span>
+        <span className="bg-bright-amber/20 text-bright-sun px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase">
+          ✦ Bright CPG Exploration
+        </span>
       </div>
     </footer>
   );

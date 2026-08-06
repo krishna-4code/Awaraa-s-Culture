@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   // In Phase 4, we use placeholder metadata structure
   return {
-    title: `[[PRODUCT NAME FOR ${id.toUpperCase()}]] - Awaraa's Culture`,
+    title: `Awaraa ${id.replace(/-/g, ' ').toUpperCase()} — Awaraa's Culture`,
     description: "Built for movement, designed for stillness. This pair represents our standard for daily reliability.",
   };
 }

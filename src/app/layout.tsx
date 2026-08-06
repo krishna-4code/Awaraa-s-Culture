@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Syne, Plus_Jakarta_Sans } from "next/font/google";
+import { Syne, Plus_Jakarta_Sans, Space_Mono, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Nav } from "@/components/Nav";
@@ -14,6 +14,19 @@ const syne = Syne({
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
+  display: "swap",
+});
+
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage",
   display: "swap",
 });
 
@@ -54,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${syne.variable} ${jakarta.variable} font-sans antialiased bg-charcoal text-dust`}
+        className={`${syne.variable} ${jakarta.variable} ${spaceMono.variable} ${bricolage.variable} font-sans antialiased bg-bright-canvas text-bright-ink selection:bg-bright-amber selection:text-white`}
       >
         <CartProvider>
           <Nav />
