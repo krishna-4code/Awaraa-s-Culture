@@ -11,20 +11,35 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        dark: {
+          bg: "#0B0B0B",
+          secondary: "#161616",
+          surface: "#1D1D1D",
+        },
+        warm: {
+          white: "#F8F7F4",
+        },
+        muted: {
+          grey: "#9B9B9B",
+        },
+        gold: {
+          accent: "#C5A059",
+          muted: "rgba(197, 160, 89, 0.2)",
+        },
         charcoal: {
-          DEFAULT: "#1E1A17", // Midnight Charcoal
+          DEFAULT: "#0B0B0B",
         },
         umber: {
-          DEFAULT: "#4A4036", // Weathered Umber
+          DEFAULT: "#1D1D1D",
         },
         sand: {
-          DEFAULT: "#A38C76", // Dusk Sand
+          DEFAULT: "#9B9B9B",
         },
         dust: {
-          DEFAULT: "#E8DFD5", // Bleached Dust
+          DEFAULT: "#F8F7F4",
         },
         clay: {
-          DEFAULT: "#8E4A2F", // Canyon Clay
+          DEFAULT: "#C5A059",
         },
       },
       fontFamily: {

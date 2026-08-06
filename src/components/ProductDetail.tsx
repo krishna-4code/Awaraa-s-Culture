@@ -49,9 +49,31 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
           <h1 className="font-display text-4xl md:text-5xl uppercase tracking-wide mb-4">
             <Placeholder text={product.name} />
           </h1>
-          <p className="font-sans text-xl mb-12">
+          <p className="font-sans text-xl mb-8">
             <Placeholder text={product.price} />
           </p>
+
+          {/* Quick-Glance Stat Row (Adapted from Rogue & Rosy Icon-Stat Pattern) */}
+          <div className="grid grid-cols-3 gap-3 p-4 mb-8 bg-dark-bg/5 border border-dark-surface/10 rounded-xl">
+            <div className="flex flex-col gap-1 items-center text-center p-2 border-r border-dark-surface/10">
+              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-60 font-semibold">Weight</span>
+              <span className="text-xs sm:text-sm font-display font-medium text-charcoal">
+                <Placeholder text="[[Weight]]" />
+              </span>
+            </div>
+            <div className="flex flex-col gap-1 items-center text-center p-2 border-r border-dark-surface/10">
+              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-60 font-semibold">Break-in</span>
+              <span className="text-xs sm:text-sm font-display font-medium text-charcoal">
+                <Placeholder text="[[Break-in time]]" />
+              </span>
+            </div>
+            <div className="flex flex-col gap-1 items-center text-center p-2">
+              <span className="text-[10px] font-sans uppercase tracking-[0.15em] opacity-60 font-semibold">Sole</span>
+              <span className="text-xs sm:text-sm font-display font-medium text-charcoal">
+                <Placeholder text="[[Sole material]]" />
+              </span>
+            </div>
+          </div>
 
           <div className="flex flex-col gap-6 mb-12">
             <p className="leading-relaxed opacity-90">
