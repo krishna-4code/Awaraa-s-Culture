@@ -66,6 +66,12 @@ export async function signupAction(formData: FormData): Promise<AuthResponse> {
     return { error: error.message }
   }
 
+  // Supabase silently returns a fake response (user with no identities) when the
+  // email is already registered, instead of throwing an error (for security).
+  if (authData.user && authData.user.identities?.length === 0) {
+    return { error: 'An account with this email already exists. Please sign in instead.' }
+  }
+
   revalidatePath('/', 'layout')
 
   if (authData.session) {

@@ -40,6 +40,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Hide browser-native password reveal buttons (Edge, Chrome, WebKit)
+   so they don't double up with the custom show/hide toggle in AuthForm. */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* Professional Modern CPG Utility Styles */
 .cpg-badge {
   @apply font-accent text-xs font-semibold uppercase tracking-wider px-3.5 py-1.5 border border-bright-ink/15 shadow-sm inline-flex items-center gap-1.5 transition-all duration-300;
