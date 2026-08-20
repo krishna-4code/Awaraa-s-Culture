@@ -36,7 +36,7 @@ export function MarkerUnderline({
 
       {/* Optional Hand Annotation Text in Bricolage Grotesque (font-accent) */}
       {annotation && (
-        <span className="absolute -top-5 right-0 font-accent text-xs font-bold text-bright-amber rotate-[3deg] tracking-wide pointer-events-none whitespace-nowrap bg-bright-sun/40 px-1.5 py-0.5 rounded shadow-sm">
+        <span className="absolute -top-4 sm:-top-5 right-0 font-accent text-[10px] sm:text-xs font-bold text-bright-amber rotate-[3deg] tracking-wide pointer-events-none whitespace-nowrap bg-bright-sun/40 px-1.5 py-0.5 rounded shadow-sm">
           {annotation}
         </span>
       )}

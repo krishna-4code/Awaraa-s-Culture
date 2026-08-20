@@ -64,6 +64,8 @@ const config: Config = {
         "marquee-infinite": "marquee 22s linear infinite",
         "sticker-float": "float 3.5s ease-in-out infinite",
         "spring-pop": "springPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
+        "slideInRight": "slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "fadeIn": "fadeIn 0.2s ease-out forwards",
       },
       keyframes: {
         marquee: {
@@ -77,6 +79,14 @@ const config: Config = {
         springPop: {
           "0%": { transform: "scale(0.94)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        slideInRight: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
     },

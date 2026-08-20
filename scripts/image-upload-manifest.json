@@ -1,0 +1,393 @@
+[
+  {
+    "product": "SB Dunks",
+    "slug": "sb-dunks",
+    "sku": "SBD-WHT-07",
+    "size": "7",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "SB Dunks",
+    "slug": "sb-dunks",
+    "sku": "SBD-WHT-08",
+    "size": "8",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "SB Dunks",
+    "slug": "sb-dunks",
+    "sku": "SBD-WHT-09",
+    "size": "9",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "SB Dunks",
+    "slug": "sb-dunks",
+    "sku": "SBD-WHT-10",
+    "size": "10",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "SB Dunks",
+    "slug": "sb-dunks",
+    "sku": "SBD-WHT-11",
+    "size": "11",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "LV Sneakers",
+    "slug": "lv-sneakers",
+    "sku": "LVS-WHT-07",
+    "size": "7",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "LV Sneakers",
+    "slug": "lv-sneakers",
+    "sku": "LVS-WHT-08",
+    "size": "8",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "LV Sneakers",
+    "slug": "lv-sneakers",
+    "sku": "LVS-WHT-09",
+    "size": "9",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "LV Sneakers",
+    "slug": "lv-sneakers",
+    "sku": "LVS-WHT-10",
+    "size": "10",
+    "color": "White",
+    "images": [
+      "1000095144.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Waffle Brown",
+    "slug": "waffle-brown",
+    "sku": "WFB-TAN-07",
+    "size": "7",
+    "color": "Tan",
+    "images": [
+      "1000095146.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Waffle Brown",
+    "slug": "waffle-brown",
+    "sku": "WFB-TAN-08",
+    "size": "8",
+    "color": "Tan",
+    "images": [
+      "1000095146.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Waffle Brown",
+    "slug": "waffle-brown",
+    "sku": "WFB-TAN-09",
+    "size": "9",
+    "color": "Tan",
+    "images": [
+      "1000095146.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sports",
+    "slug": "sports",
+    "sku": "SPT-GRY-07",
+    "size": "7",
+    "color": "Grey",
+    "images": [
+      "1000095140.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sports",
+    "slug": "sports",
+    "sku": "SPT-GRY-08",
+    "size": "8",
+    "color": "Grey",
+    "images": [
+      "1000095140.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sports",
+    "slug": "sports",
+    "sku": "SPT-GRY-09",
+    "size": "9",
+    "color": "Grey",
+    "images": [
+      "1000095140.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sports",
+    "slug": "sports",
+    "sku": "SPT-GRY-10",
+    "size": "10",
+    "color": "Grey",
+    "images": [
+      "1000095140.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sketchers Sports",
+    "slug": "sketchers-sports",
+    "sku": "SKS-TAN-08",
+    "size": "8",
+    "color": "Tan",
+    "images": [
+      "1000095155.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sketchers Sports",
+    "slug": "sketchers-sports",
+    "sku": "SKS-TAN-09",
+    "size": "9",
+    "color": "Tan",
+    "images": [
+      "1000095155.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sketchers Sports",
+    "slug": "sketchers-sports",
+    "sku": "SKS-TAN-10",
+    "size": "10",
+    "color": "Tan",
+    "images": [
+      "1000095155.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sketchers Sports",
+    "slug": "sketchers-sports",
+    "sku": "SKS-TAN-11",
+    "size": "11",
+    "color": "Tan",
+    "images": [
+      "1000095155.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Sketchers Sports",
+    "slug": "sketchers-sports",
+    "sku": "SKS-TAN-12",
+    "size": "12",
+    "color": "Tan",
+    "images": [
+      "1000095155.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Brooks",
+    "slug": "brooks",
+    "sku": "BRK-BLK-07",
+    "size": "7",
+    "color": "Black",
+    "images": [
+      "1000095149.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Brooks",
+    "slug": "brooks",
+    "sku": "BRK-BLK-08",
+    "size": "8",
+    "color": "Black",
+    "images": [
+      "1000095149.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Brooks",
+    "slug": "brooks",
+    "sku": "BRK-BLK-09",
+    "size": "9",
+    "color": "Black",
+    "images": [
+      "1000095149.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "Brooks",
+    "slug": "brooks",
+    "sku": "BRK-BLK-10",
+    "size": "10",
+    "color": "Black",
+    "images": [
+      "1000095149.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "NB Sports",
+    "slug": "nb-sports",
+    "sku": "NBS-WHT-07",
+    "size": "7",
+    "color": "White",
+    "images": [
+      "1000095137.jpg",
+      "1000095719.jpg",
+      "1000095152.jpg",
+      "1000095726.jpg",
+      "1000095728.jpg",
+      "1000095730.jpg",
+      "1000095721.jpg",
+      "1000095724.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "NB Sports",
+    "slug": "nb-sports",
+    "sku": "NBS-WHT-08",
+    "size": "8",
+    "color": "White",
+    "images": [
+      "1000095137.jpg",
+      "1000095719.jpg",
+      "1000095152.jpg",
+      "1000095726.jpg",
+      "1000095728.jpg",
+      "1000095730.jpg",
+      "1000095721.jpg",
+      "1000095724.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "NB Sports",
+    "slug": "nb-sports",
+    "sku": "NBS-WHT-09",
+    "size": "9",
+    "color": "White",
+    "images": [
+      "1000095137.jpg",
+      "1000095719.jpg",
+      "1000095152.jpg",
+      "1000095726.jpg",
+      "1000095728.jpg",
+      "1000095730.jpg",
+      "1000095721.jpg",
+      "1000095724.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "NB Sports",
+    "slug": "nb-sports",
+    "sku": "NBS-WHT-10",
+    "size": "10",
+    "color": "White",
+    "images": [
+      "1000095137.jpg",
+      "1000095719.jpg",
+      "1000095152.jpg",
+      "1000095726.jpg",
+      "1000095728.jpg",
+      "1000095730.jpg",
+      "1000095721.jpg",
+      "1000095724.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "NB Sneakers",
+    "slug": "nb-sneakers",
+    "sku": "NBN-WHT-07",
+    "size": "7",
+    "color": "White",
+    "images": [
+      "1000095732.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "NB Sneakers",
+    "slug": "nb-sneakers",
+    "sku": "NBN-WHT-08",
+    "size": "8",
+    "color": "White",
+    "images": [
+      "1000095732.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "NB Sneakers",
+    "slug": "nb-sneakers",
+    "sku": "NBN-WHT-09",
+    "size": "9",
+    "color": "White",
+    "images": [
+      "1000095732.jpg"
+    ],
+    "missingImages": false
+  },
+  {
+    "product": "NB Sneakers",
+    "slug": "nb-sneakers",
+    "sku": "NBN-WHT-10",
+    "size": "10",
+    "color": "White",
+    "images": [
+      "1000095732.jpg"
+    ],
+    "missingImages": false
+  }
+]

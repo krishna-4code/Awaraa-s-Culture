@@ -6,7 +6,7 @@ import { MarkerUnderline } from "./MarkerUnderline";
 
 export function Hero() {
   return (
-    <section className="relative w-full pt-28 pb-20 px-6 bg-bright-canvas text-bright-ink overflow-hidden">
+    <section className="relative w-full pt-28 pb-20 px-6 bg-transparent text-bright-ink overflow-hidden">
       {/* Background Decorative Playful Blobs */}
       <div className="absolute top-10 left-1/4 w-96 h-96 bg-bright-sun/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-bright-coral/15 rounded-full blur-3xl pointer-events-none" />
@@ -42,11 +42,11 @@ export function Hero() {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
-          <Link href="#squad" className="cpg-button-primary text-base">
+          <Link href="/#squad" className="cpg-button-primary text-base">
             <span>Explore The Squad</span>
             <span className="text-lg">➔</span>
           </Link>
-          <Link href="#matrix" className="cpg-button-secondary text-base">
+          <Link href="/#matrix" className="cpg-button-secondary text-base">
             <span>Why Comfort First?</span>
           </Link>
         </div>
@@ -65,7 +65,7 @@ export function Hero() {
                   Featured Kick
                 </span>
                 <h3 className="font-display font-bold text-3xl md:text-4xl text-bright-ink mb-2">
-                  Awaraa Classic Low
+                  SB Dunks
                 </h3>
                 <p className="font-sans text-sm text-bright-muted mb-4 leading-relaxed">
                   Dual-density EVA foam midsole designed for all-day urban exploration.
@@ -84,13 +84,13 @@ export function Hero() {
               <div className="relative w-64 h-64 flex items-center justify-center bg-bright-sun/30 rounded-full border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80"
-                  alt="Awaraa Classic Low Featured Kick"
+                  alt="SB Dunks Featured Kick"
                   fill
                   sizes="256px"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute bottom-3 bg-bright-amber/95 text-white text-xs font-accent font-bold px-3 py-1 rounded-full shadow-md">
-                  Classic Low
+                  SB Dunks
                 </div>
               </div>
 
@@ -113,7 +113,7 @@ export function Hero() {
       </div>
 
       {/* Marquee Ticker */}
-      <div className="mt-16 -mx-6 bg-bright-ink text-white py-3.5 overflow-hidden border-y border-bright-amber">
+      <div className="mt-16 -mx-6 bg-bright-ink text-white py-3.5 overflow-hidden border-y border-bright-amber" aria-hidden="true">
         <div className="flex whitespace-nowrap animate-marquee-infinite font-sans text-xs md:text-sm font-bold uppercase tracking-widest gap-8">
           <span>✦ REAL COMFORT FIRST</span>
           <span>✦ DUAL-DENSITY EVA FOAM</span>

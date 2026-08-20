@@ -62,3 +62,33 @@ body {
 .cpg-card-diecut {
   clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
 }
+
+/* Ambient Floating Sneaker Particles Animation */
+@keyframes floatSneakerParticle {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(var(--r0, 0deg)) scale(1);
+  }
+  25% {
+    transform: translate3d(var(--dx1, 20px), var(--dy1, -20px), 0) rotate(var(--r1, 5deg)) scale(var(--s1, 1.02));
+  }
+  50% {
+    transform: translate3d(var(--dx2, -20px), var(--dy2, 20px), 0) rotate(var(--r2, -5deg)) scale(var(--s2, 0.98));
+  }
+  75% {
+    transform: translate3d(var(--dx3, 15px), var(--dy3, -15px), 0) rotate(var(--r3, 4deg)) scale(var(--s3, 1.03));
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--r0, 0deg)) scale(1);
+  }
+}
+
+.ambient-sneaker-animated {
+  animation: floatSneakerParticle var(--anim-dur, 25s) ease-in-out infinite;
+  animation-delay: var(--anim-del, 0s);
+  will-change: transform;
+}
+
+.ambient-sneaker-stationary {
+  transform: rotate(var(--r0, 0deg));
+}
+

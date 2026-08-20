@@ -6,32 +6,44 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "import:dry-run": "tsx scripts/import-inventory.ts --dry-run",
+    "import:live": "tsx scripts/import-inventory.ts"
   },
   "dependencies": {
+    "@sanity/icons": "^5.2.1",
+    "@sanity/image-url": "^2.1.1",
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.2",
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.9",
     "lucide-react": "^0.473.0",
     "next": "^16.2.12",
+    "next-sanity": "^13.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sanity": "^6.9.1",
     "tailwind-merge": "^2.6.0",
     "zod": "^4.4.3",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@sanity/client": "^7.26.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "latest",
     "eslint-plugin-jsx-a11y": "^6.10.2",
+    "exceljs": "^4.4.0",
     "ffmpeg-static": "^5.3.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   }
 }

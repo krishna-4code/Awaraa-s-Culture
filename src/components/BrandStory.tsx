@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function BrandStory() {
   return (
-    <section className="relative w-full bg-bright-canvas text-bright-ink py-24 px-6 overflow-hidden border-t border-bright-ink/10">
+    <section className="relative w-full bg-transparent text-bright-ink py-24 px-6 overflow-hidden border-t border-bright-ink/10">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center relative z-10">
         
         {/* LEFT COLUMN: Text Content & Values */}

@@ -1,16 +1,14 @@
 import { MetadataRoute } from 'next';
-import { getCollection } from '@/lib/commerce';
+import { getProducts } from '@/lib/commerce/products';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const categories = await getCollection();
+  const products = await getProducts();
   
-  // We don't have a getProducts list function yet, but in a real app
-  // we would fetch all product slugs here. For now we will mock it 
-  // based on the categories since our mock API maps handles exactly.
-  const productRoutes = categories.map((cat) => ({
-    url: `${SITE_URL}/products/${cat.handle}`,
+  // Real product routes based on live Sanity handles
+  const productRoutes = products.map((p) => ({
+    url: `${SITE_URL}/products/${p.handle}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
@@ -18,17 +16,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes = [
     '',
-    '/about',
-    '/story',
-    '/contact',
+    '/cart',
+    '/login',
     '/privacy',
     '/terms',
-    '/faq'
+    '/contact',
   ].map((route) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1.0 : 0.5,
+    priority: route === '' ? 1.0 : 0.6,
   }));
 
   return [...staticRoutes, ...productRoutes];

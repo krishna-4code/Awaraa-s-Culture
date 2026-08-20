@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Syne, Plus_Jakarta_Sans, Space_Mono, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
-import { SmoothScroll } from "@/components/SmoothScroll";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { CartProvider } from "@/components/CartContext";
+import { CartDrawer } from "@/components/CartDrawer";
+import { ShoeCursorTrail } from "@/components/ShoeCursorTrail";
+import { FloatingShoeParticles } from "@/components/FloatingShoeParticles";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -57,8 +58,6 @@ export const metadata: Metadata = {
   }
 };
 
-import { CartProvider } from "@/components/CartContext";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,13 +69,19 @@ export default function RootLayout({
         className={`${syne.variable} ${jakarta.variable} ${spaceMono.variable} ${bricolage.variable} font-sans antialiased bg-bright-canvas text-bright-ink selection:bg-bright-amber selection:text-white`}
       >
         <CartProvider>
-          <Nav />
-          <SmoothScroll>
-            <div className="flex flex-col min-h-screen">
-              {children}
-            </div>
-            <Footer />
-          </SmoothScroll>
+          {/* Global Cart Slide-Over Drawer */}
+          <CartDrawer />
+
+          {/* Layer 1: Ambient Floating Sneaker Silhouette Particles (z-1, non-interactive, fixed) */}
+          <FloatingShoeParticles />
+
+          {/* Layer 9998 & 9999: Interactive Bubble Canvas & 3D Shoe Cursor Trail */}
+          <ShoeCursorTrail />
+
+          {/* Layer 10+: Main Website Content */}
+          <div className="relative z-10 min-h-screen">
+            {children}
+          </div>
         </CartProvider>
         
         {/* Global Structured Data */}

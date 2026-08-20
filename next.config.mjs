@@ -1,17 +1,20 @@
+const isDev = process.env.NODE_ENV === 'development';
+
 // CSP is split: Studio routes get a permissive policy (Sanity needs eval + broad origins),
 // everything else gets the strict policy.
+// In development (HTTP localhost), upgrade-insecure-requests MUST be omitted to prevent browser hanging on HTTPS localhost.
 const strictCsp = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline';
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' blob: data: https://images.unsplash.com https://picsum.photos https://cdn.sanity.io;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.api.sanity.io https://api.sanity.io;
+  connect-src 'self' ws://localhost:* http://localhost:* ws://127.0.0.1:* http://127.0.0.1:* https://*.supabase.co wss://*.supabase.co https://*.api.sanity.io https://api.sanity.io;
   object-src 'none';
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'none';
-  upgrade-insecure-requests;
+  ${isDev ? '' : 'upgrade-insecure-requests;'}
 `;
 
 // Sanity Studio requires broader permissions — it loads from CDN and uses eval for code splitting
@@ -21,7 +24,7 @@ const studioCsp = `
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.sanity.io;
   img-src 'self' blob: data: https://cdn.sanity.io https://*.sanity.io https://images.unsplash.com;
   font-src 'self' https://fonts.gstatic.com https://*.sanity.io;
-  connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.sanity.io;
+  connect-src 'self' ws://localhost:* http://localhost:* ws://127.0.0.1:* http://127.0.0.1:* https://*.sanity.io wss://*.sanity.io https://api.sanity.io https://registry.npmjs.org https://cdn.jsdelivr.net https://unpkg.com;
   frame-src 'self' https://*.sanity.io;
   object-src 'none';
   base-uri 'self';
@@ -47,6 +50,11 @@ const nextConfig = {
     ],
   },
   async headers() {
+    // In local dev, relax headers so HMR and local HTTP are instant
+    if (isDev) {
+      return [];
+    }
+
     return [
       {
         // Sanity Studio route — permissive policy
