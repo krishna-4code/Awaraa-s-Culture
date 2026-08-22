@@ -132,7 +132,7 @@ export function CartDrawer() {
           ) : (
             cart.lines.map((line) => {
               const productImg = line.merchandise.product.images?.[0]?.url || 
-                "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80";
+                "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png";
               const productHandle = line.merchandise.product.handle || line.merchandise.product.id;
 
               return (

@@ -53,8 +53,10 @@ export function Hero() {
 
         {/* Layered CPG Product Card Entrance */}
         <div className="w-full max-w-4xl relative">
-          <div className="cpg-card cpg-card-diecut shadow-[0_20px_50px_rgba(17,24,39,0.06)] overflow-hidden relative group border border-bright-ink/15">
-            
+          <Link
+            href="/products/nb-sports"
+            className="cpg-card cpg-card-diecut shadow-[0_20px_50px_rgba(17,24,39,0.06)] overflow-hidden relative group border border-bright-ink/15 block"
+          >
             {/* Card Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-b from-bright-card to-bright-canvas opacity-90" />
 
@@ -64,18 +66,18 @@ export function Hero() {
                 <span className="cpg-badge bg-bright-amber text-white font-accent mb-3">
                   Featured Kick
                 </span>
-                <h3 className="font-display font-bold text-3xl md:text-4xl text-bright-ink mb-2">
-                  SB Dunks
+                <h3 className="font-display font-bold text-3xl md:text-4xl text-bright-ink mb-2 group-hover:text-bright-amber transition-colors">
+                  NB Sports
                 </h3>
                 <p className="font-sans text-sm text-bright-muted mb-4 leading-relaxed">
-                  Dual-density EVA foam midsole designed for all-day urban exploration.
+                  Technical breathable sport mesh with high-rebound molded EVA foam midsole for all-day urban movement.
                 </p>
                 <div className="flex items-center gap-3">
                   <span className="font-display font-extrabold text-2xl text-bright-amber">
-                    ₹ 2,999
+                    ₹ 1,199
                   </span>
                   <span className="font-sans text-xs font-semibold text-bright-muted bg-white/90 px-3 py-1 rounded-full border border-bright-ink/10 tracking-wide">
-                    EVA Dual-Foam
+                    High-Rebound EVA
                   </span>
                 </div>
               </div>
@@ -83,14 +85,14 @@ export function Hero() {
               {/* Center Cutout Product Graphic with Real Image */}
               <div className="relative w-64 h-64 flex items-center justify-center bg-bright-sun/30 rounded-full border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80"
-                  alt="SB Dunks Featured Kick"
+                  src="/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png"
+                  alt="NB Sports Featured Kick"
                   fill
                   sizes="256px"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute bottom-3 bg-bright-amber/95 text-white text-xs font-accent font-bold px-3 py-1 rounded-full shadow-md">
-                  SB Dunks
+                  NB Sports
                 </div>
               </div>
 
@@ -107,7 +109,7 @@ export function Hero() {
               </div>
 
             </div>
-          </div>
+          </Link>
         </div>
 
       </div>

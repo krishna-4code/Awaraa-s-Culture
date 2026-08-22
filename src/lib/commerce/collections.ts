@@ -34,7 +34,7 @@ export async function getCollection(): Promise<CommerceCollection[]> {
             handle: doc.handle || doc._id,
             title: doc.title,
             description: doc.description || '',
-            imageUrl: imageUrl || 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
+            imageUrl: imageUrl || '/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png',
           };
         });
       }
@@ -52,21 +52,21 @@ export async function getCollection(): Promise<CommerceCollection[]> {
       handle: "daily-walkers",
       title: "Daily Walkers", 
       description: "Built for the daily commute and beyond. Lightweight EVA cushioning.",
-      imageUrl: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80"
+      imageUrl: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png"
     },
     { 
       id: "street-kicks", 
       handle: "street-kicks",
       title: "Street Kicks", 
       description: "Low-profile street silhouette crafted for NCR pavement.",
-      imageUrl: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80"
+      imageUrl: "/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png"
     },
     { 
       id: "terrain-comfort", 
       handle: "terrain-comfort",
       title: "Terrain Comfort", 
       description: "High-top stability with ergonomic heel cushion.",
-      imageUrl: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80"
+      imageUrl: "/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png"
     }
   ];
 }

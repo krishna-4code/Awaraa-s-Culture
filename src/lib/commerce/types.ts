@@ -10,6 +10,7 @@ export interface CommerceVariant {
 
 export interface CommerceProduct {
   id: string;
+  _sanityId?: string;
   handle: string;
   name: string;
   price: string;

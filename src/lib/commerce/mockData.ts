@@ -2,10 +2,50 @@ import { CommerceProduct } from './types';
 
 export const MOCK_PRODUCTS: CommerceProduct[] = [
   {
+    id: "nb-sports",
+    handle: "nb-sports",
+    name: "NB Sports",
+    price: "₹1,199",
+    description: "Athletic lifestyle runner engineered with lightweight breathable mesh, high-rebound molded EVA foam midsole, and multi-surface grip.",
+    materials: [
+      "Technical breathable sport mesh with synthetic overlays",
+      "High-rebound molded EVA foam midsole",
+      "Durable non-marking rubber traction outsole",
+      "Removable contoured orthotic footbed"
+    ],
+    variants: [
+      { id: "nb-sports-uk7", title: "UK 7", available: true, size: "7", color: "White" },
+      { id: "nb-sports-uk8", title: "UK 8", available: true, size: "8", color: "White" },
+      { id: "nb-sports-uk9", title: "UK 9", available: true, size: "9", color: "White" },
+      { id: "nb-sports-uk10", title: "UK 10", available: true, size: "10", color: "White" },
+    ],
+    images: [
+      {
+        url: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png",
+        altText: "NB Sports - Hero Angle"
+      },
+      {
+        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.46 PM (2).jpeg",
+        altText: "NB Sports - Studio Profile"
+      },
+      {
+        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.47 PM.jpeg",
+        altText: "NB Sports - Top & Sole Angle"
+      },
+      {
+        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.49 PM.jpeg",
+        altText: "NB Sports - Pair Showcase"
+      }
+    ],
+    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
+    careInstructions: "Wipe clean with a damp cloth. Air dry naturally away from direct heat."
+  },
+  {
     id: "sb-dunks",
     handle: "sb-dunks",
     name: "SB Dunks",
-    price: "₹2,999",
+    price: "₹1,399",
     description: "Iconic streetwear silhouette engineered for all-day urban movement. Dual-density cushioning and reinforced grip outer sole provide supreme stability.",
     materials: [
       "Full-grain premium leather and synthetic upper",
@@ -22,61 +62,27 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1000&q=80",
-        altText: "SB Dunks - Front Angle"
+        url: "/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png",
+        altText: "SB Dunks - Front Hero View"
       },
       {
-        url: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=800&q=80",
-        altText: "SB Dunks - Profile Shot"
+        url: "/shoes/dunks/WhatsApp Image 2026-08-18 at 6.51.46 PM.jpeg",
+        altText: "SB Dunks - Studio Angle"
+      },
+      {
+        url: "/shoes/dunks/WhatsApp Image 2026-08-18 at 6.51.46 PM (1).jpeg",
+        altText: "SB Dunks - Side Profile"
       }
     ],
-    shippingPolicy: "Free express shipping across India on all orders. Dispatched within 24 hours.",
+    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe clean with a damp cloth. Use standard sneaker cleaner for scuffs. Air dry only."
-  },
-  {
-    id: "awaraa-street-glide",
-    handle: "awaraa-street-glide",
-    name: "Awaraa Street Glide",
-    price: "₹2,999",
-    description: "Low-profile street silhouette crafted for everyday street wear. Minimalist profile engineered for flexible ankle motion and sustained durability.",
-    materials: [
-      "Premium suede and recycled canvas combination",
-      "Flexible vulcanized natural rubber sole",
-      "Ortho-comfort foam insole",
-      "Reinforced double-stitched toe box"
-    ],
-    variants: [
-      { id: "awaraa-street-glide-uk6", title: "UK 6", available: true, size: "6", color: "Black" },
-      { id: "awaraa-street-glide-uk7", title: "UK 7", available: true, size: "7", color: "Black" },
-      { id: "awaraa-street-glide-uk8", title: "UK 8", available: true, size: "8", color: "Black" },
-      { id: "awaraa-street-glide-uk9", title: "UK 9", available: true, size: "9", color: "Black" },
-      { id: "awaraa-street-glide-uk10", title: "UK 10", available: true, size: "10", color: "Black" },
-      { id: "awaraa-street-glide-uk11", title: "UK 11", available: true, size: "11", color: "Black" },
-    ],
-    images: [
-      {
-        url: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=1000&q=80",
-        altText: "Awaraa Street Glide - Front Profile"
-      },
-      {
-        url: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80",
-        altText: "Awaraa Street Glide - Profile Shot"
-      },
-      {
-        url: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-        altText: "Awaraa Street Glide - Detail View"
-      }
-    ],
-    shippingPolicy: "Free express shipping across India on all orders. Dispatched within 24 hours.",
-    returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
-    careInstructions: "Brush suede gently with a suede brush. Avoid submerging in water."
   },
   {
     id: "waffle-brown",
     handle: "waffle-brown",
     name: "Waffle Brown",
-    price: "₹3,199",
+    price: "₹1,599",
     description: "Heritage runner styling reimagined in rich earthy tones. Features lightweight waffle-traction sole and breathable mesh panels for all-day comfort.",
     materials: [
       "Earth-tone nubuck suede and woven nylon mesh",
@@ -91,15 +97,11 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=1000&q=80",
-        altText: "Waffle Brown - Profile Angle"
-      },
-      {
-        url: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80",
-        altText: "Waffle Brown - Detail View"
+        url: "/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png",
+        altText: "Waffle Brown - Hero Profile"
       }
     ],
-    shippingPolicy: "Free express shipping across India on all orders. Dispatched within 24 hours.",
+    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe with damp cloth and use dedicated suede foam cleaner."
   },
@@ -107,7 +109,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     id: "lv-sneakers",
     handle: "lv-sneakers",
     name: "LV Sneakers",
-    price: "₹3,499",
+    price: "₹1,099",
     description: "High-end urban fashion sneaker blending runway aesthetics with robust street comfort. Monogram-accented panels and cushioned cupsole.",
     materials: [
       "Smooth micro-fiber leather with embossed texture",
@@ -123,75 +125,146 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=1000&q=80",
+        url: "/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.46 PM.jpeg",
         altText: "LV Sneakers - Studio View"
+      },
+      {
+        url: "/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.47 PM.jpeg",
+        altText: "LV Sneakers - Side Profile"
+      },
+      {
+        url: "/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.47 PM (1).jpeg",
+        altText: "LV Sneakers - Detail Angle"
       }
     ],
-    shippingPolicy: "Free express shipping across India on all orders. Dispatched within 24 hours.",
+    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe gently with leather cleaning wipe. Do not machine wash."
   },
   {
-    id: "awaraa-pace-high",
-    handle: "awaraa-pace-high",
-    name: "Awaraa Pace High",
-    price: "₹3,299",
-    description: "High-top stability silhouette with breathable canvas upper, padded ankle collar, and ergonomic heel cushion for rougher surfaces.",
+    id: "nb-sneakers",
+    handle: "nb-sneakers",
+    name: "NB Sneakers",
+    price: "₹1,249",
+    description: "Street-forward retro athletic runner with dual-tone paneled leather, responsive foam cushion, and non-slip rubber outsole.",
     materials: [
-      "12oz heavy-duty organic canvas upper",
-      "Ergonomic shock-absorbing heel counter",
-      "High-grip chevron lugged rubber outsole",
-      "Padded collar with heel pull-tab"
+      "Layered micro-fiber leather & perforated toe box",
+      "Dual-density cushioned EVA midsole",
+      "Reinforced heel counter for structural stability",
+      "Padded sport tongue with heritage label"
     ],
     variants: [
-      { id: "awaraa-pace-high-uk6", title: "UK 6", available: true, size: "6", color: "Black" },
-      { id: "awaraa-pace-high-uk7", title: "UK 7", available: true, size: "7", color: "Black" },
-      { id: "awaraa-pace-high-uk8", title: "UK 8", available: true, size: "8", color: "Black" },
-      { id: "awaraa-pace-high-uk9", title: "UK 9", available: true, size: "9", color: "Black" },
-      { id: "awaraa-pace-high-uk10", title: "UK 10", available: true, size: "10", color: "Black" },
-      { id: "awaraa-pace-high-uk11", title: "UK 11", available: true, size: "11", color: "Black" },
+      { id: "nb-sneakers-uk7", title: "UK 7", available: true, size: "7", color: "White" },
+      { id: "nb-sneakers-uk8", title: "UK 8", available: true, size: "8", color: "White" },
+      { id: "nb-sneakers-uk9", title: "UK 9", available: true, size: "9", color: "White" },
+      { id: "nb-sneakers-uk10", title: "UK 10", available: true, size: "10", color: "White" },
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=1000&q=80",
-        altText: "Awaraa Pace High - Angle View"
-      },
-      {
-        url: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80",
-        altText: "Awaraa Pace High - Side Shot"
+        url: "/shoes/nb_sneakers/Gemini_Generated_Image_ytxwfkytxwfkytxw.png",
+        altText: "NB Sneakers - Hero Angle"
       }
     ],
-    shippingPolicy: "Free express shipping across India on all orders. Dispatched within 24 hours.",
+    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
-    careInstructions: "Spot clean canvas with mild soap. Air dry in shade."
+    careInstructions: "Wipe clean with a damp cloth. Air dry in shade."
   },
   {
-    id: "nb-sports",
-    handle: "nb-sports",
-    name: "NB Sports",
-    price: "₹3,499",
-    description: "Athletic lifestyle runner engineered with lightweight breathable mesh, shock-dampening heel cup, and multi-surface grip.",
+    id: "sports",
+    handle: "sports",
+    name: "Sports",
+    price: "₹999",
+    description: "Ultra-lightweight everyday runner designed for daily commute, high-flexibility walking, and zero fatigue wear.",
     materials: [
-      "Technical breathable sport mesh with synthetic overlays",
-      "High-rebound molded EVA foam midsole",
-      "Durable non-marking rubber outsole",
-      "Removable contoured orthotic footbed"
+      "Breathable engineered knit textile upper",
+      "Ultra-light flexible EVA sole",
+      "Cushioned memory-foam insole",
+      "Elastic slip-on collar with secure lacing"
     ],
     variants: [
-      { id: "nb-sports-uk7", title: "UK 7", available: true, size: "7", color: "White" },
-      { id: "nb-sports-uk8", title: "UK 8", available: true, size: "8", color: "White" },
-      { id: "nb-sports-uk9", title: "UK 9", available: true, size: "9", color: "White" },
-      { id: "nb-sports-uk10", title: "UK 10", available: true, size: "10", color: "White" },
+      { id: "sports-uk7", title: "UK 7", available: true, size: "7", color: "Grey" },
+      { id: "sports-uk8", title: "UK 8", available: true, size: "8", color: "Grey" },
+      { id: "sports-uk9", title: "UK 9", available: true, size: "9", color: "Grey" },
+      { id: "sports-uk10", title: "UK 10", available: true, size: "10", color: "Grey" },
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=1000&q=80",
-        altText: "NB Sports - Hero Angle"
+        url: "/shoes/sports/WhatsApp Image 2026-08-20 at 1.42.50 PM.jpeg",
+        altText: "Sports - Studio View"
+      },
+      {
+        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 7.50.48 PM.jpeg",
+        altText: "Sports - Angled View"
+      },
+      {
+        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 9.21.55 PM.jpeg",
+        altText: "Sports - Profile Shot"
+      },
+      {
+        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 9.21.56 PM.jpeg",
+        altText: "Sports - Pair Detail"
       }
     ],
-    shippingPolicy: "Free express shipping across India on all orders. Dispatched within 24 hours.",
+    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
-    careInstructions: "Hand wash with mild detergent. Air dry naturally."
+    careInstructions: "Machine washable on delicate cold cycle. Air dry only."
+  },
+  {
+    id: "sketchers-sports",
+    handle: "sketchers-sports",
+    name: "Sketchers Sports",
+    price: "₹1,579",
+    description: "Plush all-day walking shoe featuring high-rebound cushioning, responsive arch support, and rugged street tread.",
+    materials: [
+      "Reinforced mesh upper with synthetic side braces",
+      "Shock-absorbing segmented EVA midsole",
+      "High-traction rubber pod outsole",
+      "Breathable moisture-wicking sockliner"
+    ],
+    variants: [
+      { id: "sketchers-sports-uk8", title: "UK 8", available: true, size: "8", color: "Tan" },
+      { id: "sketchers-sports-uk9", title: "UK 9", available: true, size: "9", color: "Tan" },
+      { id: "sketchers-sports-uk10", title: "UK 10", available: true, size: "10", color: "Tan" },
+      { id: "sketchers-sports-uk11", title: "UK 11", available: true, size: "11", color: "Tan" },
+      { id: "sketchers-sports-uk12", title: "UK 12", available: true, size: "12", color: "Tan" },
+    ],
+    images: [
+      {
+        url: "/shoes/sketchers/Gemini_Generated_Image_iptr9iptr9iptr9i.png",
+        altText: "Sketchers Sports - Hero View"
+      }
+    ],
+    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
+    careInstructions: "Spot clean with damp cloth and mild soap. Air dry."
+  },
+  {
+    id: "brooks",
+    handle: "brooks",
+    name: "Brooks",
+    price: "₹1,399",
+    description: "High-performance endurance walking shoe with structured heel stabilizer, responsive road cushioning, and high-abrasion rubber tread.",
+    materials: [
+      "Heavy-duty double jacquard breathable mesh",
+      "Bio-cushioned responsive midsole compound",
+      "Blown rubber crash pad outsole",
+      "3D Fit Print saddle for secure midfoot lockdown"
+    ],
+    variants: [
+      { id: "brooks-uk7", title: "UK 7", available: true, size: "7", color: "Black" },
+      { id: "brooks-uk8", title: "UK 8", available: true, size: "8", color: "Black" },
+      { id: "brooks-uk9", title: "UK 9", available: true, size: "9", color: "Black" },
+      { id: "brooks-uk10", title: "UK 10", available: true, size: "10", color: "Black" },
+    ],
+    images: [
+      {
+        url: "/shoes/brooks/Gemini_Generated_Image_7ol72i7ol72i7ol7.png",
+        altText: "Brooks - Hero Studio Angle"
+      }
+    ],
+    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
+    careInstructions: "Hand wash with mild detergent. Air dry away from heat sources."
   }
 ];
 

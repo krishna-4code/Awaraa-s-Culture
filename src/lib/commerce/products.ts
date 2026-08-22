@@ -66,13 +66,15 @@ function mapSanityProduct(doc: any): CommerceProduct {
       url = '';
     }
     return {
-      url: url || 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1000&q=80',
+      url: url || '/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png',
       altText: img?.alt || doc.name || 'Product Image',
     };
   });
 
   const variants = (doc.variants || []).map((v: any) => {
-    const stock = typeof v.stock === 'number' ? v.stock : 10;
+    // IMPORTANT: default to 0 (out of stock) if stock is undefined/null.
+    // Defaulting to a non-zero value would show sold-out items as available.
+    const stock = typeof v.stock === 'number' ? v.stock : 0;
     const title = v.color ? `${v.size || 'Standard'} / ${v.color}` : v.size || 'Standard';
     // IMPORTANT: namespace the variant ID with the product handle so it's globally unique
     const rawKey = v._key || `${v.size}_${v.color}`;
@@ -105,6 +107,9 @@ function mapSanityProduct(doc: any): CommerceProduct {
     // Use handle as canonical ID (not Sanity's _id) so cart matching is always consistent
     id: handle,
     handle: handle,
+    // _sanityId is the actual Sanity document _id — used by inventory operations
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    _sanityId: doc._id,
     name: doc.name,
     price: formattedPrice,
     description: doc.description || '',
@@ -112,7 +117,7 @@ function mapSanityProduct(doc: any): CommerceProduct {
     variants,
     images: images.length > 0 ? images : [
       {
-        url: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1000&q=80',
+        url: '/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png',
         altText: doc.name,
       }
     ],
@@ -128,7 +133,10 @@ export async function getProduct(handle: string): Promise<CommerceProduct | null
 
   if (projectId && projectId !== 'your_sanity_project_id' && projectId !== 'placeholder') {
     try {
-      const doc = await sanityClient.fetch(SINGLE_PRODUCT_QUERY, { handle });
+      // next.tags allows revalidateTag('products') to purge this cache after inventory changes
+      const doc = await sanityClient.fetch(SINGLE_PRODUCT_QUERY, { handle }, {
+        next: { tags: ['products', `product-${handle}`], revalidate: 60 }
+      });
       if (doc) {
         return mapSanityProduct(doc);
       }
@@ -149,7 +157,9 @@ export async function getProducts(): Promise<CommerceProduct[]> {
 
   if (projectId && projectId !== 'your_sanity_project_id' && projectId !== 'placeholder') {
     try {
-      const docs = await sanityClient.fetch(ALL_PRODUCTS_QUERY);
+      const docs = await sanityClient.fetch(ALL_PRODUCTS_QUERY, {}, {
+        next: { tags: ['products'], revalidate: 60 }
+      });
       if (Array.isArray(docs) && docs.length > 0) {
         return docs.map(mapSanityProduct);
       }

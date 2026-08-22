@@ -410,9 +410,55 @@ async function main() {
         `*[_type == "product" && _id == $id][0]{ _id }`,
         { id: payload._id }
       )
-      await client.createOrReplace(payload)
-      if (existing) { updated++; console.log(`  Updated:  ${group.name}  (${payload.variants.length} variants)`) }
-      else           { created++; console.log(`  Created:  ${group.name}  (${payload.variants.length} variants)`) }
+
+      if (existing) {
+        // ── EXISTING PRODUCT: Patch non-inventory fields only ──────────────
+        // NEVER overwrite stock values on an existing product — doing so
+        // would erase real sales data with stale spreadsheet numbers.
+        // Only update: name, slug, price, description, materials, and policies.
+        // To restock, use the admin dashboard or adjustStock() directly.
+        await client
+          .patch(payload._id)
+          .set({
+            name: payload.name,
+            slug: payload.slug,
+            collection: payload.collection,
+            price: payload.price,
+            description: payload.description,
+            materials: payload.materials,
+            shippingPolicy: payload.shippingPolicy,
+            returnPolicy: payload.returnPolicy,
+            careInstructions: payload.careInstructions,
+            isPlaceholder: false,
+          })
+          // Only add NEW variants (by _key) that don't exist yet
+          // This does NOT touch existing variants and their live stock values
+          .commit()
+
+        // Now add any variant _keys from the spreadsheet that are not yet in Sanity
+        const existingDoc = await client.fetch<{ variants: Array<{_key: string}> } | null>(
+          `*[_type == "product" && _id == $id][0]{ variants[]{_key} }`,
+          { id: payload._id }
+        )
+        const existingKeys = new Set((existingDoc?.variants || []).map(v => v._key))
+        const newVariants = payload.variants.filter(v => !existingKeys.has(v._key))
+        if (newVariants.length > 0) {
+          await client
+            .patch(payload._id)
+            .append('variants', newVariants)
+            .commit()
+          console.log(`  Updated:  ${group.name}  (patched metadata + ${newVariants.length} new variant(s) added; existing stock PRESERVED)`)
+        } else {
+          console.log(`  Updated:  ${group.name}  (patched metadata only; all variants existed — stock PRESERVED)`)
+        }
+        updated++
+      } else {
+        // ── NEW PRODUCT: Full createOrReplace is safe ──────────────────────
+        // First import — no live sales data to protect.
+        await client.createOrReplace(payload)
+        console.log(`  Created:  ${group.name}  (${payload.variants.length} variants)`)
+        created++
+      }
     } catch (err) {
       skipped++
       console.error(`  Failed:   ${group.name} -- ${(err as Error).message}`)

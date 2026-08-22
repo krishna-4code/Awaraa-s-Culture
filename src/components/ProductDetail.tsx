@@ -89,7 +89,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
 
   const images = product.images && product.images.length > 0 
     ? product.images 
-    : [{ url: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1000&q=80", altText: product.name }];
+    : [{ url: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png", altText: product.name }];
 
   const activeImage = images[selectedImageIndex] || images[0];
 

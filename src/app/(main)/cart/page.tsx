@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/components/CartContext";
 import { Trash2, Plus, Minus, ArrowRight, ShieldCheck, Truck, RotateCcw, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
-import { createCheckoutOrder, verifyServerPayment } from "@/lib/commerce/razorpay";
+import { initiateWebsiteCheckout, confirmWebsiteOrder } from "@/lib/commerce/checkout";
 
 declare global {
   interface Window {
@@ -62,16 +62,29 @@ export default function CartPage() {
     setCheckoutError(null);
 
     try {
-      // 1. Create Order via Server Action
-      const lineItems = cart.lines.map((l) => ({
-        id: l.merchandise.id,
-        name: l.merchandise.product.name,
-        quantity: l.quantity,
-        price: parseFloat(l.merchandise.product.price.replace(/[^0-9.]/g, '')) || 2999,
-        size: l.merchandise.title,
-      }));
+      // Build line items — include productId and variantKey for inventory tracking
+      // The variantId format is "{handle}__{variantKey}" — extract the variantKey part
+      const lineItems = cart.lines.map((l) => {
+        const variantId = l.merchandise.id;
+        // Extract variantKey: format is "{productHandle}__{variantKey}"
+        const separatorIdx = variantId.lastIndexOf('__');
+        const variantKey = separatorIdx >= 0 ? variantId.slice(separatorIdx + 2) : variantId;
+        // productId is the Sanity _id — stored in product.id (which is the handle for mock, _id for Sanity)
+        const productId = (l.merchandise.product as any)._sanityId || l.merchandise.product.id;
 
-      const orderRes = await createCheckoutOrder({
+        return {
+          productId,
+          variantKey,
+          productName: l.merchandise.product.name,
+          size: l.merchandise.title,
+          color: (l.merchandise.product.variants?.find((v: any) => v.id === variantId) as any)?.color || '',
+          quantity: l.quantity,
+          unitPrice: parseFloat(l.merchandise.product.price.replace(/[^0-9.]/g, '')) || 2999,
+        };
+      });
+
+      // 1. Create Razorpay order (does NOT modify inventory)
+      const orderRes = await initiateWebsiteCheckout({
         amount: finalTotal,
         lineItems,
       });
@@ -79,6 +92,8 @@ export default function CartPage() {
       if (!orderRes.success || !orderRes.orderId) {
         throw new Error(orderRes.error || "Failed to initialize payment gateway order.");
       }
+
+      const idempotencyKey = orderRes.idempotencyKey!;
 
       // 2. Open Razorpay Modal or Sandbox Handler
       if (window.Razorpay && orderRes.keyId && !orderRes.keyId.includes("placeholder")) {
@@ -89,13 +104,12 @@ export default function CartPage() {
           name: "Awaraa's Culture",
           description: "Footwear order checkout",
           order_id: orderRes.orderId,
-          theme: {
-            color: "#FF5E1E",
-          },
+          theme: { color: "#FF5E1E" },
           handler: async function (response: any) {
             try {
-              // 3. Cryptographic Signature Verification on Server
-              const verifyRes = await verifyServerPayment({
+              // 3. Verify payment + decrement inventory + create order
+              const verifyRes = await confirmWebsiteOrder({
+                idempotencyKey,
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
@@ -133,9 +147,10 @@ export default function CartPage() {
         });
         rzp.open();
       } else {
-        // Sandbox Simulation Mode (Runs server-side verification with mock signature)
+        // Sandbox Simulation Mode
         const mockPaymentId = `pay_sim_${Date.now()}`;
-        const verifyRes = await verifyServerPayment({
+        const verifyRes = await confirmWebsiteOrder({
+          idempotencyKey,
           razorpay_order_id: orderRes.orderId,
           razorpay_payment_id: mockPaymentId,
           razorpay_signature: "sandbox_valid_signature",
@@ -283,7 +298,7 @@ export default function CartPage() {
             <div className="lg:col-span-7 flex flex-col divide-y divide-bright-ink/10">
               {cart.lines.map((line) => {
                 const productImg = line.merchandise.product.images?.[0]?.url || 
-                  "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80";
+                  "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png";
                 const productHandle = line.merchandise.product.handle || line.merchandise.product.id;
 
                 return (

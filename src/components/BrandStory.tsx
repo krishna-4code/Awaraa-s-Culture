@@ -54,8 +54,8 @@ export function BrandStory() {
           {/* Layer 1 */}
           <div className="absolute top-0 left-0 w-[65%] h-[65%] rounded-2xl overflow-hidden shadow-lg border-4 border-white z-20 hover:scale-105 transition-transform duration-300">
             <Image
-              src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1000&q=80"
-              alt="Awaraa's Culture wanderer in motion"
+              src="/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png"
+              alt="Awaraa's Culture SB Dunks in motion"
               fill
               sizes="(max-width: 768px) 70vw, 35vw"
               className="object-cover"
@@ -65,8 +65,8 @@ export function BrandStory() {
           {/* Layer 2 */}
           <div className="absolute top-8 right-0 w-[48%] h-[50%] rounded-2xl overflow-hidden shadow-md border-4 border-white z-10 hover:scale-105 transition-transform duration-300">
             <Image
-              src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80"
-              alt="Craftsmanship detail"
+              src="/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png"
+              alt="NB Sports craftsmanship detail"
               fill
               sizes="(max-width: 768px) 50vw, 25vw"
               className="object-cover"
@@ -76,8 +76,8 @@ export function BrandStory() {
           {/* Layer 3 */}
           <div className="absolute bottom-0 left-[10%] w-[55%] h-[50%] rounded-2xl overflow-hidden shadow-lg border-4 border-white z-30 hover:scale-105 transition-transform duration-300">
             <Image
-              src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80"
-              alt="Urban footwear in Delhi NCR"
+              src="/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png"
+              alt="Waffle Brown urban footwear in Delhi NCR"
               fill
               sizes="(max-width: 768px) 55vw, 28vw"
               className="object-cover"
