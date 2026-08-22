@@ -57,8 +57,9 @@ const ALL_PRODUCTS_QUERY = `
 
 function mapSanityProduct(doc: any): CommerceProduct {
   const handle = doc.handle || doc._id || 'unknown';
+  const mockFallback = findMockProduct(handle) || findMockProduct(doc.name);
 
-  const images = (doc.images || []).map((img: any) => {
+  let images = (doc.images || []).map((img: any) => {
     let url = '';
     try {
       url = img?.asset ? urlForImage(img.asset).url() : '';
@@ -66,10 +67,14 @@ function mapSanityProduct(doc: any): CommerceProduct {
       url = '';
     }
     return {
-      url: url || '/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png',
+      url: url,
       altText: img?.alt || doc.name || 'Product Image',
     };
-  });
+  }).filter((img: { url: string }) => Boolean(img.url));
+
+  if (images.length === 0 && mockFallback && mockFallback.images.length > 0) {
+    images = mockFallback.images;
+  }
 
   const variants = (doc.variants || []).map((v: any) => {
     // IMPORTANT: default to 0 (out of stock) if stock is undefined/null.
@@ -115,12 +120,12 @@ function mapSanityProduct(doc: any): CommerceProduct {
     description: doc.description || '',
     materials: doc.materials || ['Full-grain leather', 'Dual-density EVA midsole', 'Rubber outsole'],
     variants,
-    images: images.length > 0 ? images : [
+    images: images.length > 0 ? images : (mockFallback?.images || [
       {
         url: '/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png',
         altText: doc.name,
       }
-    ],
+    ]),
     shippingPolicy: doc.shippingPolicy || 'Free shipping across India on prepaid orders.',
     returnPolicy: doc.returnPolicy || '14-day returns for unworn products.',
     careInstructions: doc.careInstructions || 'Wipe clean with a damp cloth. Avoid direct heat.',
