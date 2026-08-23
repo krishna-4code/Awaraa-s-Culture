@@ -88,7 +88,9 @@ export function Hero() {
                   src="/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png"
                   alt="NB Sports Featured Kick"
                   fill
-                  sizes="256px"
+                  sizes="(max-width: 768px) 100vw, 512px"
+                  quality={90}
+                  priority
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute bottom-3 bg-bright-amber/95 text-white text-xs font-accent font-bold px-3 py-1 rounded-full shadow-md">

@@ -147,7 +147,8 @@ export function CartDrawer() {
                       src={productImg}
                       alt={line.merchandise.product.name}
                       fill
-                      sizes="80px"
+                      sizes="160px"
+                      quality={85}
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </Link>

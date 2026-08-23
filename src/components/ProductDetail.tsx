@@ -107,7 +107,8 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
               src={activeImage.url}
               alt={activeImage.altText || product.name}
               fill
-              sizes="(max-width: 768px) 100vw, 60vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 1200px"
+              quality={95}
               priority
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -137,7 +138,8 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     src={img.url}
                     alt={img.altText || `Detail ${idx + 1}`}
                     fill
-                    sizes="(max-width: 768px) 33vw, 20vw"
+                    sizes="(max-width: 768px) 33vw, 250px"
+                    quality={90}
                     className="object-cover"
                   />
                 </button>

@@ -290,7 +290,8 @@ function ShoeCardItem({
             src={currentImg.url}
             alt={currentImg.altText || product.title}
             fill
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            quality={90}
             className="object-cover transition-transform duration-500 group-hover/img:scale-105"
           />
         </Link>

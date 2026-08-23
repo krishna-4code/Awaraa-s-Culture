@@ -315,7 +315,8 @@ export default function CartPage() {
                         src={productImg}
                         alt={line.merchandise.product.name}
                         fill
-                        sizes="112px"
+                        sizes="(max-width: 640px) 192px, 224px"
+                        quality={85}
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </Link>
