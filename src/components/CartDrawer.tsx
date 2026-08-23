@@ -132,7 +132,7 @@ export function CartDrawer() {
           ) : (
             cart.lines.map((line) => {
               const productImg = line.merchandise.product.images?.[0]?.url || 
-                "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png";
+                "/shoes/nb_sports/1.png";
               const productHandle = line.merchandise.product.handle || line.merchandise.product.id;
 
               return (
@@ -147,8 +147,7 @@ export function CartDrawer() {
                       src={productImg}
                       alt={line.merchandise.product.name}
                       fill
-                      sizes="160px"
-                      quality={85}
+                      unoptimized
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </Link>

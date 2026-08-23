@@ -85,11 +85,10 @@ export function Hero() {
               {/* Center Cutout Product Graphic with Real Image */}
               <div className="relative w-64 h-64 flex items-center justify-center bg-bright-sun/30 rounded-full border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden">
                 <Image
-                  src="/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png"
+                  src="/shoes/nb_sports/1.png"
                   alt="NB Sports Featured Kick"
                   fill
-                  sizes="(max-width: 768px) 100vw, 512px"
-                  quality={90}
+                  unoptimized
                   priority
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />

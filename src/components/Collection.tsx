@@ -34,23 +34,23 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     spec: "High-Rebound Molded EVA",
     desc: "Athletic lifestyle runner engineered with lightweight breathable mesh and grip.",
     price: "1,199",
-    image: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png",
+    image: "/shoes/nb_sports/1.png",
     images: [
       {
-        url: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png",
-        altText: "NB Sports - Hero Angle"
+        url: "/shoes/nb_sports/1.png",
+        altText: "NB Sports - Angle 1"
       },
       {
-        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.46 PM (2).jpeg",
-        altText: "NB Sports - Studio Profile"
+        url: "/shoes/nb_sports/2.jpeg",
+        altText: "NB Sports - Angle 2"
       },
       {
-        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.47 PM.jpeg",
-        altText: "NB Sports - Top & Sole Angle"
+        url: "/shoes/nb_sports/3.jpeg",
+        altText: "NB Sports - Angle 3"
       },
       {
-        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.49 PM.jpeg",
-        altText: "NB Sports - Pair Showcase"
+        url: "/shoes/nb_sports/4.jpeg",
+        altText: "NB Sports - Angle 4"
       }
     ],
     badgeColor: "bg-bright-amber text-white",
@@ -90,10 +90,10 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     spec: "Dual-Density EVA Midsole",
     desc: "Street-forward retro athletic runner with dual-tone paneled leather.",
     price: "1,249",
-    image: "/shoes/nb_sneakers/Gemini_Generated_Image_ytxwfkytxwfkytxw.png",
+    image: "/shoes/nb_sneakers/1.png",
     images: [
       {
-        url: "/shoes/nb_sneakers/Gemini_Generated_Image_ytxwfkytxwfkytxw.png",
+        url: "/shoes/nb_sneakers/1.png",
         altText: "NB Sneakers - Hero Angle"
       }
     ],
@@ -152,23 +152,23 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     spec: "Ultra-Light Flexible EVA",
     desc: "Ultra-lightweight everyday runner designed for daily commute and zero fatigue.",
     price: "999",
-    image: "/shoes/sports/WhatsApp Image 2026-08-20 at 1.42.50 PM.jpeg",
+    image: "/shoes/sports/1.jpeg",
     images: [
       {
-        url: "/shoes/sports/WhatsApp Image 2026-08-20 at 1.42.50 PM.jpeg",
-        altText: "Sports - Studio View"
+        url: "/shoes/sports/1.jpeg",
+        altText: "Sports - Angle 1"
       },
       {
-        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 7.50.48 PM.jpeg",
-        altText: "Sports - Angled View"
+        url: "/shoes/sports/2.jpeg",
+        altText: "Sports - Angle 2"
       },
       {
-        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 9.21.55 PM.jpeg",
-        altText: "Sports - Profile Shot"
+        url: "/shoes/sports/3.jpeg",
+        altText: "Sports - Angle 3"
       },
       {
-        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 9.21.56 PM.jpeg",
-        altText: "Sports - Pair Detail"
+        url: "/shoes/sports/4.jpeg",
+        altText: "Sports - Angle 4"
       }
     ],
     badgeColor: "bg-bright-lime text-white",
@@ -290,8 +290,7 @@ function ShoeCardItem({
             src={currentImg.url}
             alt={currentImg.altText || product.title}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            quality={90}
+            unoptimized
             className="object-cover transition-transform duration-500 group-hover/img:scale-105"
           />
         </Link>
@@ -440,7 +439,7 @@ export function Collection({
         );
         const resolvedImages: { url: string; altText: string }[] = p.images && p.images.length > 0
           ? p.images.map((img) => ({ url: img.url, altText: img.altText || p.name }))
-          : (fallbackMatch?.images || [{ url: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png", altText: p.name }]);
+          : (fallbackMatch?.images || [{ url: "/shoes/nb_sports/1.png", altText: p.name }]);
 
         return {
           id: p.id,
@@ -451,7 +450,7 @@ export function Collection({
           spec: p.materials?.[0] || "Dual EVA Foam Sole",
           desc: p.description || "Built for daily hustle, zero hype markups, pure craft.",
           price: p.price.replace(/[^0-9,]/g, ""),
-          image: resolvedImages[0]?.url || "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png",
+          image: resolvedImages[0]?.url || "/shoes/nb_sports/1.png",
           images: resolvedImages,
           badgeColor: badgeColors[idx % badgeColors.length],
           rawProduct: p,

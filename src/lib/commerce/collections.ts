@@ -34,7 +34,7 @@ export async function getCollection(): Promise<CommerceCollection[]> {
             handle: doc.handle || doc._id,
             title: doc.title,
             description: doc.description || '',
-            imageUrl: imageUrl || '/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png',
+            imageUrl: imageUrl || '/shoes/nb_sports/1.png',
           };
         });
       }
@@ -52,7 +52,7 @@ export async function getCollection(): Promise<CommerceCollection[]> {
       handle: "daily-walkers",
       title: "Daily Walkers", 
       description: "Built for the daily commute and beyond. Lightweight EVA cushioning.",
-      imageUrl: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png"
+      imageUrl: "/shoes/nb_sports/1.png"
     },
     { 
       id: "street-kicks", 

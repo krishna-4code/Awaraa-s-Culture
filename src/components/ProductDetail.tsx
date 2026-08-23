@@ -89,7 +89,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
 
   const images = product.images && product.images.length > 0 
     ? product.images 
-    : [{ url: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png", altText: product.name }];
+    : [{ url: "/shoes/nb_sports/1.png", altText: product.name }];
 
   const activeImage = images[selectedImageIndex] || images[0];
 
@@ -107,8 +107,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
               src={activeImage.url}
               alt={activeImage.altText || product.name}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 1200px"
-              quality={95}
+              unoptimized
               priority
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -138,8 +137,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     src={img.url}
                     alt={img.altText || `Detail ${idx + 1}`}
                     fill
-                    sizes="(max-width: 768px) 33vw, 250px"
-                    quality={90}
+                    unoptimized
                     className="object-cover"
                   />
                 </button>

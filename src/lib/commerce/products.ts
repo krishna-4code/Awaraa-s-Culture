@@ -122,7 +122,7 @@ function mapSanityProduct(doc: any): CommerceProduct {
     variants,
     images: images.length > 0 ? images : (mockFallback?.images || [
       {
-        url: '/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png',
+        url: '/shoes/nb_sports/1.png',
         altText: doc.name,
       }
     ]),

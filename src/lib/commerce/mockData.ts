@@ -21,20 +21,20 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     ],
     images: [
       {
-        url: "/shoes/nb_sports/Gemini_Generated_Image_1h2b5y1h2b5y1h2b.png",
-        altText: "NB Sports - Hero Angle"
+        url: "/shoes/nb_sports/1.png",
+        altText: "NB Sports - Angle 1"
       },
       {
-        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.46 PM (2).jpeg",
-        altText: "NB Sports - Studio Profile"
+        url: "/shoes/nb_sports/2.jpeg",
+        altText: "NB Sports - Angle 2"
       },
       {
-        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.47 PM.jpeg",
-        altText: "NB Sports - Top & Sole Angle"
+        url: "/shoes/nb_sports/3.jpeg",
+        altText: "NB Sports - Angle 3"
       },
       {
-        url: "/shoes/nb_sports/WhatsApp Image 2026-08-18 at 6.51.49 PM.jpeg",
-        altText: "NB Sports - Pair Showcase"
+        url: "/shoes/nb_sports/4.jpeg",
+        altText: "NB Sports - Angle 4"
       }
     ],
     shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
@@ -161,7 +161,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     ],
     images: [
       {
-        url: "/shoes/nb_sneakers/Gemini_Generated_Image_ytxwfkytxwfkytxw.png",
+        url: "/shoes/nb_sneakers/1.png",
         altText: "NB Sneakers - Hero Angle"
       }
     ],
@@ -189,20 +189,20 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     ],
     images: [
       {
-        url: "/shoes/sports/WhatsApp Image 2026-08-20 at 1.42.50 PM.jpeg",
-        altText: "Sports - Studio View"
+        url: "/shoes/sports/1.jpeg",
+        altText: "Sports - Angle 1"
       },
       {
-        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 7.50.48 PM.jpeg",
-        altText: "Sports - Angled View"
+        url: "/shoes/sports/2.jpeg",
+        altText: "Sports - Angle 2"
       },
       {
-        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 9.21.55 PM.jpeg",
-        altText: "Sports - Profile Shot"
+        url: "/shoes/sports/3.jpeg",
+        altText: "Sports - Angle 3"
       },
       {
-        url: "/shoes/sports/WhatsApp Image 2026-08-22 at 9.21.56 PM.jpeg",
-        altText: "Sports - Pair Detail"
+        url: "/shoes/sports/4.jpeg",
+        altText: "Sports - Angle 4"
       }
     ],
     shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
