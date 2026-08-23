@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "./CartContext";
 import { X, Trash2, Plus, Minus, ArrowRight, ShoppingBag, Sparkles, ShieldCheck, Truck } from "lucide-react";
+import { getProductPrimaryImage } from "@/lib/commerce/productImages";
 
 export function CartDrawer() {
   const { cart, isCartOpen, closeCart, updateItem, removeItem, clearCart } = useCart();
@@ -71,7 +72,8 @@ export function CartDrawer() {
       {/* Slide-over Drawer Panel */}
       <div 
         ref={drawerRef}
-        className="relative w-full max-w-md bg-bright-canvas text-bright-ink h-full shadow-2xl z-10 flex flex-col border-l border-bright-ink/10 transition-transform duration-300 ease-out animate-slideInRight overflow-hidden"
+        data-lenis-prevent="true"
+        className="relative w-full max-w-md bg-bright-canvas text-bright-ink h-full shadow-2xl z-10 flex flex-col border-l border-bright-ink/10 transition-transform duration-300 ease-out animate-slideInRight overflow-hidden overscroll-contain"
         role="dialog"
         aria-modal="true"
         aria-label="Shopping Cart Drawer"
@@ -108,7 +110,11 @@ export function CartDrawer() {
         </div>
 
         {/* Cart Line Items List */}
-        <div className="flex-1 overflow-y-auto p-5 flex flex-col divide-y divide-bright-ink/10">
+        <div 
+          data-lenis-prevent="true"
+          onWheel={(e) => e.stopPropagation()}
+          className="flex-1 overflow-y-auto overscroll-contain p-5 flex flex-col divide-y divide-bright-ink/10"
+        >
           {(!cart || cart.lines.length === 0) ? (
             <div className="flex-1 flex flex-col items-center justify-center text-center p-6 gap-4 my-auto">
               <div className="w-16 h-16 rounded-full bg-bright-card border border-bright-ink/10 flex items-center justify-center text-3xl mb-1">
@@ -131,8 +137,7 @@ export function CartDrawer() {
             </div>
           ) : (
             cart.lines.map((line) => {
-              const productImg = line.merchandise.product.images?.[0]?.url || 
-                "/shoes/nb_sports/1.png";
+              const productImg = getProductPrimaryImage(line.merchandise.product);
               const productHandle = line.merchandise.product.handle || line.merchandise.product.id;
 
               return (
@@ -297,7 +302,7 @@ export function CartDrawer() {
                 </button>
                 <div className="flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-bright-amber" />
-                  <span>Secure 256-bit Checkout</span>
+                  <span>Direct Instagram DM Checkout</span>
                 </div>
               </div>
             </div>

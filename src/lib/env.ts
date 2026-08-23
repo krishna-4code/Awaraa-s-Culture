@@ -6,7 +6,8 @@ const envSchema = z.object({
   
   // Client-side
   NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
-  NEXT_PUBLIC_COMMERCE_PROVIDER: z.enum(['mock', 'shopify', 'medusa']).default('mock'),
+  NEXT_PUBLIC_COMMERCE_PROVIDER: z.enum(['mock', 'shopify', 'medusa', 'supabase-sanity']).default('mock'),
+  NEXT_PUBLIC_INSTAGRAM_USERNAME: z.string().default('awaraas_culture'),
 });
 
 const _env = envSchema.safeParse(process.env);

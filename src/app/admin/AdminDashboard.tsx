@@ -12,6 +12,7 @@
  */
 
 import { useState, useTransition } from 'react'
+import Link from 'next/link'
 import { Package, TrendingDown, AlertTriangle, CheckCircle, Instagram, Globe, Plus, Minus, RefreshCw, ChevronDown, ChevronUp, Search } from 'lucide-react'
 import { createInstagramOrder } from './actions'
 import { adjustStockAction } from './actions'
@@ -203,25 +204,37 @@ function StockAdjustModal({
   }
 
   return (
-    <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-gray-900 rounded-2xl border border-gray-700 p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
-        <h3 className="font-bold text-white text-lg mb-1">Adjust Stock</h3>
+    <div 
+      className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" 
+      role="presentation"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+    >
+      <div 
+        className="bg-gray-900 rounded-2xl border border-gray-700 p-6 w-full max-w-sm" 
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="stock-adjust-title"
+      >
+        <h3 id="stock-adjust-title" className="font-bold text-white text-lg mb-1">Adjust Stock</h3>
         <p className="text-gray-400 text-sm mb-4">{target.productName} — {target.size}</p>
 
         <div className="mb-4">
-          <label className="block text-xs text-gray-400 uppercase tracking-wider mb-2">New Stock Quantity</label>
+          <label htmlFor="adjust-new-stock" className="block text-xs text-gray-400 uppercase tracking-wider mb-2">New Stock Quantity</label>
           <div className="flex items-center gap-3">
-            <button onClick={() => setNewStock(Math.max(0, newStock - 1))} className="w-9 h-9 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center">
+            <button type="button" onClick={() => setNewStock(Math.max(0, newStock - 1))} className="w-9 h-9 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center">
               <Minus className="w-4 h-4" />
             </button>
             <input
+              id="adjust-new-stock"
               type="number"
               min="0"
               value={newStock}
               onChange={e => setNewStock(Math.max(0, parseInt(e.target.value) || 0))}
               className="flex-1 bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-center font-mono font-bold text-white text-xl focus:outline-none focus:border-amber-500"
             />
-            <button onClick={() => setNewStock(newStock + 1)} className="w-9 h-9 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center">
+            <button type="button" onClick={() => setNewStock(newStock + 1)} className="w-9 h-9 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center">
               <Plus className="w-4 h-4" />
             </button>
           </div>
@@ -231,8 +244,9 @@ function StockAdjustModal({
         </div>
 
         <div className="mb-4">
-          <label className="block text-xs text-gray-400 uppercase tracking-wider mb-2">Reason *</label>
+          <label htmlFor="adjust-reason" className="block text-xs text-gray-400 uppercase tracking-wider mb-2">Reason *</label>
           <input
+            id="adjust-reason"
             type="text"
             placeholder="e.g. Received new shipment, Manual count correction"
             value={reason}
@@ -343,8 +357,9 @@ function InstagramOrderForm({ productsWithStock }: { productsWithStock: StockInf
         {/* Customer Info */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Customer Name *</label>
+            <label htmlFor="admin-customer-name" className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Customer Name *</label>
             <input
+              id="admin-customer-name"
               required
               type="text"
               value={customerName}
@@ -354,8 +369,9 @@ function InstagramOrderForm({ productsWithStock }: { productsWithStock: StockInf
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Phone / Instagram</label>
+            <label htmlFor="admin-customer-contact" className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Phone / Instagram</label>
             <input
+              id="admin-customer-contact"
               type="text"
               value={customerContact}
               onChange={e => setCustomerContact(e.target.value)}
@@ -367,8 +383,9 @@ function InstagramOrderForm({ productsWithStock }: { productsWithStock: StockInf
 
         {/* Product Selection */}
         <div>
-          <label className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Product *</label>
+          <label htmlFor="admin-select-product" className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Product *</label>
           <select
+            id="admin-select-product"
             required
             value={selectedProductId}
             onChange={e => {
@@ -387,7 +404,7 @@ function InstagramOrderForm({ productsWithStock }: { productsWithStock: StockInf
         {/* Variant / Size Selection */}
         {selectedProduct && (
           <div>
-            <label className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Size *</label>
+            <span className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Size *</span>
             <div className="grid grid-cols-4 gap-2">
               {selectedProduct.variants.map(variant => (
                 <button
@@ -416,8 +433,9 @@ function InstagramOrderForm({ productsWithStock }: { productsWithStock: StockInf
         {/* Quantity & Price */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Quantity *</label>
+            <label htmlFor="admin-order-quantity" className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Quantity *</label>
             <input
+              id="admin-order-quantity"
               type="number"
               min="1"
               value={quantity}
@@ -426,8 +444,9 @@ function InstagramOrderForm({ productsWithStock }: { productsWithStock: StockInf
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Unit Price (₹) *</label>
+            <label htmlFor="admin-unit-price" className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Unit Price (₹) *</label>
             <input
+              id="admin-unit-price"
               required
               type="number"
               min="0"
@@ -441,7 +460,7 @@ function InstagramOrderForm({ productsWithStock }: { productsWithStock: StockInf
 
         {/* Payment Method */}
         <div>
-          <label className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Payment Method</label>
+          <span className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Payment Method</span>
           <div className="grid grid-cols-4 gap-2">
             {(['COD', 'UPI', 'BANK', 'OTHER'] as const).map(method => (
               <button
@@ -462,8 +481,9 @@ function InstagramOrderForm({ productsWithStock }: { productsWithStock: StockInf
 
         {/* Notes */}
         <div>
-          <label className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Notes (optional)</label>
+          <label htmlFor="admin-order-notes" className="block text-xs text-gray-400 uppercase tracking-wider mb-1.5">Notes (optional)</label>
           <textarea
+            id="admin-order-notes"
             value={notes}
             onChange={e => setNotes(e.target.value)}
             placeholder="Instagram handle, special instructions, etc."
@@ -533,10 +553,10 @@ export function AdminDashboard({ productsWithStock, recentLogs, recentOrders }: 
       {/* Header */}
       <header className="border-b border-gray-800 px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="font-bold text-white text-xl">Awaraa's Culture — Admin</h1>
+          <h1 className="font-bold text-white text-xl">Awaraa&apos;s Culture — Admin</h1>
           <p className="text-xs text-gray-500 mt-0.5">Inventory & Order Management</p>
         </div>
-        <a href="/" className="text-xs text-gray-400 hover:text-gray-200 transition-colors">← Back to Store</a>
+        <Link href="/" className="text-xs text-gray-400 hover:text-gray-200 transition-colors">← Back to Store</Link>
       </header>
 
       {/* Toast notification */}

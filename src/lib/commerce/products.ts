@@ -2,6 +2,7 @@ import { CommerceProduct } from './types';
 import { sanityClient } from '@/sanity/client';
 import { urlForImage } from '@/sanity/image';
 import { findMockProduct, MOCK_PRODUCTS } from './mockData';
+import { getProductGalleryImages } from './productImages';
 
 const SINGLE_PRODUCT_QUERY = `
   *[_type == "product" && (slug.current == $handle || _id == $handle) && !isPlaceholder][0] {
@@ -72,8 +73,8 @@ function mapSanityProduct(doc: any): CommerceProduct {
     };
   }).filter((img: { url: string }) => Boolean(img.url));
 
-  if (images.length === 0 && mockFallback && mockFallback.images.length > 0) {
-    images = mockFallback.images;
+  if (images.length === 0) {
+    images = getProductGalleryImages({ handle, name: doc.name, id: doc._id });
   }
 
   const variants = (doc.variants || []).map((v: any) => {
@@ -113,19 +114,13 @@ function mapSanityProduct(doc: any): CommerceProduct {
     id: handle,
     handle: handle,
     // _sanityId is the actual Sanity document _id — used by inventory operations
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     _sanityId: doc._id,
     name: doc.name,
     price: formattedPrice,
     description: doc.description || '',
     materials: doc.materials || ['Full-grain leather', 'Dual-density EVA midsole', 'Rubber outsole'],
     variants,
-    images: images.length > 0 ? images : (mockFallback?.images || [
-      {
-        url: '/shoes/nb_sports/1.png',
-        altText: doc.name,
-      }
-    ]),
+    images,
     shippingPolicy: doc.shippingPolicy || 'Free shipping across India on prepaid orders.',
     returnPolicy: doc.returnPolicy || '14-day returns for unworn products.',
     careInstructions: doc.careInstructions || 'Wipe clean with a damp cloth. Avoid direct heat.',

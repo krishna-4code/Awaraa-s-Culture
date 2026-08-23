@@ -6,6 +6,7 @@ import { useState, useMemo } from "react";
 import { Feather, Clock, ShieldCheck, ShoppingBag, ArrowRight, Check, Plus, Minus } from "lucide-react";
 import { CommerceProduct, CommerceVariant } from "@/lib/commerce/types";
 import { useCart } from "@/components/CartContext";
+import { getProductGalleryImages } from "@/lib/commerce/productImages";
 
 export function ProductDetail({ product }: { product: CommerceProduct }) {
   const { cart, addItem, updateItem, removeItem, openCart } = useCart();
@@ -87,9 +88,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
     }
   };
 
-  const images = product.images && product.images.length > 0 
-    ? product.images 
-    : [{ url: "/shoes/nb_sports/1.png", altText: product.name }];
+  const images = getProductGalleryImages(product);
 
   const activeImage = images[selectedImageIndex] || images[0];
 

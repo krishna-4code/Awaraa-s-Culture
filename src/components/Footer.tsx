@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { INSTAGRAM_CONFIG } from "@/lib/config/instagram";
 
 export function Footer() {
   return (
@@ -24,6 +25,14 @@ export function Footer() {
           <Link href="/cart" className="hover:text-bright-sun transition-colors">
             Cart
           </Link>
+          <a
+            href={INSTAGRAM_CONFIG.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-bright-sun transition-colors"
+          >
+            Instagram ({INSTAGRAM_CONFIG.handle})
+          </a>
           <Link href="/privacy" className="hover:text-bright-sun transition-colors">
             Privacy Policy
           </Link>

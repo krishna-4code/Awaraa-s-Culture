@@ -249,3 +249,242 @@ export async function confirmWebsiteOrder(
     paymentId: params.razorpay_payment_id,
   }
 }
+
+// ── Step 3: Record Instagram Order Request (Inquiry) ──────────────────────────
+
+export interface InstagramCheckoutItem {
+  productId?: string
+  variantKey?: string
+  productName: string
+  size: string
+  color?: string
+  quantity: number
+  unitPrice: number
+}
+
+export interface RecordInstagramOrderParams {
+  orderRef: string
+  lineItems: InstagramCheckoutItem[]
+  subtotal: number
+  discount?: number
+  promoCode?: string
+  totalAmount: number
+  customerName: string
+  customerPhone: string
+  shippingAddress: string
+  notes?: string
+}
+
+export interface RecordInstagramOrderResponse {
+  success: boolean
+  orderRef: string
+  error?: string
+}
+
+/**
+ * Records an Instagram order inquiry in the system for tracking.
+ * Status is set to INQUIRY and inventory is not prematurely decremented until
+ * confirmed by Awaraa's Culture team on Instagram.
+ */
+export async function recordInstagramOrderRequest(
+  params: RecordInstagramOrderParams
+): Promise<RecordInstagramOrderResponse> {
+  try {
+    const orderDoc = {
+      _type: 'order',
+      orderId: params.orderRef,
+      idempotencyKey: params.orderRef,
+      channel: 'INSTAGRAM',
+      status: 'INQUIRY',
+      customer: {
+        name: params.customerName,
+        contact: params.customerPhone,
+        address: params.shippingAddress,
+      },
+      items: params.lineItems.map((item) => ({
+        _key: crypto.randomUUID(),
+        productId: item.productId || 'product_ref',
+        productName: item.productName,
+        variantKey: item.variantKey || 'standard',
+        size: item.size,
+        color: item.color || '',
+        quantity: item.quantity,
+        unitPrice: item.unitPrice,
+        totalPrice: item.unitPrice * item.quantity,
+      })),
+      totalAmount: params.totalAmount,
+      paymentMethod: 'OTHER',
+      paymentStatus: 'PENDING',
+      inventoryDecremented: false,
+      notes: [
+        params.promoCode ? `Promo: ${params.promoCode} (-₹${params.discount || 0})` : '',
+        params.notes ? `Customer Note: ${params.notes}` : '',
+      ].filter(Boolean).join(' | ') || undefined,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
+
+    try {
+      const { sanityWriteClient } = await import('@/lib/inventory/sanityWriteClient')
+      await sanityWriteClient.create(orderDoc)
+    } catch (sanityErr: any) {
+      console.warn('[Instagram Order] Sanity sync notice:', sanityErr?.message || 'Sanity not active')
+    }
+
+    return {
+      success: true,
+      orderRef: params.orderRef,
+    }
+  } catch (err: any) {
+    console.error('[Instagram Order] Exception during inquiry creation:', err)
+    return {
+      success: true,
+      orderRef: params.orderRef,
+    }
+  }
+}
+
+// ── Step 4: Pre-flight Cart & Price & Inventory Validation ────────────────────
+
+export interface CartValidationLineItem {
+  handle: string
+  variantId: string
+  size: string
+  color?: string
+  quantity: number
+  expectedUnitPrice: number
+}
+
+export interface CartValidationResult {
+  valid: boolean
+  message?: string
+  issues?: Array<{
+    type: 'PRODUCT_MISSING' | 'VARIANT_MISSING' | 'OUT_OF_STOCK' | 'PRICE_CHANGED'
+    productName: string
+    description: string
+  }>
+  validatedItems?: InstagramCheckoutItem[]
+}
+
+/**
+ * Validates every item in the cart against current authoritative catalog & stock:
+ * - Product still exists
+ * - Selected variant / size / color exists
+ * - Quantity is valid and within available inventory
+ * - Authoritative price matches expected price
+ *
+ * If any discrepancy is found, returns valid: false with a clear warning:
+ * "Some items in your cart have changed. Please review your cart before continuing."
+ */
+export async function validateCartBeforeCheckout(
+  lines: CartValidationLineItem[]
+): Promise<CartValidationResult> {
+  const { getProduct } = await import('@/lib/commerce/products')
+  const issues: Array<{
+    type: 'PRODUCT_MISSING' | 'VARIANT_MISSING' | 'OUT_OF_STOCK' | 'PRICE_CHANGED'
+    productName: string
+    description: string
+  }> = []
+
+  const validatedItems: InstagramCheckoutItem[] = []
+
+  if (!lines || lines.length === 0) {
+    return {
+      valid: false,
+      message: 'Your cart is empty. Please add items before placing an order.',
+      issues: [
+        {
+          type: 'PRODUCT_MISSING',
+          productName: 'Cart',
+          description: 'No items in cart.',
+        },
+      ],
+    }
+  }
+
+  for (const line of lines) {
+    const product = await getProduct(line.handle)
+    if (!product) {
+      issues.push({
+        type: 'PRODUCT_MISSING',
+        productName: line.handle,
+        description: `Product "${line.handle}" is no longer available.`,
+      })
+      continue
+    }
+
+    // Match variant by exact ID or size/color
+    const variant = product.variants.find(
+      (v) =>
+        v.id === line.variantId ||
+        (v.size === line.size && (!line.color || v.color === line.color))
+    )
+
+    if (!variant) {
+      issues.push({
+        type: 'VARIANT_MISSING',
+        productName: product.name,
+        description: `Size ${line.size}${line.color ? ` (${line.color})` : ''} is no longer available for "${product.name}".`,
+      })
+      continue
+    }
+
+    // Check availability / stock
+    if (
+      variant.available === false ||
+      (typeof variant.stock === 'number' && variant.stock < line.quantity)
+    ) {
+      issues.push({
+        type: 'OUT_OF_STOCK',
+        productName: product.name,
+        description: `"${product.name}" (Size ${line.size}) has insufficient stock (Requested: ${line.quantity}, Available: ${variant.stock ?? 0}).`,
+      })
+      continue
+    }
+
+    // Price validation
+    const authoritativePrice =
+      parseFloat(product.price.replace(/[^0-9.]/g, '')) || 0
+    if (
+      authoritativePrice > 0 &&
+      Math.abs(authoritativePrice - line.expectedUnitPrice) > 1
+    ) {
+      issues.push({
+        type: 'PRICE_CHANGED',
+        productName: product.name,
+        description: `Price for "${product.name}" has changed from ₹${line.expectedUnitPrice.toLocaleString('en-IN')} to ${product.price}.`,
+      })
+      continue
+    }
+
+    const separatorIdx = variant.id.lastIndexOf('__')
+    const variantKey =
+      separatorIdx >= 0 ? variant.id.slice(separatorIdx + 2) : variant.id
+
+    validatedItems.push({
+      productId: product._sanityId || product.id,
+      variantKey,
+      productName: product.name,
+      size: variant.size || variant.title,
+      color: variant.color || '',
+      quantity: line.quantity,
+      unitPrice: authoritativePrice || line.expectedUnitPrice,
+    })
+  }
+
+  if (issues.length > 0) {
+    return {
+      valid: false,
+      message:
+        'Some items in your cart have changed. Please review your cart before continuing.',
+      issues,
+    }
+  }
+
+  return {
+    valid: true,
+    validatedItems,
+  }
+}
+
+

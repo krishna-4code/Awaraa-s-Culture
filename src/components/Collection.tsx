@@ -8,6 +8,7 @@ import { MarkerUnderline } from "./MarkerUnderline";
 import { Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
 import type { CommerceProduct, CommerceCollection } from "@/lib/commerce/types";
 import { findMockProduct } from "@/lib/commerce/mockData";
+import { getProductGalleryImages, getProductPrimaryImage } from "@/lib/commerce/productImages";
 
 export interface ShoeCardProduct {
   id: string;
@@ -235,10 +236,7 @@ function ShoeCardItem({
 }) {
   const [activeImgIndex, setActiveImgIndex] = useState(0);
 
-  const images = product.images && product.images.length > 0 
-    ? product.images 
-    : [{ url: product.image, altText: product.title }];
-
+  const images = getProductGalleryImages(product);
   const currentImg = images[activeImgIndex] || images[0];
 
   const handlePrev = (e: React.MouseEvent) => {
@@ -434,12 +432,7 @@ export function Collection({
           "bg-bright-coral text-white",
         ];
         const tags = ["Daily Essential", "New Edition", "Comfort Series"];
-        const fallbackMatch = FALLBACK_PRODUCTS.find(
-          (fb) => fb.id === p.id || fb.handle === p.handle || fb.title.toLowerCase() === p.name.toLowerCase()
-        );
-        const resolvedImages: { url: string; altText: string }[] = p.images && p.images.length > 0
-          ? p.images.map((img) => ({ url: img.url, altText: img.altText || p.name }))
-          : (fallbackMatch?.images || [{ url: "/shoes/nb_sports/1.png", altText: p.name }]);
+        const resolvedImages = getProductGalleryImages(p);
 
         return {
           id: p.id,
@@ -456,7 +449,15 @@ export function Collection({
           rawProduct: p,
         };
       })
-    : FALLBACK_PRODUCTS.map((p) => ({ ...p, rawProduct: undefined }));
+    : FALLBACK_PRODUCTS.map((p) => {
+        const resolvedImages = getProductGalleryImages(p);
+        return {
+          ...p,
+          image: resolvedImages[0]?.url || p.image,
+          images: resolvedImages,
+          rawProduct: undefined
+        };
+      });
 
   // Build filter tabs from CMS collections or fallback
   const tabs = initialCollections && initialCollections.length > 0
@@ -490,14 +491,22 @@ export function Collection({
   };
 
   const buildCommerceProduct = (product: ShoeCardProduct): CommerceProduct => {
+    const directImages = getProductGalleryImages(product);
+
     // rawProduct (from CMS) has the most accurate data — use it directly
     if (product.rawProduct) {
-      return product.rawProduct;
+      return {
+        ...product.rawProduct,
+        images: directImages,
+      };
     }
     // Try mock catalog to get consistent IDs and full variant list
     const mockProduct = findMockProduct(product.id) || findMockProduct(product.handle);
     if (mockProduct) {
-      return mockProduct;
+      return {
+        ...mockProduct,
+        images: directImages,
+      };
     }
     // Fallback: build a minimal product representation
     return {
@@ -510,9 +519,7 @@ export function Collection({
       variants: [
         { id: `${product.id}__default`, title: "Standard", available: true, size: "8" }
       ],
-      images: product.images && product.images.length > 0 
-        ? product.images.map(img => ({ url: img.url, altText: img.altText || product.title }))
-        : [{ url: product.image, altText: product.title }],
+      images: directImages,
       shippingPolicy: "Free express shipping across India on all orders. Dispatched within 24 hours.",
       returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
       careInstructions: "Wipe clean with a damp cloth."
