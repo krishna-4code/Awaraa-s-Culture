@@ -49,7 +49,7 @@ export default function PrivacyPage() {
               1. Information We Collect
             </h2>
             <p>
-              When you purchase footwear or create an account with Awaraa&apos;s Culture, we collect necessary personal details including your name, shipping address, telephone number, and email address to process and deliver your order.
+              When you purchase footwear or view stock with Awaraa&apos;s Culture, we collect necessary personal details including your name, shipping address, and telephone number to process and deliver your order.
             </p>
           </section>
 
@@ -64,15 +64,14 @@ export default function PrivacyPage() {
 
           <section className="flex flex-col gap-3">
             <h2 className="font-display font-bold text-xl uppercase tracking-tight text-bright-ink">
-              3. Grievance Officer & Statutory Disclosures
+              3. Customer Support & Grievance Mechanism
             </h2>
             <div className="bg-bright-card p-5 rounded-xl border border-bright-ink/10 text-bright-ink">
-              <p className="font-bold text-xs uppercase tracking-wider mb-2">Grievance Redressal Mechanism</p>
+              <p className="font-bold text-xs uppercase tracking-wider mb-2">Customer Support Desk</p>
               <p className="text-xs text-bright-muted">
-                Name: [[Grievance Officer Name — Pending Appointment]]<br />
+                Channel: Instagram Direct Messages (@awaraasculture)<br />
                 Entity: Awaraa&apos;s Culture Footwear LLP<br />
-                Address: Delhi NCR, India<br />
-                Email: grievance@awaraasculture.in
+                Address: Delhi NCR, India
               </p>
             </div>
           </section>

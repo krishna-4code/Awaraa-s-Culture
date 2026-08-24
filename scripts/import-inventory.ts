@@ -298,7 +298,7 @@ function buildProductPayload(group: ProductGroup, collectionRef: string): Produc
     price: group.price,
     description: '',
     materials,
-    shippingPolicy:   'Free shipping across India on prepaid orders.',
+    shippingPolicy:   'Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.',
     returnPolicy:     '14-day returns for unworn products.',
     careInstructions: 'Wipe clean with a damp cloth. Avoid direct heat.',
     variants,

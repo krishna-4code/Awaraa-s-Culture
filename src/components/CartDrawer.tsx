@@ -103,10 +103,10 @@ export function CartDrawer() {
           </button>
         </div>
 
-        {/* Free Shipping Banner */}
+        {/* Delivery Info Banner */}
         <div className="bg-bright-card px-5 py-2.5 border-b border-bright-ink/10 flex items-center gap-2 text-xs font-sans font-semibold text-bright-ink">
           <Truck className="w-3.5 h-3.5 text-bright-amber flex-shrink-0" />
-          <span>Free Express Shipping across India on all orders</span>
+          <span>Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)</span>
         </div>
 
         {/* Cart Line Items List */}
@@ -270,8 +270,8 @@ export function CartDrawer() {
                 </div>
               )}
               <div className="flex justify-between items-center text-bright-muted">
-                <span>Shipping</span>
-                <span className="text-bright-lime font-bold uppercase tracking-wider">Free (₹0)</span>
+                <span>Delivery</span>
+                <span className="text-bright-ink font-semibold">₹100 (Delhi) / Porter</span>
               </div>
               <div className="flex justify-between items-center text-sm font-bold border-t border-bright-ink/10 pt-2 text-bright-ink">
                 <span>Total Amount</span>

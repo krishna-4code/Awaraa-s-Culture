@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service',
-  description: 'Terms of Service, Order, and Returns Policies for Awaraa\'s Culture.',
+  title: 'Terms & Delivery Policy',
+  description: 'Terms of Service, Delivery, and Return Policies for Awaraa\'s Culture.',
 };
 
 export default function TermsPage() {
@@ -22,23 +22,23 @@ export default function TermsPage() {
         {/* Header */}
         <div>
           <span className="font-sans text-xs uppercase tracking-widest text-bright-amber font-bold block mb-2">
-            ✦ Store Policies
+            ✦ Store & Delivery Policies
           </span>
           <h1 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-bright-ink">
-            Terms of Service & Returns
+            Terms & Delivery Policy
           </h1>
           <p className="font-sans text-sm text-bright-muted mt-2">
             Last Updated: August 2026
           </p>
         </div>
 
-        {/* Mandatory Legal Review Banner */}
-        <div className="p-6 rounded-2xl bg-amber-500/10 border-2 border-amber-500/30 text-amber-900 flex flex-col gap-2">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider bg-amber-500/20 text-amber-900 px-2.5 py-1 rounded-md self-start">
-            [[LEGAL REVIEW REQUIRED — MANDATORY STATUTORY DISCLOSURE]]
+        {/* Stock & Ordering Notice */}
+        <div className="p-6 rounded-2xl bg-bright-amber/10 border-2 border-bright-amber/30 text-bright-ink flex flex-col gap-2">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider bg-bright-amber/20 text-bright-ink px-2.5 py-1 rounded-md self-start">
+            ✦ Live Stock Catalog & Instagram Ordering
           </span>
-          <p className="text-xs font-sans leading-relaxed">
-            Mandatory disclosures under Consumer Protection (E-Commerce) Rules, 2020: Return windows, pickup policies, warranty terms, and dispute resolution jurisdiction. Review required by legal counsel before public commerce activation.
+          <p className="text-xs font-sans leading-relaxed text-bright-muted">
+            The website serves as a live catalog to check current stock availability. All inquiries, size verifications, and order confirmations take place directly via Instagram DMs.
           </p>
         </div>
 
@@ -49,25 +49,30 @@ export default function TermsPage() {
               1. Orders & Pricing
             </h2>
             <p>
-              All prices listed on Awaraa&apos;s Culture are in Indian Rupees (INR) and include applicable Goods and Services Tax (GST). Orders are confirmed upon successful payment verification.
+              All prices listed on Awaraa&apos;s Culture are in Indian Rupees (INR). Orders are verified and confirmed individually with our team in Instagram DMs after checking live stock.
             </p>
           </section>
 
           <section className="flex flex-col gap-3">
             <h2 className="font-display font-bold text-xl uppercase tracking-tight text-bright-ink">
-              2. 14-Day Honest Returns & Exchange Policy
+              2. Shipping & Delivery Policy
             </h2>
-            <p>
-              We offer a 14-day hassle-free return and exchange window for unworn footwear in original condition with tags intact. Reverse pickup is arranged free of charge across supported Delhi NCR and national pin codes.
-            </p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                <strong className="text-bright-ink">Delhi Orders:</strong> We deliver directly in Delhi with a flat delivery fee of <strong className="text-bright-ink">₹100</strong> per order. Standard dispatch happens within 24–48 business hours.
+              </li>
+              <li>
+                <strong className="text-bright-ink">Outside Delhi Orders:</strong> For customers outside Delhi, you can arrange and book <strong className="text-bright-ink">Porter</strong> (or your preferred courier/logistics service) on your own charges once our team notifies you that your pair is packed and ready for pickup from our Delhi fulfillment hub.
+              </li>
+            </ul>
           </section>
 
           <section className="flex flex-col gap-3">
             <h2 className="font-display font-bold text-xl uppercase tracking-tight text-bright-ink">
-              3. Shipping & Delivery Timelines
+              3. 14-Day Returns & Exchanges
             </h2>
             <p>
-              Standard orders are dispatched within 24–48 business hours. Average delivery takes 2–4 business days across Delhi NCR and metro cities, and 4–7 business days for rest of India.
+              We offer a 14-day exchange window for unworn footwear in original condition with tags intact. Reach out to our team on Instagram to coordinate an exchange for supported Delhi orders.
             </p>
           </section>
         </div>

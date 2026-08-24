@@ -122,7 +122,7 @@ export const productType = defineType({
       name: 'shippingPolicy',
       title: 'Shipping Policy',
       type: 'string',
-      initialValue: 'Free shipping across India on prepaid orders.',
+      initialValue: 'Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.',
     }),
 
     defineField({

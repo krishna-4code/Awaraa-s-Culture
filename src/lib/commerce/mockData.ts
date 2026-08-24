@@ -37,7 +37,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "NB Sports - Angle 4"
       }
     ],
-    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe clean with a damp cloth. Air dry naturally away from direct heat."
   },
@@ -74,7 +74,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "SB Dunks - Side Profile"
       }
     ],
-    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe clean with a damp cloth. Use standard sneaker cleaner for scuffs. Air dry only."
   },
@@ -101,7 +101,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Waffle Brown - Hero Profile"
       }
     ],
-    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe with damp cloth and use dedicated suede foam cleaner."
   },
@@ -137,7 +137,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "LV Sneakers - Detail Angle"
       }
     ],
-    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe gently with leather cleaning wipe. Do not machine wash."
   },
@@ -165,7 +165,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "NB Sneakers - Hero Angle"
       }
     ],
-    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe clean with a damp cloth. Air dry in shade."
   },
@@ -205,7 +205,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Sports - Angle 4"
       }
     ],
-    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Machine washable on delicate cold cycle. Air dry only."
   },
@@ -234,7 +234,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Sketchers Sports - Hero View"
       }
     ],
-    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Spot clean with damp cloth and mild soap. Air dry."
   },
@@ -262,7 +262,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Brooks - Hero Studio Angle"
       }
     ],
-    shippingPolicy: "Free express shipping across India on prepaid orders. Dispatched within 24 hours.",
+    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Hand wash with mild detergent. Air dry away from heat sources."
   }

@@ -121,7 +121,7 @@ function mapSanityProduct(doc: any): CommerceProduct {
     materials: doc.materials || ['Full-grain leather', 'Dual-density EVA midsole', 'Rubber outsole'],
     variants,
     images,
-    shippingPolicy: doc.shippingPolicy || 'Free shipping across India on prepaid orders.',
+    shippingPolicy: doc.shippingPolicy || 'Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.',
     returnPolicy: doc.returnPolicy || '14-day returns for unworn products.',
     careInstructions: doc.careInstructions || 'Wipe clean with a damp cloth. Avoid direct heat.',
     collectionSlug: doc.collectionSlug,

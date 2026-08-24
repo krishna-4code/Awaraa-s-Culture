@@ -234,7 +234,7 @@ export function OrderReadyModal({
             )}
             <div className="flex justify-between text-bright-muted">
               <span>Delivery</span>
-              <span className="font-semibold text-bright-ink">To be confirmed</span>
+              <span className="font-semibold text-bright-ink">₹100 (Delhi) / Porter (Outside Delhi)</span>
             </div>
             <div className="flex justify-between text-sm font-bold border-t border-bright-ink/10 pt-2 text-bright-ink">
               <span>Total Amount</span>

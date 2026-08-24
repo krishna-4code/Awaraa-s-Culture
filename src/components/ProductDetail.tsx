@@ -393,7 +393,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
             <div className="flex items-start gap-2 text-bright-muted font-sans">
               <span className="text-bright-lime font-bold mt-0.5">✓</span>
               <span>
-                <strong className="text-bright-ink">Free Shipping:</strong>{" "}
+                <strong className="text-bright-ink">Delivery:</strong>{" "}
                 {product.shippingPolicy}
               </span>
             </div>

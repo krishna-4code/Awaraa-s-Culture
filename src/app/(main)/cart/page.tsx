@@ -292,7 +292,7 @@ export default function CartPage() {
         subtotal: validatedSubtotal,
         discount: validatedDiscount > 0 ? validatedDiscount : undefined,
         promoCode: appliedPromo || undefined,
-        delivery: "To be confirmed",
+        delivery: "₹100 (Delhi) / Porter (Outside Delhi)",
         total: validatedTotal,
         customer: {
           name: customerName.trim(),
@@ -775,7 +775,7 @@ export default function CartPage() {
 
                   <div className="flex justify-between items-center text-bright-muted">
                     <span className="uppercase tracking-wider">Delivery</span>
-                    <span className="font-semibold text-bright-ink">To be confirmed</span>
+                    <span className="font-semibold text-bright-ink">₹100 (Delhi) / Porter</span>
                   </div>
 
                   <div className="flex justify-between items-center text-sm font-bold border-t border-bright-ink/10 pt-4 text-bright-ink">
@@ -790,10 +790,10 @@ export default function CartPage() {
                 <div className="p-4 rounded-xl bg-bright-canvas border border-bright-ink/10 flex flex-col gap-2 text-xs text-bright-muted">
                   <div className="flex items-center gap-2 text-bright-ink font-bold">
                     <MessageCircle className="w-4 h-4 text-bright-amber" />
-                    <span>Official Instagram Ordering</span>
+                    <span>Instagram Ordering & Delivery</span>
                   </div>
                   <p className="leading-relaxed">
-                    Awaraa&apos;s Culture processes all orders directly through Instagram DMs ({INSTAGRAM_CONFIG.handle}). No online card payment needed now.
+                    Awaraa&apos;s Culture processes all orders via Instagram DMs ({INSTAGRAM_CONFIG.handle}). Delivery is ₹100 within Delhi; customers outside Delhi can book Porter at their own charges.
                   </p>
                 </div>
 

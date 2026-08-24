@@ -520,7 +520,7 @@ export function Collection({
         { id: `${product.id}__default`, title: "Standard", available: true, size: "8" }
       ],
       images: directImages,
-      shippingPolicy: "Free express shipping across India on all orders. Dispatched within 24 hours.",
+      shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
       returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
       careInstructions: "Wipe clean with a damp cloth."
     };
