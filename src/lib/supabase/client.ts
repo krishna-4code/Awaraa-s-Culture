@@ -8,6 +8,7 @@ function createDummyBrowserClient() {
       onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
       signInWithPassword: async () => ({ data: { user: null, session: null }, error: new Error('Supabase not configured') }),
       signUp: async () => ({ data: { user: null, session: null }, error: new Error('Supabase not configured') }),
+      signInWithOAuth: async () => ({ data: { url: null, provider: 'google' }, error: new Error('Supabase not configured') }),
       signOut: async () => ({ error: null }),
     },
     from: () => ({

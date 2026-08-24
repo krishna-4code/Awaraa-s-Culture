@@ -9,6 +9,7 @@ function createDummyServerClient() {
       getSession: async () => ({ data: { session: null }, error: null }),
       signInWithPassword: async () => ({ data: { user: null, session: null }, error: new Error('Supabase not configured') }),
       signUp: async () => ({ data: { user: null, session: null }, error: new Error('Supabase not configured') }),
+      exchangeCodeForSession: async () => ({ data: { user: null, session: null }, error: new Error('Supabase not configured') }),
       signOut: async () => ({ error: null }),
     },
     from: () => ({
