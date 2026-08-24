@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/components/CartContext";
+import { createClient } from "@/lib/supabase/client";
 import {
   Trash2,
   Plus,
@@ -19,7 +21,10 @@ import {
   Phone,
   MapPin,
   FileText,
-  RefreshCw
+  RefreshCw,
+  Lock,
+  LogIn,
+  CheckCircle2
 } from "lucide-react";
 import {
   generateOrderRef,
@@ -40,9 +45,23 @@ import { OrderReadyModal } from "@/components/checkout/OrderReadyModal";
 import { getProductPrimaryImage } from "@/lib/commerce/productImages";
 
 export default function CartPage() {
-  const { cart, isLoading, updateItem, removeItem, clearCart } = useCart();
-  const [promoCode, setPromoCode] = useState("");
-  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const router = useRouter();
+  const {
+    cart,
+    isLoading,
+    updateItem,
+    removeItem,
+    clearCart,
+    appliedPromo,
+    applyPromo,
+    removePromo,
+    rawSubtotal,
+    discountAmount,
+    finalTotal
+  } = useCart();
+  const [user, setUser] = useState<any>(null);
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
+  const [promoInput, setPromoInput] = useState("");
   const [promoError, setPromoError] = useState<string | null>(null);
   const [cartValidationAlert, setCartValidationAlert] = useState<{
     message: string;
@@ -65,6 +84,32 @@ export default function CartPage() {
   const [copiedMessage, setCopiedMessage] = useState(false);
   const [popupBlocked, setPopupBlocked] = useState(false);
 
+  // Check Supabase authentication status
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }: any) => {
+      const currentUser = data?.user || null;
+      setUser(currentUser);
+      if (currentUser?.user_metadata?.full_name && !customerName) {
+        setCustomerName(currentUser.user_metadata.full_name);
+      }
+      setIsAuthChecking(false);
+    });
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
+      const currentUser = session?.user || null;
+      setUser(currentUser);
+      if (currentUser?.user_metadata?.full_name && !customerName) {
+        setCustomerName(currentUser.user_metadata.full_name);
+      }
+      setIsAuthChecking(false);
+    });
+
+    return () => {
+      authListener?.subscription?.unsubscribe();
+    };
+  }, []);
+
   // Concurrency & Double-click guard
   const isSubmittingRef = useRef(false);
   const lastSubmittedRef = useRef<number>(0);
@@ -77,13 +122,6 @@ export default function CartPage() {
       idempotencyKeyRef.current = `idemp_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
     }
   }, []);
-
-  const rawSubtotal = cart?.cost?.subtotalAmount?.amount
-    ? parseFloat(cart.cost.subtotalAmount.amount.replace(/,/g, ""))
-    : 0;
-
-  const discountAmount = appliedPromo ? Math.round(rawSubtotal * 0.1) : 0;
-  const finalTotal = Math.max(0, rawSubtotal - discountAmount);
 
   // Track checkout_started event once when cart is loaded
   useEffect(() => {
@@ -107,12 +145,13 @@ export default function CartPage() {
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
     setPromoError(null);
-    if (!promoCode.trim()) return;
+    if (!promoInput.trim()) return;
 
-    if (promoCode.toUpperCase() === "AWARAA10" || promoCode.toUpperCase() === "SQUAD10") {
-      setAppliedPromo(promoCode.toUpperCase());
+    const result = applyPromo(promoInput);
+    if (!result.success) {
+      setPromoError(result.error || "Invalid discount code. Try 'AWARAA10'");
     } else {
-      setPromoError("Invalid discount code. Try 'AWARAA10'");
+      setPromoInput("");
     }
   };
 
@@ -217,6 +256,11 @@ export default function CartPage() {
     if (!cart || cart.lines.length === 0) {
       alert("Your cart is empty. Please add items before ordering.");
       analytics.trackInstagramOrderFailed("empty_cart");
+      return;
+    }
+
+    if (!user) {
+      router.push('/login?next=/cart');
       return;
     }
 
@@ -720,33 +764,36 @@ export default function CartPage() {
                   </span>
                 </h3>
 
-                {/* Promo Code Input */}
-                <form onSubmit={handleApplyPromo} className="flex gap-2">
-                  <input
-                    type="text"
-                    placeholder="Discount code (e.g. AWARAA10)"
-                    value={promoCode}
-                    onChange={(e) => setPromoCode(e.target.value)}
-                    className="flex-grow bg-bright-card border border-bright-ink/15 rounded-xl px-3 py-2 text-xs font-sans placeholder:text-bright-muted/60 uppercase tracking-wider focus:outline-none focus:border-bright-amber"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-bright-ink text-white px-4 py-2 rounded-xl text-xs font-sans font-bold uppercase tracking-wider hover:bg-bright-amber transition-colors"
-                  >
-                    Apply
-                  </button>
-                </form>
-
-                {appliedPromo && (
-                  <div className="flex items-center justify-between bg-bright-lime/10 border border-bright-lime/20 px-3 py-2 rounded-xl text-xs font-sans text-bright-lime font-bold">
+                {/* Promo Code Form */}
+                {!appliedPromo ? (
+                  <form onSubmit={handleApplyPromo} className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Discount code (e.g. AWARAA10)"
+                      value={promoInput}
+                      onChange={(e) => {
+                        setPromoInput(e.target.value);
+                        if (promoError) setPromoError(null);
+                      }}
+                      className="flex-grow bg-bright-card border border-bright-ink/15 rounded-xl px-3 py-2 text-xs font-sans placeholder:text-bright-muted/60 uppercase tracking-wider focus:outline-none focus:border-bright-amber"
+                    />
+                    <button
+                      type="submit"
+                      className="bg-bright-ink text-white px-4 py-2 rounded-xl text-xs font-sans font-bold uppercase tracking-wider hover:bg-bright-amber transition-colors cursor-pointer"
+                    >
+                      Apply
+                    </button>
+                  </form>
+                ) : (
+                  <div className="flex items-center justify-between bg-bright-lime/10 border border-bright-lime/20 px-3.5 py-2.5 rounded-xl text-xs font-sans text-bright-lime font-bold animate-fadeIn">
                     <span className="flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5" />
                       Promo {appliedPromo} applied (10% OFF)
                     </span>
                     <button
                       type="button"
-                      onClick={() => setAppliedPromo(null)}
-                      className="text-bright-muted hover:text-bright-coral text-[11px] underline"
+                      onClick={removePromo}
+                      className="text-bright-muted hover:text-bright-coral text-[11px] underline cursor-pointer"
                     >
                       Remove
                     </button>
@@ -797,11 +844,45 @@ export default function CartPage() {
                   </p>
                 </div>
 
-                {/* Modular Instagram Order CTA */}
-                <InstagramOrderButton
-                  onClick={handleInstagramCheckout}
-                  isProcessing={isProcessing}
-                />
+                {/* Auth Check & Order CTA */}
+                {!isAuthChecking && !user ? (
+                  <div className="flex flex-col gap-3 p-4 rounded-xl bg-bright-amber/10 border border-bright-amber/30 text-xs text-bright-ink animate-fadeIn">
+                    <div className="flex items-center gap-2 font-bold text-bright-ink">
+                      <Lock className="w-4 h-4 text-bright-amber flex-shrink-0" />
+                      <span>Sign in to complete order</span>
+                    </div>
+                    <p className="text-[11px] text-bright-muted leading-relaxed">
+                      Please sign in or create an account before checkout. All your items in the cart will stay saved!
+                    </p>
+                    <Link
+                      href="/login?next=/cart"
+                      className="cpg-button-primary justify-center py-3.5 text-xs uppercase tracking-wider font-bold bg-bright-ink hover:bg-bright-amber text-white shadow-sm flex items-center gap-2"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      <span>Sign In to Checkout</span>
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    {user && (
+                      <div className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-bright-lime/10 border border-bright-lime/25 text-xs">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <CheckCircle2 className="w-4 h-4 text-bright-lime flex-shrink-0" />
+                          <span className="font-semibold text-bright-ink truncate max-w-[170px]">
+                            {user.email}
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-bold text-bright-lime uppercase tracking-wider flex-shrink-0">
+                          Ready ✓
+                        </span>
+                      </div>
+                    )}
+                    <InstagramOrderButton
+                      onClick={handleInstagramCheckout}
+                      isProcessing={isProcessing}
+                    />
+                  </>
+                )}
 
                 {/* Trust Badges */}
                 <div className="grid grid-cols-3 gap-2 pt-2 border-t border-bright-ink/10 text-center">

@@ -15,6 +15,9 @@ export function AuthForm() {
   const [isPending, startTransition] = useTransition()
   const [isGooglePending, setIsGooglePending] = useState(false)
 
+  const nextParam = searchParams.get('next') || searchParams.get('redirectTo') || '/'
+  const isFromCheckout = nextParam.includes('/cart')
+
   // Capture OAuth error if redirected back with error query param
   useEffect(() => {
     const errorParam = searchParams.get('error')
@@ -31,10 +34,11 @@ export function AuthForm() {
     try {
       const supabase = createClient()
       const origin = typeof window !== 'undefined' ? window.location.origin : ''
+      const callbackUrl = `${origin}/auth/callback?next=${encodeURIComponent(nextParam)}`
       const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${origin}/auth/callback`,
+          redirectTo: callbackUrl,
         },
       })
 
@@ -131,6 +135,14 @@ export function AuthForm() {
           </p>
         </div>
 
+        {/* Checkout Redirect Notice */}
+        {isFromCheckout && (
+          <div className="mb-6 p-3.5 text-xs font-semibold rounded-2xl bg-bright-amber/15 border border-bright-amber/30 text-bright-ink flex items-center gap-2.5 animate-fadeIn">
+            <span className="text-base">👟</span>
+            <p>Sign in to complete your checkout. Your selected kicks are safely saved in your cart!</p>
+          </div>
+        )}
+
         {/* Error / Success Feedback */}
         {error && (
           <div className="mb-6 p-4 text-xs font-medium rounded-2xl bg-red-500/10 border border-red-500/30 text-red-700 flex items-start gap-2.5 animate-fadeIn">
@@ -202,6 +214,7 @@ export function AuthForm() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
+          <input type="hidden" name="redirectTo" value={nextParam} />
           {mode === 'signup' && (
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-bright-ink mb-1.5" htmlFor="fullName">

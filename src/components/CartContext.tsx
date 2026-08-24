@@ -1,8 +1,15 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import { CommerceCart, CommerceProduct, CommerceVariant } from '@/lib/commerce';
 import { createCart, getCart, addToCart, updateCart, removeCartItem, clearCart as clearCommerceCart } from '@/lib/commerce/cart';
+
+const PROMO_STORAGE_KEY = 'awaraa_promo_code';
+
+interface PromoResult {
+  success: boolean;
+  error?: string;
+}
 
 interface CartContextType {
   cart: CommerceCart | null;
@@ -21,6 +28,13 @@ interface CartContextType {
   updateItem: (lineId: string, quantity: number) => Promise<void>;
   removeItem: (lineId: string) => Promise<void>;
   clearCart: () => Promise<void>;
+  // Global promo code management
+  appliedPromo: string | null;
+  applyPromo: (code: string) => PromoResult;
+  removePromo: () => void;
+  rawSubtotal: number;
+  discountAmount: number;
+  finalTotal: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -29,6 +43,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CommerceCart | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
 
   const openCart = useCallback(() => setIsCartOpen(true), []);
   const closeCart = useCallback(() => setIsCartOpen(false), []);
@@ -40,6 +55,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const existingCart = await getCart(cartId);
       if (existingCart) {
         setCart(existingCart);
+      }
+
+      // Initialize persistent promo code
+      if (typeof window !== 'undefined') {
+        const storedPromo = localStorage.getItem(PROMO_STORAGE_KEY);
+        if (storedPromo && (storedPromo.toUpperCase() === 'AWARAA10' || storedPromo.toUpperCase() === 'SQUAD10')) {
+          setAppliedPromo(storedPromo.toUpperCase());
+        }
       }
     } catch (e) {
       console.error("Failed to initialize cart", e);
@@ -56,10 +79,55 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (e.key === 'awaraa_cart_storage' || e.key === 'cartId') {
         initCart();
       }
+      if (e.key === PROMO_STORAGE_KEY) {
+        const newPromo = e.newValue;
+        if (newPromo && (newPromo.toUpperCase() === 'AWARAA10' || newPromo.toUpperCase() === 'SQUAD10')) {
+          setAppliedPromo(newPromo.toUpperCase());
+        } else {
+          setAppliedPromo(null);
+        }
+      }
     };
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
   }, [initCart]);
+
+  const rawSubtotal = useMemo(() => {
+    if (!cart?.cost?.subtotalAmount?.amount) return 0;
+    return parseFloat(cart.cost.subtotalAmount.amount.replace(/,/g, '')) || 0;
+  }, [cart]);
+
+  const discountAmount = useMemo(() => {
+    return appliedPromo ? Math.round(rawSubtotal * 0.1) : 0;
+  }, [appliedPromo, rawSubtotal]);
+
+  const finalTotal = useMemo(() => {
+    return Math.max(0, rawSubtotal - discountAmount);
+  }, [rawSubtotal, discountAmount]);
+
+  const applyPromo = useCallback((code: string): PromoResult => {
+    const cleanCode = (code || '').trim().toUpperCase();
+    if (!cleanCode) {
+      return { success: false, error: 'Please enter a coupon code.' };
+    }
+
+    if (cleanCode === 'AWARAA10' || cleanCode === 'SQUAD10') {
+      setAppliedPromo(cleanCode);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(PROMO_STORAGE_KEY, cleanCode);
+      }
+      return { success: true };
+    }
+
+    return { success: false, error: "Invalid code. Try 'AWARAA10'" };
+  }, []);
+
+  const removePromo = useCallback(() => {
+    setAppliedPromo(null);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(PROMO_STORAGE_KEY);
+    }
+  }, []);
 
   const addItem = async (
     variantId: string,
@@ -128,7 +196,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       await clearCommerceCart(cart.id);
       if (typeof window !== 'undefined') {
         localStorage.removeItem('cartId');
+        localStorage.removeItem(PROMO_STORAGE_KEY);
       }
+      setAppliedPromo(null);
       setCart(null);
     } catch (e) {
       console.error("Failed to clear cart", e);
@@ -150,6 +220,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
         updateItem,
         removeItem,
         clearCart,
+        appliedPromo,
+        applyPromo,
+        removePromo,
+        rawSubtotal,
+        discountAmount,
+        finalTotal,
       }}
     >
       {children}
@@ -157,10 +233,30 @@ export function CartProvider({ children }: { children: ReactNode }) {
   );
 }
 
+const defaultCartContext: CartContextType = {
+  cart: null,
+  isLoading: false,
+  isCartOpen: false,
+  openCart: () => {},
+  closeCart: () => {},
+  toggleCart: () => {},
+  addItem: async () => {},
+  updateItem: async () => {},
+  removeItem: async () => {},
+  clearCart: async () => {},
+  appliedPromo: null,
+  applyPromo: () => ({ success: false, error: 'Cart not initialized' }),
+  removePromo: () => {},
+  rawSubtotal: 0,
+  discountAmount: 0,
+  finalTotal: 0,
+};
+
 export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    return defaultCartContext;
   }
   return context;
 }
+

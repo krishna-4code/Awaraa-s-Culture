@@ -28,8 +28,10 @@ export async function loginAction(formData: FormData): Promise<AuthResponse> {
     return { error: error.message }
   }
 
+  const redirectTo = (formData.get('redirectTo') as string) || (formData.get('next') as string) || '/'
+
   revalidatePath('/', 'layout')
-  return { success: 'Successfully signed in!', redirectTo: '/' }
+  return { success: 'Successfully signed in!', redirectTo }
 }
 
 export async function signupAction(formData: FormData): Promise<AuthResponse> {
@@ -72,10 +74,12 @@ export async function signupAction(formData: FormData): Promise<AuthResponse> {
     return { error: 'An account with this email already exists. Please sign in instead.' }
   }
 
+  const redirectTo = (formData.get('redirectTo') as string) || (formData.get('next') as string) || '/'
+
   revalidatePath('/', 'layout')
 
   if (authData.session) {
-    return { success: 'Account created successfully! Welcome aboard.', redirectTo: '/' }
+    return { success: 'Account created successfully! Welcome aboard.', redirectTo }
   } else {
     return {
       success: 'Confirmation link sent! Please check your email to verify your account before signing in.',

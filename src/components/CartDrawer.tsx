@@ -8,9 +8,21 @@ import { X, Trash2, Plus, Minus, ArrowRight, ShoppingBag, Sparkles, ShieldCheck,
 import { getProductPrimaryImage } from "@/lib/commerce/productImages";
 
 export function CartDrawer() {
-  const { cart, isCartOpen, closeCart, updateItem, removeItem, clearCart } = useCart();
-  const [promoCode, setPromoCode] = useState("");
-  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const {
+    cart,
+    isCartOpen,
+    closeCart,
+    updateItem,
+    removeItem,
+    clearCart,
+    appliedPromo,
+    applyPromo,
+    removePromo,
+    rawSubtotal,
+    discountAmount,
+    finalTotal
+  } = useCart();
+  const [promoInput, setPromoInput] = useState("");
   const [promoError, setPromoError] = useState<string | null>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
 
@@ -38,25 +50,19 @@ export function CartDrawer() {
   }, [isCartOpen]);
 
   const totalItems = cart?.lines ? cart.lines.reduce((acc, item) => acc + item.quantity, 0) : 0;
-  
-  const rawSubtotal = cart?.cost?.subtotalAmount?.amount 
-    ? parseFloat(cart.cost.subtotalAmount.amount.replace(/,/g, '')) 
-    : 0;
 
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
     setPromoError(null);
-    if (!promoCode.trim()) return;
+    if (!promoInput.trim()) return;
 
-    if (promoCode.toUpperCase() === "AWARAA10" || promoCode.toUpperCase() === "SQUAD10") {
-      setAppliedPromo(promoCode.toUpperCase());
+    const result = applyPromo(promoInput);
+    if (!result.success) {
+      setPromoError(result.error || "Invalid code. Try 'AWARAA10'");
     } else {
-      setPromoError("Invalid code. Try 'AWARAA10'");
+      setPromoInput("");
     }
   };
-
-  const discountAmount = appliedPromo ? Math.round(rawSubtotal * 0.1) : 0;
-  const finalTotal = Math.max(0, rawSubtotal - discountAmount);
 
   if (!isCartOpen) return null;
 
@@ -221,32 +227,35 @@ export function CartDrawer() {
         {cart && cart.lines.length > 0 && (
           <div className="p-5 bg-white border-t border-bright-ink/10 flex flex-col gap-4 shadow-lg">
             {/* Promo Code Form */}
-            <form onSubmit={handleApplyPromo} className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Discount code (e.g. AWARAA10)"
-                value={promoCode}
-                onChange={(e) => setPromoCode(e.target.value)}
-                className="flex-1 bg-bright-card border border-bright-ink/15 rounded-xl px-3 py-1.5 text-xs font-sans placeholder:text-bright-muted/60 uppercase tracking-wider focus:outline-none focus:border-bright-amber"
-              />
-              <button
-                type="submit"
-                className="bg-bright-ink text-white px-3.5 py-1.5 rounded-xl text-xs font-sans font-bold uppercase tracking-wider hover:bg-bright-amber transition-colors"
-              >
-                Apply
-              </button>
-            </form>
-
-            {appliedPromo && (
-              <div className="flex items-center justify-between bg-bright-lime/10 border border-bright-lime/20 px-3 py-1.5 rounded-xl text-xs font-sans text-bright-lime font-bold">
+            {!appliedPromo ? (
+              <form onSubmit={handleApplyPromo} className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Discount code (e.g. AWARAA10)"
+                  value={promoInput}
+                  onChange={(e) => {
+                    setPromoInput(e.target.value);
+                    if (promoError) setPromoError(null);
+                  }}
+                  className="flex-1 bg-bright-card border border-bright-ink/15 rounded-xl px-3 py-1.5 text-xs font-sans placeholder:text-bright-muted/60 uppercase tracking-wider focus:outline-none focus:border-bright-amber"
+                />
+                <button
+                  type="submit"
+                  className="bg-bright-ink text-white px-3.5 py-1.5 rounded-xl text-xs font-sans font-bold uppercase tracking-wider hover:bg-bright-amber transition-colors cursor-pointer"
+                >
+                  Apply
+                </button>
+              </form>
+            ) : (
+              <div className="flex items-center justify-between bg-bright-lime/10 border border-bright-lime/20 px-3 py-2 rounded-xl text-xs font-sans text-bright-lime font-bold animate-fadeIn">
                 <span className="flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   Promo {appliedPromo} applied (10% OFF)
                 </span>
                 <button
                   type="button"
-                  onClick={() => setAppliedPromo(null)}
-                  className="text-bright-muted hover:text-bright-coral text-[11px] underline"
+                  onClick={removePromo}
+                  className="text-bright-muted hover:text-bright-coral text-[11px] underline cursor-pointer"
                 >
                   Remove
                 </button>
