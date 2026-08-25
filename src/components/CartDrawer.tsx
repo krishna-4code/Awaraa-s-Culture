@@ -50,17 +50,23 @@ export function CartDrawer() {
   }, [isCartOpen]);
 
   const totalItems = cart?.lines ? cart.lines.reduce((acc, item) => acc + item.quantity, 0) : 0;
+  const [isApplyingPromo, setIsApplyingPromo] = useState(false);
 
-  const handleApplyPromo = (e: React.FormEvent) => {
+  const handleApplyPromo = async (e: React.FormEvent) => {
     e.preventDefault();
     setPromoError(null);
     if (!promoInput.trim()) return;
 
-    const result = applyPromo(promoInput);
-    if (!result.success) {
-      setPromoError(result.error || "Invalid code. Try 'AWARAA10'");
-    } else {
-      setPromoInput("");
+    setIsApplyingPromo(true);
+    try {
+      const result = await applyPromo(promoInput);
+      if (!result.success) {
+        setPromoError(result.error || "Invalid code. Try 'AWARAA10'");
+      } else {
+        setPromoInput("");
+      }
+    } finally {
+      setIsApplyingPromo(false);
     }
   };
 
@@ -241,9 +247,10 @@ export function CartDrawer() {
                 />
                 <button
                   type="submit"
-                  className="bg-bright-ink text-white px-3.5 py-1.5 rounded-xl text-xs font-sans font-bold uppercase tracking-wider hover:bg-bright-amber transition-colors cursor-pointer"
+                  disabled={isApplyingPromo}
+                  className="bg-bright-ink text-white px-3.5 py-1.5 rounded-xl text-xs font-sans font-bold uppercase tracking-wider hover:bg-bright-amber transition-colors cursor-pointer disabled:opacity-50"
                 >
-                  Apply
+                  {isApplyingPromo ? "..." : "Apply"}
                 </button>
               </form>
             ) : (

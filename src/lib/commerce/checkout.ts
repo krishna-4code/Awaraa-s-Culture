@@ -69,6 +69,7 @@ export interface ConfirmWebsiteOrderParams {
   customerEmail?: string
   customerPhone?: string
   shippingAddress?: string
+  promoCode?: string
 }
 
 export interface ConfirmWebsiteOrderResponse {
@@ -243,6 +244,16 @@ export async function confirmWebsiteOrder(
     }
   }
 
+  // Record promo redemption if single-use promo code was applied
+  if (params.promoCode && params.customerEmail) {
+    try {
+      const { recordPromoRedemption } = await import('@/lib/commerce/promo')
+      await recordPromoRedemption(params.promoCode, params.customerEmail, orderResult.orderId)
+    } catch (promoErr) {
+      console.warn('[Website Checkout] Promo redemption recording notice:', promoErr)
+    }
+  }
+
   return {
     success: true,
     orderNumber: orderResult.orderId,
@@ -271,6 +282,7 @@ export interface RecordInstagramOrderParams {
   totalAmount: number
   customerName: string
   customerPhone: string
+  customerEmail?: string
   shippingAddress: string
   notes?: string
 }
@@ -290,6 +302,8 @@ export async function recordInstagramOrderRequest(
   params: RecordInstagramOrderParams
 ): Promise<RecordInstagramOrderResponse> {
   try {
+    const contactInfo = [params.customerPhone, params.customerEmail].filter(Boolean).join(' / ')
+
     const orderDoc = {
       _type: 'order',
       orderId: params.orderRef,
@@ -298,7 +312,7 @@ export async function recordInstagramOrderRequest(
       status: 'INQUIRY',
       customer: {
         name: params.customerName,
-        contact: params.customerPhone,
+        contact: contactInfo || params.customerPhone,
         address: params.shippingAddress,
       },
       items: params.lineItems.map((item) => ({
@@ -318,6 +332,7 @@ export async function recordInstagramOrderRequest(
       inventoryDecremented: false,
       notes: [
         params.promoCode ? `Promo: ${params.promoCode} (-₹${params.discount || 0})` : '',
+        params.customerEmail ? `Account: ${params.customerEmail}` : '',
         params.notes ? `Customer Note: ${params.notes}` : '',
       ].filter(Boolean).join(' | ') || undefined,
       createdAt: new Date().toISOString(),
@@ -329,6 +344,16 @@ export async function recordInstagramOrderRequest(
       await sanityWriteClient.create(orderDoc)
     } catch (sanityErr: any) {
       console.warn('[Instagram Order] Sanity sync notice:', sanityErr?.message || 'Sanity not active')
+    }
+
+    // Record single-use promo redemption if applicable
+    if (params.promoCode && params.customerEmail) {
+      try {
+        const { recordPromoRedemption } = await import('@/lib/commerce/promo')
+        await recordPromoRedemption(params.promoCode, params.customerEmail, params.orderRef)
+      } catch (promoErr) {
+        console.warn('[Instagram Order] Promo redemption recording notice:', promoErr)
+      }
     }
 
     return {

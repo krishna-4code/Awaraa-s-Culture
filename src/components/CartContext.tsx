@@ -3,6 +3,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import { CommerceCart, CommerceProduct, CommerceVariant } from '@/lib/commerce';
 import { createCart, getCart, addToCart, updateCart, removeCartItem, clearCart as clearCommerceCart } from '@/lib/commerce/cart';
+import { createClient } from '@/lib/supabase/client';
+import { validatePromoCode } from '@/lib/commerce/promo';
 
 const PROMO_STORAGE_KEY = 'awaraa_promo_code';
 
@@ -30,11 +32,12 @@ interface CartContextType {
   clearCart: () => Promise<void>;
   // Global promo code management
   appliedPromo: string | null;
-  applyPromo: (code: string) => PromoResult;
+  applyPromo: (code: string, userEmail?: string | null) => Promise<PromoResult>;
   removePromo: () => void;
   rawSubtotal: number;
   discountAmount: number;
   finalTotal: number;
+  userEmail: string | null;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -44,10 +47,29 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   const openCart = useCallback(() => setIsCartOpen(true), []);
   const closeCart = useCallback(() => setIsCartOpen(false), []);
   const toggleCart = useCallback(() => setIsCartOpen(prev => !prev), []);
+
+  // Track auth status for account-level promo validation
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }: any) => {
+      const email = data?.user?.email || null;
+      setUserEmail(email);
+    });
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
+      const email = session?.user?.email || null;
+      setUserEmail(email);
+    });
+
+    return () => {
+      authListener?.subscription?.unsubscribe();
+    };
+  }, []);
 
   const initCart = useCallback(async () => {
     try {
@@ -60,8 +82,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       // Initialize persistent promo code
       if (typeof window !== 'undefined') {
         const storedPromo = localStorage.getItem(PROMO_STORAGE_KEY);
-        if (storedPromo && (storedPromo.toUpperCase() === 'AWARAA10' || storedPromo.toUpperCase() === 'SQUAD10')) {
-          setAppliedPromo(storedPromo.toUpperCase());
+        if (storedPromo) {
+          const upper = storedPromo.toUpperCase();
+          if (upper === 'SQUAD10') {
+            setAppliedPromo(upper);
+          } else if (upper === 'AWARAA10') {
+            // Validate against current email if available
+            setAppliedPromo(upper);
+          }
         }
       }
     } catch (e) {
@@ -70,6 +98,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
     }
   }, []);
+
+  // Validate applied promo whenever user email changes
+  useEffect(() => {
+    if (appliedPromo === 'AWARAA10') {
+      if (!userEmail) {
+        // Not logged in anymore or not logged in yet; promo will be checked on checkout or apply
+      } else {
+        validatePromoCode('AWARAA10', userEmail).then((res) => {
+          if (!res.valid) {
+            setAppliedPromo(null);
+            if (typeof window !== 'undefined') {
+              localStorage.removeItem(PROMO_STORAGE_KEY);
+            }
+          }
+        });
+      }
+    }
+  }, [appliedPromo, userEmail]);
 
   useEffect(() => {
     initCart();
@@ -105,22 +151,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return Math.max(0, rawSubtotal - discountAmount);
   }, [rawSubtotal, discountAmount]);
 
-  const applyPromo = useCallback((code: string): PromoResult => {
+  const applyPromo = useCallback(async (code: string, overrideEmail?: string | null): Promise<PromoResult> => {
     const cleanCode = (code || '').trim().toUpperCase();
     if (!cleanCode) {
       return { success: false, error: 'Please enter a coupon code.' };
     }
 
-    if (cleanCode === 'AWARAA10' || cleanCode === 'SQUAD10') {
-      setAppliedPromo(cleanCode);
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(PROMO_STORAGE_KEY, cleanCode);
-      }
-      return { success: true };
+    const emailToUse = overrideEmail !== undefined ? overrideEmail : userEmail;
+    const result = await validatePromoCode(cleanCode, emailToUse);
+
+    if (!result.valid) {
+      return { success: false, error: result.error || "Invalid code. Try 'AWARAA10'" };
     }
 
-    return { success: false, error: "Invalid code. Try 'AWARAA10'" };
-  }, []);
+    setAppliedPromo(result.code || cleanCode);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(PROMO_STORAGE_KEY, result.code || cleanCode);
+    }
+    return { success: true };
+  }, [userEmail]);
 
   const removePromo = useCallback(() => {
     setAppliedPromo(null);
@@ -226,6 +275,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         rawSubtotal,
         discountAmount,
         finalTotal,
+        userEmail,
       }}
     >
       {children}
@@ -245,11 +295,12 @@ const defaultCartContext: CartContextType = {
   removeItem: async () => {},
   clearCart: async () => {},
   appliedPromo: null,
-  applyPromo: () => ({ success: false, error: 'Cart not initialized' }),
+  applyPromo: async () => ({ success: false, error: 'Cart not initialized' }),
   removePromo: () => {},
   rawSubtotal: 0,
   discountAmount: 0,
   finalTotal: 0,
+  userEmail: null,
 };
 
 export function useCart() {

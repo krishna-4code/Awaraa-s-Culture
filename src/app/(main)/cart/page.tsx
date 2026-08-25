@@ -39,6 +39,7 @@ import {
   recordInstagramOrderRequest,
   validateCartBeforeCheckout
 } from "@/lib/commerce/checkout";
+import { validatePromoCode } from "@/lib/commerce/promo";
 import { analytics } from "@/lib/analytics";
 import { InstagramOrderButton } from "@/components/checkout/InstagramOrderButton";
 import { OrderReadyModal } from "@/components/checkout/OrderReadyModal";
@@ -90,8 +91,8 @@ export default function CartPage() {
     supabase.auth.getUser().then(({ data }: any) => {
       const currentUser = data?.user || null;
       setUser(currentUser);
-      if (currentUser?.user_metadata?.full_name && !customerName) {
-        setCustomerName(currentUser.user_metadata.full_name);
+      if (currentUser?.user_metadata?.full_name) {
+        setCustomerName((prev) => prev || currentUser.user_metadata.full_name);
       }
       setIsAuthChecking(false);
     });
@@ -99,8 +100,8 @@ export default function CartPage() {
     const { data: authListener } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       const currentUser = session?.user || null;
       setUser(currentUser);
-      if (currentUser?.user_metadata?.full_name && !customerName) {
-        setCustomerName(currentUser.user_metadata.full_name);
+      if (currentUser?.user_metadata?.full_name) {
+        setCustomerName((prev) => prev || currentUser.user_metadata.full_name);
       }
       setIsAuthChecking(false);
     });
@@ -142,16 +143,23 @@ export default function CartPage() {
     submittedAt: string;
   } | null>(null);
 
-  const handleApplyPromo = (e: React.FormEvent) => {
+  const [isApplyingPromo, setIsApplyingPromo] = useState(false);
+
+  const handleApplyPromo = async (e: React.FormEvent) => {
     e.preventDefault();
     setPromoError(null);
     if (!promoInput.trim()) return;
 
-    const result = applyPromo(promoInput);
-    if (!result.success) {
-      setPromoError(result.error || "Invalid discount code. Try 'AWARAA10'");
-    } else {
-      setPromoInput("");
+    setIsApplyingPromo(true);
+    try {
+      const result = await applyPromo(promoInput, user?.email);
+      if (!result.success) {
+        setPromoError(result.error || "Invalid discount code. Try 'AWARAA10'");
+      } else {
+        setPromoInput("");
+      }
+    } finally {
+      setIsApplyingPromo(false);
     }
   };
 
@@ -310,6 +318,18 @@ export default function CartPage() {
         finalTotal
       );
 
+      // Pre-flight validation of applied single-use promo code (AWARAA10)
+      if (appliedPromo === 'AWARAA10') {
+        const promoValidation = await validatePromoCode('AWARAA10', user.email);
+        if (!promoValidation.valid) {
+          setPromoError(promoValidation.error || "The code 'AWARAA10' has already been redeemed for your account.");
+          removePromo();
+          setIsProcessing(false);
+          isSubmittingRef.current = false;
+          return;
+        }
+      }
+
       // 2. Generate unique order reference
       const orderRef = generateOrderRef();
 
@@ -369,6 +389,7 @@ export default function CartPage() {
         totalAmount: validatedTotal,
         customerName: customerName.trim(),
         customerPhone: customerPhone.trim(),
+        customerEmail: user.email || undefined,
         shippingAddress: customerAddress.trim(),
         notes: customerNotes.trim() || "",
       });
@@ -779,9 +800,10 @@ export default function CartPage() {
                     />
                     <button
                       type="submit"
-                      className="bg-bright-ink text-white px-4 py-2 rounded-xl text-xs font-sans font-bold uppercase tracking-wider hover:bg-bright-amber transition-colors cursor-pointer"
+                      disabled={isApplyingPromo}
+                      className="bg-bright-ink text-white px-4 py-2 rounded-xl text-xs font-sans font-bold uppercase tracking-wider hover:bg-bright-amber transition-colors cursor-pointer disabled:opacity-50"
                     >
-                      Apply
+                      {isApplyingPromo ? "..." : "Apply"}
                     </button>
                   </form>
                 ) : (
