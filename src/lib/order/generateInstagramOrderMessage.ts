@@ -32,7 +32,7 @@ export interface InstagramOrder {
 }
 
 /**
- * Format a number into standard Indian Rupee representation (e.g., ₹1,199)
+ * Format a number into standard Indian Rupee representation (e.g., ₹1,099)
  */
 export function formatCurrencyINR(amount: number): string {
   return `₹${Math.round(amount).toLocaleString('en-IN')}`;
@@ -47,7 +47,7 @@ export function formatCurrencyINR(amount: number): string {
  * Order Ref: AW-8F42K
  *
  * ITEMS
- * • NB Sports — Size 9 (White) — Qty 1 — ₹1,199
+ * • NB Sports — Size 9 (White) — Qty 1 — ₹1,099
  * • LV Sneakers — Size 8 (White/Black) — Qty 1 — ₹1,099
  *
  * Subtotal: ₹2,298

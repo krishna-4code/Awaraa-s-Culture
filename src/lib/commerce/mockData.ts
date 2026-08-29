@@ -5,7 +5,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     id: "nb-sports",
     handle: "nb-sports",
     name: "NB Sports",
-    price: "₹1,199",
+    price: "₹1,099",
     description: "Athletic lifestyle runner engineered with lightweight breathable mesh, high-rebound molded EVA foam midsole, and multi-surface grip.",
     materials: [
       "Technical breathable sport mesh with synthetic overlays",
@@ -45,7 +45,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     id: "sb-dunks",
     handle: "sb-dunks",
     name: "SB Dunks",
-    price: "₹1,399",
+    price: "₹1,199",
     description: "Iconic streetwear silhouette engineered for all-day urban movement. Dual-density cushioning and reinforced grip outer sole provide supreme stability.",
     materials: [
       "Full-grain premium leather and synthetic upper",
@@ -82,7 +82,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     id: "waffle-brown",
     handle: "waffle-brown",
     name: "Waffle Brown",
-    price: "₹1,599",
+    price: "₹1,399",
     description: "Heritage runner styling reimagined in rich earthy tones. Features lightweight waffle-traction sole and breathable mesh panels for all-day comfort.",
     materials: [
       "Earth-tone nubuck suede and woven nylon mesh",
@@ -145,7 +145,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     id: "nb-sneakers",
     handle: "nb-sneakers",
     name: "NB Sneakers",
-    price: "₹1,249",
+    price: "₹1,149",
     description: "Street-forward retro athletic runner with dual-tone paneled leather, responsive foam cushion, and non-slip rubber outsole.",
     materials: [
       "Layered micro-fiber leather & perforated toe box",
@@ -213,7 +213,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     id: "sketchers-sports",
     handle: "sketchers-sports",
     name: "Sketchers Sports",
-    price: "₹1,579",
+    price: "₹1,479",
     description: "Plush all-day walking shoe featuring high-rebound cushioning, responsive arch support, and rugged street tread.",
     materials: [
       "Reinforced mesh upper with synthetic side braces",
@@ -242,7 +242,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
     id: "brooks",
     handle: "brooks",
     name: "Brooks",
-    price: "₹1,399",
+    price: "₹1,349",
     description: "High-performance endurance walking shoe with structured heel stabilizer, responsive road cushioning, and high-abrasion rubber tread.",
     materials: [
       "Heavy-duty double jacquard breathable mesh",

@@ -74,7 +74,7 @@ export function Hero() {
                 </p>
                 <div className="flex items-center gap-3">
                   <span className="font-display font-extrabold text-2xl text-bright-amber">
-                    ₹ 1,199
+                    ₹ 1,099
                   </span>
                   <span className="font-sans text-xs font-semibold text-bright-muted bg-white/90 px-3 py-1 rounded-full border border-bright-ink/10 tracking-wide">
                     High-Rebound EVA

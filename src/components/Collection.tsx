@@ -34,7 +34,7 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     tag: "Featured Kick",
     spec: "High-Rebound Molded EVA",
     desc: "Athletic lifestyle runner engineered with lightweight breathable mesh and grip.",
-    price: "1,199",
+    price: "1,099",
     image: "/shoes/nb_sports/1.png",
     images: [
       {
@@ -64,7 +64,7 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     tag: "Top Choice",
     spec: "Dual EVA Foam Sole",
     desc: "Iconic streetwear silhouette engineered for all-day urban movement.",
-    price: "1,399",
+    price: "1,199",
     image: "/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png",
     images: [
       {
@@ -90,7 +90,7 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     tag: "New Edition",
     spec: "Dual-Density EVA Midsole",
     desc: "Street-forward retro athletic runner with dual-tone paneled leather.",
-    price: "1,249",
+    price: "1,149",
     image: "/shoes/nb_sneakers/1.png",
     images: [
       {
@@ -108,7 +108,7 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     tag: "Daily Essential",
     spec: "Waffle Lug Traction Sole",
     desc: "Heritage runner styling reimagined in rich earthy tones with breathable mesh.",
-    price: "1,599",
+    price: "1,399",
     image: "/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png",
     images: [
       {
@@ -182,7 +182,7 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     tag: "Plush Cushion",
     spec: "Segmented EVA Midsole",
     desc: "Plush all-day walking shoe featuring high-rebound cushioning and responsive arch support.",
-    price: "1,579",
+    price: "1,479",
     image: "/shoes/sketchers/Gemini_Generated_Image_iptr9iptr9iptr9i.png",
     images: [
       {
@@ -200,7 +200,7 @@ const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
     tag: "Endurance Series",
     spec: "Bio-Cushioned Road Sole",
     desc: "High-performance endurance walking shoe with structured heel stabilizer.",
-    price: "1,399",
+    price: "1,349",
     image: "/shoes/brooks/Gemini_Generated_Image_7ol72i7ol72i7ol7.png",
     images: [
       {
