@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Terms & Delivery Policy',
-  description: 'Terms of Service, Delivery, and Return Policies for Awaraa\'s Culture.',
+  description: "Terms of Service, Delivery, and 14-Day Return Policy for Awaraa's Culture. Delhi flat ₹100 delivery, outside Delhi via Porter. All orders confirmed via Instagram DM.",
 };
 
 export default function TermsPage() {

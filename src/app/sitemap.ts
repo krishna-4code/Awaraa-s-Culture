@@ -1,11 +1,10 @@
 import { MetadataRoute } from 'next';
 import { getProducts } from '@/lib/commerce/products';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+import { SITE_URL } from '@/lib/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await getProducts();
-  
+
   // Real product routes based on live Sanity handles
   const productRoutes = products.map((p) => ({
     url: `${SITE_URL}/products/${p.handle}`,
@@ -14,10 +13,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // Only routes with a real, functioning, indexable content page behind them.
+  // Utility pages (/cart, /login) are intentionally excluded — /login has
+  // noindex metadata and /cart is a client-only user-session page.
+  // Every URL here must return HTTP 200.
   const staticRoutes = [
     '',
-    '/cart',
-    '/login',
     '/privacy',
     '/terms',
     '/contact',

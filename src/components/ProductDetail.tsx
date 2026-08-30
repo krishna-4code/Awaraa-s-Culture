@@ -7,6 +7,7 @@ import { Feather, Clock, ShieldCheck, ShoppingBag, ArrowRight, Check, Plus, Minu
 import { CommerceProduct, CommerceVariant } from "@/lib/commerce/types";
 import { useCart } from "@/components/CartContext";
 import { getProductGalleryImages } from "@/lib/commerce/productImages";
+import { SITE_URL } from "@/lib/site";
 
 export function ProductDetail({ product }: { product: CommerceProduct }) {
   const { cart, addItem, updateItem, removeItem, openCart } = useCart();
@@ -106,8 +107,8 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
               src={activeImage.url}
               alt={activeImage.altText || product.name}
               fill
-              unoptimized
               priority
+              sizes="(max-width: 768px) 100vw, 60vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             {/* CPG sticker badge overlay */}
@@ -136,7 +137,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     src={img.url}
                     alt={img.altText || `Detail ${idx + 1}`}
                     fill
-                    unoptimized
+                    sizes="(max-width: 768px) 25vw, 12vw"
                     className="object-cover"
                   />
                 </button>
@@ -207,9 +208,9 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
             </p>
             {product.materials && product.materials.length > 0 && (
               <div className="flex flex-col gap-2">
-                <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-bright-ink">
+                <div className="font-sans text-xs font-bold uppercase tracking-widest text-bright-ink">
                   Honest Materials
-                </h3>
+                </div>
                 <ul className="list-disc pl-5 text-bright-muted text-sm space-y-1 font-sans">
                   {product.materials.map((m, i) => (
                     <li key={i}>
@@ -225,9 +226,9 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
           {availableColors.length > 0 && (
             <div className="flex flex-col gap-3 mb-6">
               <div className="flex justify-between items-center">
-                <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-bright-ink">
+                <div className="font-sans text-xs font-bold uppercase tracking-widest text-bright-ink">
                   Color: <span className="text-bright-amber font-normal">{selectedColor}</span>
-                </h3>
+                </div>
               </div>
               <div className="flex flex-wrap gap-2.5">
                 {availableColors.map((c) => (
@@ -265,9 +266,9 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
           {/* Size Selection */}
           <div className="flex flex-col gap-4 mb-8">
             <div className="flex justify-between items-end">
-              <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-bright-ink">
+              <div className="font-sans text-xs font-bold uppercase tracking-widest text-bright-ink">
                 Select Size (UK/India)
-              </h3>
+              </div>
               <span className="font-sans text-[11px] uppercase tracking-wider text-bright-muted">
                 True to size fit
               </span>
@@ -282,7 +283,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     selectedSize === variant.size
                       ? "bg-bright-ink text-white border-bright-ink scale-105 shadow-md"
                       : !variant.available
-                        ? "bg-transparent text-bright-muted/30 border-bright-ink/10 cursor-not-allowed line-through"
+                        ? "bg-transparent text-bright-muted/60 border-bright-ink/25 cursor-not-allowed line-through"
                         : "bg-transparent text-bright-ink border-bright-ink/20 hover:border-bright-amber hover:bg-bright-card"
                   }`}
                 >
@@ -429,13 +430,13 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": process.env.NEXT_PUBLIC_SITE_URL || "https://awaraas.culture"
+                    "item": SITE_URL
                   },
                   {
                     "@type": "ListItem",
                     "position": 2,
                     "name": product.name,
-                    "item": `${process.env.NEXT_PUBLIC_SITE_URL || "https://awaraas.culture"}/products/${product.handle}`
+                    "item": `${SITE_URL}/products/${product.handle}`
                   }
                 ]
               },
@@ -449,7 +450,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                   "price": product.price.replace(/[^0-9.]/g, ''),
                   "priceCurrency": "INR",
                   "availability": activeVariant?.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-                  "url": `${process.env.NEXT_PUBLIC_SITE_URL || "https://awaraas.culture"}/products/${product.handle}`
+                  "url": `${SITE_URL}/products/${product.handle}`
                 }
               }
             ]

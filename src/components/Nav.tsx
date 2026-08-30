@@ -36,7 +36,7 @@ export function Nav({ user }: { user: User | null }) {
         {/* Brand Logo */}
         <Link 
           href="/" 
-          className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-bright-ink hover:text-bright-amber transition-colors duration-200 focus-visible:outline-none flex-shrink-0"
+          className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-bright-ink hover:text-bright-amber transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-amber rounded-xl flex-shrink-0"
         >
           Awaraa&apos;s Culture<span className="text-bright-amber">.</span>
         </Link>
@@ -60,7 +60,7 @@ export function Nav({ user }: { user: User | null }) {
           <button 
             type="button"
             onClick={() => openCart()}
-            className="relative bg-bright-amber text-white px-4 py-2 rounded-full font-sans text-xs font-bold uppercase tracking-wider hover:bg-bright-amber/90 hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-sm focus:outline-none cursor-pointer"
+            className="relative bg-bright-amber text-white px-4 py-2 rounded-full font-sans text-xs font-bold uppercase tracking-wider hover:bg-bright-amber/90 hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-bright-ink focus-visible:ring-offset-2 focus-visible:ring-offset-bright-canvas cursor-pointer"
             aria-label={`Shopping cart with ${totalItems} items`}
           >
             <ShoppingBag className="w-3.5 h-3.5" />
@@ -105,7 +105,7 @@ export function Nav({ user }: { user: User | null }) {
           <button 
             type="button"
             onClick={() => openCart()}
-            className="relative bg-bright-amber text-white p-2.5 rounded-full font-sans text-xs font-bold hover:bg-bright-amber/90 transition-all duration-200 flex items-center justify-center shadow-sm focus:outline-none cursor-pointer"
+            className="relative bg-bright-amber text-white p-2.5 rounded-full font-sans text-xs font-bold hover:bg-bright-amber/90 transition-all duration-200 flex items-center justify-center shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-bright-ink focus-visible:ring-offset-2 focus-visible:ring-offset-bright-canvas cursor-pointer"
             aria-label={`Shopping cart with ${totalItems} items`}
           >
             <ShoppingBag className="w-4 h-4" />
@@ -120,7 +120,7 @@ export function Nav({ user }: { user: User | null }) {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="p-2 rounded-xl text-bright-ink hover:bg-bright-ink/5 border border-bright-ink/15 transition-colors focus:outline-none"
+            className="p-2 rounded-xl text-bright-ink hover:bg-bright-ink/5 border border-bright-ink/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-bright-amber"
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
           >

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 
 const SITE_NAME = "Awaraa's Culture";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export function generatePageMetadata(title: string, description: string, path: string): Metadata {
   return {
@@ -27,15 +27,22 @@ export function generatePageMetadata(title: string, description: string, path: s
 }
 
 export function generateProductMetadata(product: { name: string; description: string; handle: string; imageUrl?: string }): Metadata {
+  // Ensure description is never empty — fall back to a branded sentence if Sanity field is blank.
+  const description = product.description?.trim()
+    ? product.description.length > 160
+      ? product.description.slice(0, 157) + '...'
+      : product.description
+    : `Shop ${product.name} from Awaraa's Culture — street-tested footwear crafted for Delhi NCR. Honest comfort, zero hype markups, built for daily movement.`;
+
   return {
     title: `${product.name} — ${SITE_NAME}`,
-    description: product.description,
+    description,
     alternates: {
       canonical: `${SITE_URL}/products/${product.handle}`,
     },
     openGraph: {
       title: `${product.name} — ${SITE_NAME}`,
-      description: product.description,
+      description,
       url: `${SITE_URL}/products/${product.handle}`,
       siteName: SITE_NAME,
       images: product.imageUrl ? [{ url: product.imageUrl, width: 1000, height: 1000, alt: product.name }] : [],
@@ -45,7 +52,7 @@ export function generateProductMetadata(product: { name: string; description: st
     twitter: {
       card: 'summary_large_image',
       title: `${product.name} — ${SITE_NAME}`,
-      description: product.description,
+      description,
       images: product.imageUrl ? [product.imageUrl] : [],
     },
   };

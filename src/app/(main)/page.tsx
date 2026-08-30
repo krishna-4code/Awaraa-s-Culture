@@ -5,6 +5,12 @@ import { Collection } from "@/components/Collection";
 import { Community } from "@/components/Community";
 import { getProducts, getCollection } from "@/lib/commerce";
 
+export const metadata = {
+  title: "Street-Tested Footwear for Daily Movement",
+  description:
+    "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
+};
+
 export default async function Home() {
   const [products, collections] = await Promise.all([
     getProducts(),

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Privacy Policy for Awaraa\'s Culture. Understanding how we handle your personal data with transparency.',
+  description: "Awaraa's Culture Privacy Policy — how we collect, use, and protect your personal data for order fulfilment under India's DPDPA. No data sold to third parties.",
 };
 
 export default function PrivacyPage() {

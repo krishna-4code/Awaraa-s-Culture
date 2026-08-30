@@ -5,7 +5,7 @@ import { INSTAGRAM_CONFIG } from '@/lib/config/instagram';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Get in touch with the Awaraa\'s Culture team on Instagram for support, sizing help, and stock inquiries.',
+  description: "Reach Awaraa's Culture on Instagram for sizing help, stock availability, and order support. Delhi NCR footwear — direct DM ordering, honest responses.",
 };
 
 export default function ContactPage() {

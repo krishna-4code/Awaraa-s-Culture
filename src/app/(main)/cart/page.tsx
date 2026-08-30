@@ -573,7 +573,7 @@ export default function CartPage() {
                           src={productImg}
                           alt={line.merchandise.product.name}
                           fill
-                          unoptimized
+                          sizes="112px"
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </Link>
@@ -673,7 +673,7 @@ export default function CartPage() {
                       }}
                       className={`bg-bright-canvas border ${
                         formErrors.name ? "border-bright-coral bg-red-50/20" : "border-bright-ink/15"
-                      } rounded-xl px-3.5 py-2.5 text-sm font-sans placeholder:text-bright-muted/60 focus:outline-none focus:border-bright-amber transition-colors`}
+                      } rounded-xl px-3.5 py-2.5 text-sm font-sans placeholder:text-bright-muted/60 focus:outline-none focus:border-bright-amber focus-visible:ring-2 focus-visible:ring-bright-amber/40 transition-colors`}
                     />
                     {formErrors.name && (
                       <span className="text-[11px] text-bright-coral font-medium flex items-center gap-1">
@@ -703,7 +703,7 @@ export default function CartPage() {
                       }}
                       className={`bg-bright-canvas border ${
                         formErrors.phone ? "border-bright-coral bg-red-50/20" : "border-bright-ink/15"
-                      } rounded-xl px-3.5 py-2.5 text-sm font-sans placeholder:text-bright-muted/60 focus:outline-none focus:border-bright-amber transition-colors`}
+                      } rounded-xl px-3.5 py-2.5 text-sm font-sans placeholder:text-bright-muted/60 focus:outline-none focus:border-bright-amber focus-visible:ring-2 focus-visible:ring-bright-amber/40 transition-colors`}
                     />
                     {formErrors.phone && (
                       <span className="text-[11px] text-bright-coral font-medium flex items-center gap-1">
@@ -733,7 +733,7 @@ export default function CartPage() {
                       }}
                       className={`bg-bright-canvas border ${
                         formErrors.address ? "border-bright-coral bg-red-50/20" : "border-bright-ink/15"
-                      } rounded-xl px-3.5 py-2.5 text-sm font-sans placeholder:text-bright-muted/60 focus:outline-none focus:border-bright-amber transition-colors resize-none`}
+                      } rounded-xl px-3.5 py-2.5 text-sm font-sans placeholder:text-bright-muted/60 focus:outline-none focus:border-bright-amber focus-visible:ring-2 focus-visible:ring-bright-amber/40 transition-colors resize-none`}
                     />
                     {formErrors.address && (
                       <span className="text-[11px] text-bright-coral font-medium flex items-center gap-1">
@@ -758,7 +758,7 @@ export default function CartPage() {
                       placeholder="e.g. Call before delivery / prefer wider fit"
                       value={customerNotes}
                       onChange={(e) => setCustomerNotes(e.target.value)}
-                      className="bg-bright-canvas border border-bright-ink/15 rounded-xl px-3.5 py-2 text-sm font-sans placeholder:text-bright-muted/60 focus:outline-none focus:border-bright-amber transition-colors"
+                      className="bg-bright-canvas border border-bright-ink/15 rounded-xl px-3.5 py-2 text-sm font-sans placeholder:text-bright-muted/60 focus:outline-none focus:border-bright-amber focus-visible:ring-2 focus-visible:ring-bright-amber/40 transition-colors"
                     />
                   </div>
                 </div>
@@ -796,7 +796,7 @@ export default function CartPage() {
                         setPromoInput(e.target.value);
                         if (promoError) setPromoError(null);
                       }}
-                      className="flex-grow bg-bright-card border border-bright-ink/15 rounded-xl px-3 py-2 text-xs font-sans placeholder:text-bright-muted/60 uppercase tracking-wider focus:outline-none focus:border-bright-amber"
+                      className="flex-grow bg-bright-card border border-bright-ink/15 rounded-xl px-3 py-2 text-xs font-sans placeholder:text-bright-muted/60 uppercase tracking-wider focus:outline-none focus:border-bright-amber focus-visible:ring-2 focus-visible:ring-bright-amber/40"
                     />
                     <button
                       type="submit"

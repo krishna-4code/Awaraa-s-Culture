@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { MarkerUnderline } from "./MarkerUnderline";
 
 export function Hero() {
   return (
@@ -27,12 +26,7 @@ export function Hero() {
 
         {/* Poster-Style Headline with Reusable MarkerUnderline */}
         <h1 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-bright-ink leading-[0.95] mb-6 uppercase">
-          Wander Without{" "}
-          <MarkerUnderline
-            text="LIMITS."
-            annotation="Built to last"
-            strokeColor="#FF5E1E"
-          />
+          Wander Without LIMITS.
         </h1>
 
         {/* Plus Jakarta Sans Subtitle */}
@@ -66,9 +60,9 @@ export function Hero() {
                 <span className="cpg-badge bg-bright-amber text-white font-accent mb-3">
                   Featured Kick
                 </span>
-                <h3 className="font-display font-bold text-3xl md:text-4xl text-bright-ink mb-2 group-hover:text-bright-amber transition-colors">
+                <h2 className="font-display font-bold text-3xl md:text-4xl text-bright-ink mb-2 group-hover:text-bright-amber transition-colors">
                   NB Sports
-                </h3>
+                </h2>
                 <p className="font-sans text-sm text-bright-muted mb-4 leading-relaxed">
                   Technical breathable sport mesh with high-rebound molded EVA foam midsole for all-day urban movement.
                 </p>
@@ -88,8 +82,8 @@ export function Hero() {
                   src="/shoes/nb_sports/1.png"
                   alt="NB Sports Featured Kick"
                   fill
-                  unoptimized
                   priority
+                  sizes="256px"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute bottom-3 bg-bright-amber/95 text-white text-xs font-accent font-bold px-3 py-1 rounded-full shadow-md">

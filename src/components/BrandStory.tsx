@@ -57,7 +57,7 @@ export function BrandStory() {
               src="/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png"
               alt="Awaraa's Culture SB Dunks in motion"
               fill
-              unoptimized
+              sizes="(max-width: 1024px) 60vw, 600px"
               className="object-cover"
             />
           </div>
@@ -68,7 +68,7 @@ export function BrandStory() {
               src="/shoes/nb_sports/1.png"
               alt="NB Sports craftsmanship detail"
               fill
-              unoptimized
+              sizes="(max-width: 1024px) 45vw, 440px"
               className="object-cover"
             />
           </div>
@@ -79,7 +79,7 @@ export function BrandStory() {
               src="/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png"
               alt="Waffle Brown urban footwear in Delhi NCR"
               fill
-              unoptimized
+              sizes="(max-width: 1024px) 55vw, 520px"
               className="object-cover"
             />
           </div>

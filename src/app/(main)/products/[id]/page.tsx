@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductDetail } from "@/components/ProductDetail";
 import { getProduct } from "@/lib/commerce";
+import { generateProductMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -9,12 +10,21 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  
-  // In Phase 4, we use placeholder metadata structure
-  return {
-    title: `Awaraa ${id.replace(/-/g, ' ').toUpperCase()} — Awaraa's Culture`,
-    description: "Built for movement, designed for stillness. This pair represents our standard for daily reliability.",
-  };
+  const product = await getProduct(id);
+
+  if (!product) {
+    return {
+      title: "Product not found",
+      description: "This pair could not be found. Explore the rest of the Awaraa's Culture squad.",
+    };
+  }
+
+  return generateProductMetadata({
+    name: product.name,
+    description: product.description,
+    handle: product.handle,
+    imageUrl: product.images?.[0]?.url,
+  });
 }
 
 export default async function ProductPage({ params }: Props) {

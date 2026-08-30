@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "./CartContext";
@@ -237,24 +237,47 @@ function ShoeCardItem({
   const [activeImgIndex, setActiveImgIndex] = useState(0);
 
   const images = getProductGalleryImages(product);
-  const currentImg = images[activeImgIndex] || images[0];
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToSlide = (targetIdx: number) => {
+    const clamped = Math.max(0, Math.min(images.length - 1, targetIdx));
+    const slider = sliderRef.current;
+    if (!slider) {
+      setActiveImgIndex(clamped);
+      return;
+    }
+    slider.scrollTo({
+      left: clamped * slider.clientWidth,
+      behavior: "smooth",
+    });
+  };
 
   const handlePrev = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setActiveImgIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    scrollToSlide(activeImgIndex - 1);
   };
 
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setActiveImgIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    scrollToSlide(activeImgIndex + 1);
   };
 
   const handleSelectDot = (idx: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setActiveImgIndex(idx);
+    scrollToSlide(idx);
+  };
+
+  // Keep arrows, dots and counter in sync as the native swipe scrolls
+  const handleSliderScroll = () => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+    const slideWidth = slider.clientWidth;
+    if (slideWidth <= 0) return;
+    const idx = Math.round(slider.scrollLeft / slideWidth);
+    setActiveImgIndex(Math.max(0, Math.min(images.length - 1, idx)));
   };
 
   return (
@@ -262,7 +285,7 @@ function ShoeCardItem({
       
       {/* Header Tag / In-Cart Status Badge */}
       <div className="flex items-center justify-between gap-2 mb-4">
-        <span className={`cpg-badge text-[11px] font-accent font-bold px-3 py-1 rounded-full ${product.badgeColor}`}>
+        <span className={`cpg-badge cpg-badge-pill text-[11px] font-accent font-bold px-3 py-1 rounded-full ${product.badgeColor}`}>
           {product.tag}
         </span>
         {inCartQty > 0 ? (
@@ -277,20 +300,33 @@ function ShoeCardItem({
         )}
       </div>
 
-      {/* Product Image Area with Multi-Image Carousel */}
-      <div className="relative w-full h-64 bg-bright-card rounded-2xl overflow-hidden flex items-center justify-center group/img">
+      {/* Product Image Area with Multi-Image Swipe Carousel */}
+      <div className="relative w-full h-64 bg-bright-card rounded-2xl overflow-hidden group/img">
         <Link
           href={`/products/${product.handle}`}
           className="relative w-full h-full block"
           title={`View ${product.title}`}
         >
-          <Image
-            src={currentImg.url}
-            alt={currentImg.altText || product.title}
-            fill
-            unoptimized
-            className="object-cover transition-transform duration-500 group-hover/img:scale-105"
-          />
+          <div
+            ref={sliderRef}
+            onScroll={handleSliderScroll}
+            className="relative w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar overscroll-x-contain"
+          >
+            {images.map((img, idx) => (
+              <div
+                key={`${img.url}-${idx}`}
+                className="relative w-full h-full shrink-0 snap-start"
+              >
+                <Image
+                  src={img.url}
+                  alt={img.altText || product.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover/img:scale-105"
+                />
+              </div>
+            ))}
+          </div>
         </Link>
 
         {/* Top-right shoe label sticker */}
@@ -305,25 +341,25 @@ function ShoeCardItem({
           </div>
         )}
 
-        {/* Previous Image Arrow */}
+        {/* Previous Image Arrow — always visible on mobile, hover-only on desktop */}
         {images.length > 1 && (
           <button
             type="button"
             onClick={handlePrev}
             aria-label={`Previous image of ${product.title}`}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-bright-ink shadow-md flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-all duration-200 z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-bright-ink shadow-md flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover/img:opacity-100 transition-all duration-200 z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
         )}
 
-        {/* Next Image Arrow */}
+        {/* Next Image Arrow — always visible on mobile, hover-only on desktop */}
         {images.length > 1 && (
           <button
             type="button"
             onClick={handleNext}
             aria-label={`Next image of ${product.title}`}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-bright-ink shadow-md flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-all duration-200 z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-bright-ink shadow-md flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover/img:opacity-100 transition-all duration-200 z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
           >
             <ChevronRight className="w-4 h-4" />
           </button>

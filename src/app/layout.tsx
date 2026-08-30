@@ -5,15 +5,18 @@ import { CartProvider } from "@/components/CartContext";
 import { CartDrawer } from "@/components/CartDrawer";
 import { ShoeCursorTrail } from "@/components/ShoeCursorTrail";
 import { FloatingShoeParticles } from "@/components/FloatingShoeParticles";
+import { SITE_URL } from "@/lib/site";
 
 const syne = Syne({
   subsets: ["latin"],
+  weight: ["700", "800"],   // display/headlines only — bold + extrabold
   variable: "--font-syne",
   display: "swap",
 });
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],  // body, medium, semibold, bold — all used
   variable: "--font-jakarta",
   display: "swap",
 });
@@ -23,15 +26,16 @@ const spaceMono = Space_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
+  // Small spec labels only — no need to preload this face above the fold.
+  preload: false,
 });
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
+  weight: ["600", "700"],   // accent/badge labels — semibold + bold
   variable: "--font-bricolage",
   display: "swap",
 });
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -39,13 +43,13 @@ export const metadata: Metadata = {
     default: "Awaraa's Culture",
     template: "%s — Awaraa's Culture"
   },
-  description: "Movement with purpose, not aimless wandering.",
+  description: "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "Awaraa's Culture",
-    description: "Movement with purpose, not aimless wandering.",
+    title: "Awaraa's Culture — Street-Tested Footwear, Zero Hype Markups",
+    description: "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
     url: SITE_URL,
     siteName: "Awaraa's Culture",
     locale: 'en_IN',
@@ -53,8 +57,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Awaraa's Culture",
-    description: "Movement with purpose, not aimless wandering.",
+    title: "Awaraa's Culture — Street-Tested Footwear, Zero Hype Markups",
+    description: "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
   }
 };
 
@@ -68,6 +72,12 @@ export default function RootLayout({
       <body
         className={`${syne.variable} ${jakarta.variable} ${spaceMono.variable} ${bricolage.variable} font-sans antialiased bg-bright-canvas text-bright-ink selection:bg-bright-amber selection:text-white`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10000] focus:bg-bright-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-full focus:text-xs focus:font-bold focus:uppercase focus:tracking-wider focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         <CartProvider>
           {/* Global Cart Slide-Over Drawer */}
           <CartDrawer />
@@ -79,7 +89,7 @@ export default function RootLayout({
           <ShoeCursorTrail />
 
           {/* Layer 10+: Main Website Content */}
-          <div className="relative z-10 min-h-screen">
+          <div id="main-content" className="relative z-10 min-h-screen" tabIndex={-1}>
             {children}
           </div>
         </CartProvider>
@@ -98,7 +108,7 @@ export default function RootLayout({
                   "url": SITE_URL,
                   "logo": {
                     "@type": "ImageObject",
-                    "url": `${SITE_URL}/icon.png`
+                    "url": `${SITE_URL}/logo.jpeg`
                   }
                 },
                 {

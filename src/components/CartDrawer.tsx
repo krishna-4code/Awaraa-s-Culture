@@ -164,7 +164,7 @@ export function CartDrawer() {
                       src={productImg}
                       alt={line.merchandise.product.name}
                       fill
-                      unoptimized
+                      sizes="80px"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </Link>
@@ -243,7 +243,7 @@ export function CartDrawer() {
                     setPromoInput(e.target.value);
                     if (promoError) setPromoError(null);
                   }}
-                  className="flex-1 bg-bright-card border border-bright-ink/15 rounded-xl px-3 py-1.5 text-xs font-sans placeholder:text-bright-muted/60 uppercase tracking-wider focus:outline-none focus:border-bright-amber"
+                  className="flex-1 bg-bright-card border border-bright-ink/15 rounded-xl px-3 py-1.5 text-xs font-sans placeholder:text-bright-muted/60 uppercase tracking-wider focus:outline-none focus:border-bright-amber focus-visible:ring-2 focus-visible:ring-bright-amber/40"
                 />
                 <button
                   type="submit"
