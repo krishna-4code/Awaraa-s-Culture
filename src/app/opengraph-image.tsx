@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
  
-export const alt = 'Awaraa\'s Culture — Movement with purpose, not aimless wandering.';
+export const alt = 'Awaraa\'s Culture — Your Feet Deserve to Look Premium.';
 export const size = {
   width: 1200,
   height: 630,
@@ -43,7 +43,7 @@ export default async function Image() {
             letterSpacing: '0.05em',
           }}
         >
-          Movement with purpose, not aimless wandering.
+          Your Feet Deserve to Look Premium.
         </div>
       </div>
     ),
