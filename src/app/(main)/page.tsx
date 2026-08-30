@@ -6,7 +6,7 @@ import { Community } from "@/components/Community";
 import { getProducts, getCollection } from "@/lib/commerce";
 
 export const metadata = {
-  title: "Awaraa's Culture",
+  title: { absolute: "Awaraa's Culture" },
   description:
     "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
 };
