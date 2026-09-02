@@ -254,6 +254,16 @@ function resolveProductAndVariant(
   };
 }
 
+// Stock-aware quantity clamp: never lets a cart quantity exceed the inventory
+// available for that variant (returns the quantity untouched when stock is unknown).
+function clampQuantityToStock(quantity: number, product: CommerceProduct, variantId: string): number {
+  const variant = product.variants?.find(v => v.id === variantId || v.title === variantId);
+  const stock = typeof variant?.stock === 'number' ? variant.stock : undefined;
+  if (typeof stock !== 'number') return Math.max(1, quantity);
+  if (stock <= 0) return 0;
+  return Math.max(1, Math.min(quantity, stock));
+}
+
 function createLocalCart(
   variantId: string,
   quantity: number,
@@ -266,7 +276,7 @@ function createLocalCart(
   const lines = [
     {
       id: lineId,
-      quantity: Math.max(1, quantity),
+      quantity: clampQuantityToStock(quantity, product, variant.id),
       merchandise: {
         id: variant.id,
         title: variant.title,
@@ -303,14 +313,16 @@ function addLocalItem(
 
   let newLines = [...cart.lines];
   if (existingLineIndex > -1) {
+    const existingLine = newLines[existingLineIndex];
+    const nextQty = existingLine.quantity + clampQuantityToStock(quantity, product, variant.id);
     newLines[existingLineIndex] = {
-      ...newLines[existingLineIndex],
-      quantity: newLines[existingLineIndex].quantity + quantity
+      ...existingLine,
+      quantity: clampQuantityToStock(nextQty, existingLine.merchandise.product || product, variant.id)
     };
   } else {
     newLines.push({
       id: `line_${variant.id}_${Date.now()}`,
-      quantity: Math.max(1, quantity),
+      quantity: clampQuantityToStock(quantity, product, variant.id),
       merchandise: {
         id: variant.id,
         title: variant.title,
@@ -332,7 +344,8 @@ function addLocalItem(
 function updateLocalItem(cart: CommerceCart, lineId: string, quantity: number): CommerceCart {
   let newLines = cart.lines.map(line => {
     if (line.id === lineId) {
-      return { ...line, quantity };
+      const cappedQty = clampQuantityToStock(quantity, line.merchandise.product, line.merchandise.id);
+      return { ...line, quantity: cappedQty };
     }
     return line;
   }).filter(line => line.quantity > 0);

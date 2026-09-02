@@ -63,7 +63,6 @@ export function Craft() {
               The Comfort{" "}
               <MarkerUnderline
                 text="MATRIX"
-                annotation="Verified Specs"
                 strokeColor="#FF6B8B"
               />
             </h2>

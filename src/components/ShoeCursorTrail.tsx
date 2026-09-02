@@ -32,7 +32,7 @@ const SHOE_SVG_SRCS = [
   "/bg-shoes/shoe-5.svg",
 ];
 
-export function ShoeCursorTrail() {
+export function ShoeCursorTrail({ enabled = true }: { enabled?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -46,6 +46,8 @@ export function ShoeCursorTrail() {
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    let active = enabled;
 
     let animId: number;
     let width = (canvas.width = window.innerWidth);
@@ -136,6 +138,7 @@ export function ShoeCursorTrail() {
     let distSinceLastParticle = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (!active) return;
       mouseX = e.clientX;
       mouseY = e.clientY;
 
@@ -157,6 +160,7 @@ export function ShoeCursorTrail() {
     };
 
     const handleMouseDown = (e: MouseEvent) => {
+      if (!active) return;
       spawnShoeParticle(e.clientX, e.clientY, 5, true);
     };
 
@@ -166,6 +170,11 @@ export function ShoeCursorTrail() {
     // Animation Loop (60 FPS)
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
+
+      if (!active) {
+        animId = requestAnimationFrame(animate);
+        return;
+      }
 
       // Sort by depth so distant particles render behind foreground ones
       particles.sort((a, b) => a.depth - b.depth);
@@ -226,7 +235,7 @@ export function ShoeCursorTrail() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleMouseDown);
     };
-  }, []);
+  }, [enabled]);
 
   return (
     <canvas

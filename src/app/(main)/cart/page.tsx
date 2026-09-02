@@ -558,6 +558,10 @@ export default function CartPage() {
                   const productImg = getProductPrimaryImage(line.merchandise.product);
                   const productHandle =
                     line.merchandise.product.handle || line.merchandise.product.id;
+                  const lineStock = line.merchandise.product.variants?.find(
+                    (v) => v.id === line.merchandise.id
+                  )?.stock;
+                  const atLineStockLimit = typeof lineStock === 'number' && line.quantity >= lineStock;
 
                   return (
                     <div
@@ -616,8 +620,16 @@ export default function CartPage() {
                               {line.quantity}
                             </span>
                             <button
-                              onClick={() => updateItem(line.id, line.quantity + 1)}
-                              className="w-7 h-7 rounded-full flex items-center justify-center text-bright-muted hover:text-bright-ink hover:bg-white transition-all text-xs font-bold"
+                              onClick={() => {
+                                if (atLineStockLimit) return;
+                                updateItem(line.id, line.quantity + 1);
+                              }}
+                              disabled={atLineStockLimit}
+                              className={`w-7 h-7 rounded-full flex items-center justify-center text-bright-muted transition-all text-xs font-bold ${
+                                atLineStockLimit
+                                  ? "opacity-40 cursor-not-allowed"
+                                  : "hover:text-bright-ink hover:bg-white"
+                              }`}
                               aria-label="Increase quantity"
                             >
                               <Plus className="w-3.5 h-3.5" />

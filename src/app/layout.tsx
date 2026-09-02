@@ -3,7 +3,6 @@ import { Syne, Plus_Jakarta_Sans, Space_Mono, Bricolage_Grotesque } from "next/f
 import "./globals.css";
 import { CartProvider } from "@/components/CartContext";
 import { CartDrawer } from "@/components/CartDrawer";
-import { ShoeCursorTrail } from "@/components/ShoeCursorTrail";
 import { FloatingShoeParticles } from "@/components/FloatingShoeParticles";
 import { SITE_URL } from "@/lib/site";
 
@@ -84,9 +83,6 @@ export default function RootLayout({
 
           {/* Layer 1: Ambient Floating Sneaker Silhouette Particles (z-1, non-interactive, fixed) */}
           <FloatingShoeParticles />
-
-          {/* Layer 9998 & 9999: Interactive Bubble Canvas & 3D Shoe Cursor Trail */}
-          <ShoeCursorTrail />
 
           {/* Layer 10+: Main Website Content */}
           <div id="main-content" className="relative z-10 min-h-screen" tabIndex={-1}>

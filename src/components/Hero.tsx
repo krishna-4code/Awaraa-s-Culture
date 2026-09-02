@@ -2,10 +2,18 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import { ShoeCursorTrail } from "./ShoeCursorTrail";
 
 export function Hero() {
+  const [trailActive, setTrailActive] = useState(false);
+
   return (
-    <section className="relative w-full pt-28 pb-20 px-6 bg-transparent text-bright-ink overflow-hidden">
+    <section
+      onMouseEnter={() => setTrailActive(true)}
+      onMouseLeave={() => setTrailActive(false)}
+      className="relative w-full pt-28 pb-20 px-6 bg-transparent text-bright-ink overflow-hidden"
+    >
       {/* Background Decorative Playful Blobs */}
       <div className="absolute top-10 left-1/4 w-96 h-96 bg-bright-sun/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-bright-coral/15 rounded-full blur-3xl pointer-events-none" />
@@ -122,6 +130,9 @@ export function Hero() {
           <span>✦ DELHI NCR CRAFTED</span>
         </div>
       </div>
+
+      {/* Shoe Cursor Trail — active only while hovering the hero section */}
+      <ShoeCursorTrail enabled={trailActive} />
     </section>
   );
 }

@@ -151,6 +151,10 @@ export function CartDrawer() {
             cart.lines.map((line) => {
               const productImg = getProductPrimaryImage(line.merchandise.product);
               const productHandle = line.merchandise.product.handle || line.merchandise.product.id;
+              const lineStock = line.merchandise.product.variants?.find(
+                (v) => v.id === line.merchandise.id
+              )?.stock;
+              const atLineStockLimit = typeof lineStock === 'number' && line.quantity >= lineStock;
 
               return (
                 <div key={line.id} className="py-4 flex gap-4 items-start group">
@@ -210,8 +214,16 @@ export function CartDrawer() {
                         </span>
                         <button
                           type="button"
-                          onClick={() => updateItem(line.id, line.quantity + 1)}
-                          className="w-6 h-6 rounded-full flex items-center justify-center text-bright-muted hover:text-bright-ink hover:bg-bright-card transition-all text-xs font-bold"
+                          onClick={() => {
+                            if (atLineStockLimit) return;
+                            updateItem(line.id, line.quantity + 1);
+                          }}
+                          disabled={atLineStockLimit}
+                          className={`w-6 h-6 rounded-full flex items-center justify-center text-bright-muted transition-all text-xs font-bold ${
+                            atLineStockLimit
+                              ? "opacity-40 cursor-not-allowed"
+                              : "hover:text-bright-ink hover:bg-bright-card"
+                          }`}
                           aria-label="Increase quantity"
                         >
                           <Plus className="w-3 h-3" />

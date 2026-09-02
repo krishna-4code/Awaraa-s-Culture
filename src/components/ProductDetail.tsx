@@ -63,16 +63,19 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
   }, [cart?.lines, activeVariant]);
 
   const inCartQty = activeCartLine ? activeCartLine.quantity : 0;
+  // Inventory cap for the active variant (unlimited when stock is unknown)
+  const activeStock = typeof activeVariant?.stock === 'number' ? activeVariant.stock : Number.POSITIVE_INFINITY;
+  const atStockLimit = inCartQty >= activeStock;
 
   const handleAddToCart = async () => {
-    if (!activeVariant || !activeVariant.available) return;
+    if (!activeVariant || !activeVariant.available || atStockLimit) return;
     await addItem(activeVariant.id, 1, false, product, activeVariant);
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 1800);
   };
 
   const handleIncrement = async () => {
-    if (!activeVariant) return;
+    if (!activeVariant || atStockLimit) return;
     if (activeCartLine) {
       await updateItem(activeCartLine.id, activeCartLine.quantity + 1);
     } else {
@@ -323,7 +326,12 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     <button
                       type="button"
                       onClick={handleIncrement}
-                      className="w-8 h-8 rounded-full bg-bright-amber hover:bg-bright-ink text-white flex items-center justify-center text-xs font-bold transition-all active:scale-90"
+                      disabled={atStockLimit}
+                      className={`w-8 h-8 rounded-full bg-bright-amber text-white flex items-center justify-center text-xs font-bold transition-all active:scale-90 ${
+                        atStockLimit
+                          ? "opacity-40 cursor-not-allowed"
+                          : "hover:bg-bright-ink"
+                      }`}
                       aria-label="Increase quantity in cart"
                     >
                       <Plus className="w-3.5 h-3.5" />
@@ -335,10 +343,15 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                   <button
                     type="button"
                     onClick={handleAddToCart}
-                    className="py-3.5 px-4 font-sans font-bold uppercase tracking-wider text-xs rounded-full border border-bright-ink/20 hover:border-bright-ink hover:bg-bright-ink hover:text-white transition-all duration-200 flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
+                    disabled={atStockLimit}
+                    className={`py-3.5 px-4 font-sans font-bold uppercase tracking-wider text-xs rounded-full border border-bright-ink/20 transition-all duration-200 flex items-center justify-center gap-1.5 shadow-sm active:scale-95 ${
+                      atStockLimit
+                        ? "border-bright-ink/10 text-bright-muted cursor-not-allowed"
+                        : "hover:border-bright-ink hover:bg-bright-ink hover:text-white"
+                    }`}
                   >
                     <Plus className="w-3.5 h-3.5" />
-                    <span>Add Another</span>
+                    <span>{atStockLimit ? "Stock Limit Reached" : "Add Another"}</span>
                   </button>
 
                   <button
