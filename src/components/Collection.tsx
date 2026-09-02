@@ -616,7 +616,6 @@ export function Collection({
               Meet The{" "}
               <MarkerUnderline
                 text="SQUAD"
-                annotation="Select Kicks"
                 strokeColor="#88C057"
               />
             </h2>
