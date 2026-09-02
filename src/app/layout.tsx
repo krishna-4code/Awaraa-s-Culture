@@ -4,6 +4,7 @@ import "./globals.css";
 import { CartProvider } from "@/components/CartContext";
 import { CartDrawer } from "@/components/CartDrawer";
 import { FloatingShoeParticles } from "@/components/FloatingShoeParticles";
+import { BRAND_NAME, BRAND_NAME_ALT, BRAND_TAGLINE, BRAND_DESCRIPTION } from "@/lib/constants";
 import { SITE_URL } from "@/lib/site";
 
 const syne = Syne({
@@ -39,25 +40,25 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Awaraa's Culture",
-    template: "%s — Awaraa's Culture"
+    default: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+    template: `%s — ${BRAND_NAME}`,
   },
-  description: "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
+  description: BRAND_DESCRIPTION,
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "Awaraa's Culture — Street-Tested Footwear, Zero Hype Markups",
-    description: "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
+    title: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+    description: BRAND_DESCRIPTION,
     url: SITE_URL,
-    siteName: "Awaraa's Culture",
+    siteName: BRAND_NAME,
     locale: 'en_IN',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Awaraa's Culture — Street-Tested Footwear, Zero Hype Markups",
-    description: "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
+    title: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+    description: BRAND_DESCRIPTION,
   }
 };
 
@@ -98,23 +99,23 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@graph": [
                 {
-                  "@type": "Organization",
-                  "@id": `${SITE_URL}/#organization`,
-                  "name": "Awaraa's Culture",
-                  "url": SITE_URL,
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": `${SITE_URL}/logo.jpeg`
-                  }
-                },
-                {
                   "@type": "WebSite",
                   "@id": `${SITE_URL}/#website`,
-                  "url": SITE_URL,
-                  "name": "Awaraa's Culture",
+                  "name": BRAND_NAME,
+                  "alternateName": BRAND_NAME_ALT,
+                  "url": `${SITE_URL}/`,
                   "publisher": {
                     "@id": `${SITE_URL}/#organization`
                   }
+                },
+                {
+                  "@type": "OnlineStore",
+                  "@id": `${SITE_URL}/#organization`,
+                  "name": BRAND_NAME,
+                  "alternateName": BRAND_NAME_ALT,
+                  "url": `${SITE_URL}/`,
+                  "logo": `${SITE_URL}/logo.png`,
+                  "sameAs": ["[[INSTAGRAM_URL_ONCE_CREATED]]"]
                 }
               ]
             })

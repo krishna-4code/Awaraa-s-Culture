@@ -2,10 +2,14 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Instagram, MapPin, Truck } from 'lucide-react';
 import { INSTAGRAM_CONFIG } from '@/lib/config/instagram';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
   description: "Reach Awaraa's Culture on Instagram for sizing help, stock availability, and order support. Delhi NCR footwear — direct DM ordering, honest responses.",
+  alternates: {
+    canonical: `${SITE_URL}/contact`,
+  },
 };
 
 export default function ContactPage() {

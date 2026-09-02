@@ -47,8 +47,8 @@ export function formatCurrencyINR(amount: number): string {
  * Order Ref: AW-8F42K
  *
  * ITEMS
- * • NB Sports — Size 9 (White) — Qty 1 — ₹1,099
- * • LV Sneakers — Size 8 (White/Black) — Qty 1 — ₹1,099
+ * • Aero Tide — Size 9 (White) — Qty 1 — ₹1,099
+ * • Shadow Crest — Size 8 (White/Black) — Qty 1 — ₹1,099
  *
  * Subtotal: ₹2,298
  * Total: ₹2,298

@@ -56,7 +56,7 @@ export function Hero() {
         {/* Layered CPG Product Card Entrance */}
         <div className="w-full max-w-4xl relative">
           <Link
-            href="/products/nb-sports"
+            href="/products/aero-tide"
             className="cpg-card cpg-card-diecut shadow-[0_20px_50px_rgba(17,24,39,0.06)] overflow-hidden relative group border border-bright-ink/15 block"
           >
             {/* Card Background Pattern */}
@@ -69,7 +69,7 @@ export function Hero() {
                   Featured Kick
                 </span>
                 <h2 className="font-display font-bold text-3xl md:text-4xl text-bright-ink mb-2 group-hover:text-bright-amber transition-colors">
-                  NB Sports
+                  Aero Tide
                 </h2>
                 <p className="font-sans text-sm text-bright-muted mb-4 leading-relaxed">
                   Technical breathable sport mesh with high-rebound molded EVA foam midsole for all-day urban movement.
@@ -88,14 +88,14 @@ export function Hero() {
               <div className="relative w-64 h-64 flex items-center justify-center bg-bright-sun/30 rounded-full border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden">
                 <Image
                   src="/shoes/nb_sports/1.png"
-                  alt="NB Sports Featured Kick"
+                  alt="Aero Tide Featured Kick"
                   fill
                   priority
                   sizes="256px"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute bottom-3 bg-bright-amber/95 text-white text-xs font-accent font-bold px-3 py-1 rounded-full shadow-md">
-                  NB Sports
+                  Aero Tide
                 </div>
               </div>
 

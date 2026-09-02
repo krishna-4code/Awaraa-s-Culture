@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
+import { BRAND_NAME, BRAND_TAGLINE } from '@/lib/constants';
  
-export const alt = 'Awaraa\'s Culture — Your Feet Deserve to Look Premium.';
+export const alt = `${BRAND_NAME} — ${BRAND_TAGLINE}`;
 export const size = {
   width: 1200,
   height: 630,
@@ -25,25 +26,27 @@ export default async function Image() {
       >
         <div
           style={{
-            fontSize: 96,
+            fontSize: 88,
             fontFamily: 'sans-serif',
             fontWeight: 'bold',
-            letterSpacing: '0.1em',
+            letterSpacing: '0.05em',
             textTransform: 'uppercase',
+            color: '#FFFFFF',
           }}
         >
-          Awaraa&apos;s Culture
+          {BRAND_NAME}
         </div>
         <div
           style={{
             fontSize: 32,
             fontFamily: 'sans-serif',
-            marginTop: 40,
-            opacity: 0.8,
+            marginTop: 32,
+            color: '#FF5E1E', // bright amber
             letterSpacing: '0.05em',
+            fontWeight: 600,
           }}
         >
-          Your Feet Deserve to Look Premium.
+          {BRAND_TAGLINE}
         </div>
       </div>
     ),

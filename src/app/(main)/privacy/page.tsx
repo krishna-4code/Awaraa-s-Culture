@@ -1,9 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: "Awaraa's Culture Privacy Policy — how we collect, use, and protect your personal data for order fulfilment under India's DPDPA. No data sold to third parties.",
+  alternates: {
+    canonical: `${SITE_URL}/privacy`,
+  },
 };
 
 export default function PrivacyPage() {

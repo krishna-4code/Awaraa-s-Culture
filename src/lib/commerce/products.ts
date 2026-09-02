@@ -57,8 +57,11 @@ const ALL_PRODUCTS_QUERY = `
 `;
 
 function mapSanityProduct(doc: any): CommerceProduct {
-  const handle = doc.handle || doc._id || 'unknown';
-  const mockFallback = findMockProduct(handle) || findMockProduct(doc.name);
+  const rawHandle = doc.handle || doc._id || 'unknown';
+  const mockFallback = findMockProduct(rawHandle) || findMockProduct(doc.name);
+
+  const handle = mockFallback?.handle || rawHandle;
+  const name = mockFallback?.name || doc.name;
 
   let images = (doc.images || []).map((img: any) => {
     let url = '';
@@ -69,12 +72,12 @@ function mapSanityProduct(doc: any): CommerceProduct {
     }
     return {
       url: url,
-      altText: img?.alt || doc.name || 'Product Image',
+      altText: img?.alt || name || 'Product Image',
     };
   }).filter((img: { url: string }) => Boolean(img.url));
 
   if (images.length === 0) {
-    images = getProductGalleryImages({ handle, name: doc.name, id: doc._id });
+    images = getProductGalleryImages({ handle, name, id: doc._id });
   }
 
   const variants = (doc.variants || []).map((v: any) => {
@@ -107,7 +110,7 @@ function mapSanityProduct(doc: any): CommerceProduct {
 
   const formattedPrice = typeof doc.price === 'number'
     ? `₹${doc.price.toLocaleString('en-IN')}`
-    : doc.price || '₹2,999';
+    : doc.price || mockFallback?.price || '₹2,999';
 
   return {
     // Use handle as canonical ID (not Sanity's _id) so cart matching is always consistent
@@ -115,16 +118,16 @@ function mapSanityProduct(doc: any): CommerceProduct {
     handle: handle,
     // _sanityId is the actual Sanity document _id — used by inventory operations
     _sanityId: doc._id,
-    name: doc.name,
+    name: name,
     price: formattedPrice,
-    description: doc.description || '',
-    materials: doc.materials || ['Full-grain leather', 'Dual-density EVA midsole', 'Rubber outsole'],
+    description: mockFallback?.description || doc.description || '',
+    materials: doc.materials || mockFallback?.materials || ['Full-grain leather', 'Dual-density EVA midsole', 'Rubber outsole'],
     variants,
     images,
     shippingPolicy: doc.shippingPolicy || 'Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.',
     returnPolicy: doc.returnPolicy || '14-day returns for unworn products.',
     careInstructions: doc.careInstructions || 'Wipe clean with a damp cloth. Avoid direct heat.',
-    collectionSlug: doc.collectionSlug,
+    collectionSlug: doc.collectionSlug || mockFallback?.collectionSlug,
   };
 }
 

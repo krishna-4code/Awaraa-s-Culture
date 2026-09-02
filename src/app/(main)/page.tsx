@@ -3,12 +3,16 @@ import { BrandStory } from "@/components/BrandStory";
 import { Craft } from "@/components/Craft";
 import { Collection } from "@/components/Collection";
 import { Community } from "@/components/Community";
-import { getProducts, getCollection } from "@/lib/commerce";
+import { getProducts } from "@/lib/commerce/products";
+import { getCollection } from "@/lib/commerce/collections";
+import { BRAND_NAME, BRAND_TAGLINE, BRAND_DESCRIPTION } from "@/lib/constants";
 
 export const metadata = {
-  title: { absolute: "Awaraa's Culture" },
-  description:
-    "Awaraa's Culture crafts honest, street-tested footwear for Delhi NCR — real comfort, zero hype markups, built for daily movement. Wander without limits.",
+  title: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+  description: BRAND_DESCRIPTION,
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default async function Home() {

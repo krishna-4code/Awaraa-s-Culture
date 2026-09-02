@@ -56,7 +56,7 @@ export function BrandStory() {
           <Link href="/#squad" className="block absolute top-0 left-0 w-[65%] h-[65%] rounded-2xl overflow-hidden shadow-lg border-4 border-white z-20 hover:scale-105 transition-transform duration-300" aria-label="Explore the squad">
             <Image
               src="/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png"
-              alt="Awaraa's Culture SB Dunks in motion"
+              alt="Awaraa's Culture Cocoa Drift in motion"
               fill
               sizes="(max-width: 1024px) 60vw, 600px"
               className="object-cover"
@@ -67,7 +67,7 @@ export function BrandStory() {
           <Link href="/#squad" className="block absolute top-8 right-0 w-[48%] h-[50%] rounded-2xl overflow-hidden shadow-md border-4 border-white z-10 hover:scale-105 transition-transform duration-300" aria-label="Explore the squad">
             <Image
               src="/shoes/nb_sports/1.png"
-              alt="NB Sports craftsmanship detail"
+              alt="Aero Tide craftsmanship detail"
               fill
               sizes="(max-width: 1024px) 45vw, 440px"
               className="object-cover"
@@ -78,7 +78,7 @@ export function BrandStory() {
           <Link href="/#squad" className="block absolute bottom-0 left-[10%] w-[55%] h-[50%] rounded-2xl overflow-hidden shadow-lg border-4 border-white z-30 hover:scale-105 transition-transform duration-300" aria-label="Explore the squad">
             <Image
               src="/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png"
-              alt="Waffle Brown urban footwear in Delhi NCR"
+              alt="Earthline urban footwear in Delhi NCR"
               fill
               sizes="(max-width: 1024px) 55vw, 520px"
               className="object-cover"

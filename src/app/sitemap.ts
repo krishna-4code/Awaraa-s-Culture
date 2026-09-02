@@ -1,33 +1,45 @@
 import { MetadataRoute } from 'next';
 import { getProducts } from '@/lib/commerce/products';
+import { getCollection } from '@/lib/commerce/collections';
 import { SITE_URL } from '@/lib/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const products = await getProducts();
+  const [products, collections] = await Promise.all([
+    getProducts(),
+    getCollection(),
+  ]);
 
-  // Real product routes based on live Sanity handles
-  const productRoutes = products.map((p) => ({
+  // Real product routes based on live Sanity handles / catalog
+  const productRoutes: MetadataRoute.Sitemap = products.map((p) => ({
     url: `${SITE_URL}/products/${p.handle}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }));
+
+  // Collection / Category routes
+  const collectionRoutes: MetadataRoute.Sitemap = collections.map((c) => ({
+    url: `${SITE_URL}/collections/${c.handle}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
     priority: 0.8,
   }));
 
-  // Only routes with a real, functioning, indexable content page behind them.
-  // Utility pages (/cart, /login) are intentionally excluded — /login has
-  // noindex metadata and /cart is a client-only user-session page.
-  // Every URL here must return HTTP 200.
-  const staticRoutes = [
-    '',
-    '/privacy',
-    '/terms',
-    '/contact',
-  ].map((route) => ({
+  // Public indexable content & legal routes.
+  // Private / utility pages (/cart, /login, /admin, /studio) are intentionally excluded.
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { route: '', priority: 1.0, changeFrequency: 'daily' as const },
+    { route: '/contact', priority: 0.6, changeFrequency: 'monthly' as const },
+    { route: '/shipping', priority: 0.6, changeFrequency: 'monthly' as const },
+    { route: '/returns', priority: 0.6, changeFrequency: 'monthly' as const },
+    { route: '/privacy', priority: 0.5, changeFrequency: 'monthly' as const },
+    { route: '/terms', priority: 0.5, changeFrequency: 'monthly' as const },
+  ].map(({ route, priority, changeFrequency }) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1.0 : 0.6,
+    changeFrequency,
+    priority,
   }));
 
-  return [...staticRoutes, ...productRoutes];
+  return [...staticRoutes, ...collectionRoutes, ...productRoutes];
 }

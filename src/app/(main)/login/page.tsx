@@ -1,9 +1,14 @@
 import { Suspense } from 'react'
 import { AuthForm } from './AuthForm'
+import { BRAND_NAME } from '@/lib/constants'
 
 export const metadata = {
-  title: "Account & Sign In | Awaraa's Culture",
+  title: `Account & Sign In | ${BRAND_NAME}`,
   description: "Sign in or create an account to access your curated streetwear orders and exclusive drops.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function LoginPage() {

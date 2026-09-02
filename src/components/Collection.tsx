@@ -27,185 +27,185 @@ export interface ShoeCardProduct {
 
 const FALLBACK_PRODUCTS: ShoeCardProduct[] = [
   {
-    id: "nb-sports",
-    title: "NB Sports",
-    handle: "nb-sports",
+    id: "aero-tide",
+    title: "Aero Tide",
+    handle: "aero-tide",
     category: "daily-walkers",
     tag: "Featured Kick",
     spec: "High-Rebound Molded EVA",
-    desc: "Athletic lifestyle runner engineered with lightweight breathable mesh and grip.",
+    desc: "White performance runner with aqua sculpted sole, lightweight breathable mesh, and multi-surface grip.",
     price: "1,099",
     image: "/shoes/nb_sports/1.png",
     images: [
       {
         url: "/shoes/nb_sports/1.png",
-        altText: "NB Sports - Angle 1"
+        altText: "Aero Tide - Angle 1"
       },
       {
         url: "/shoes/nb_sports/2.jpeg",
-        altText: "NB Sports - Angle 2"
+        altText: "Aero Tide - Angle 2"
       },
       {
         url: "/shoes/nb_sports/3.jpeg",
-        altText: "NB Sports - Angle 3"
+        altText: "Aero Tide - Angle 3"
       },
       {
         url: "/shoes/nb_sports/4.jpeg",
-        altText: "NB Sports - Angle 4"
+        altText: "Aero Tide - Angle 4"
       }
     ],
     badgeColor: "bg-bright-amber text-white",
   },
   {
-    id: "sb-dunks",
-    title: "SB Dunks",
-    handle: "sb-dunks",
+    id: "cocoa-drift",
+    title: "Cocoa Drift",
+    handle: "cocoa-drift",
     category: "street-kicks",
     tag: "Top Choice",
     spec: "Dual EVA Foam Sole",
-    desc: "Iconic streetwear silhouette engineered for all-day urban movement.",
+    desc: "Cream/off-white retro sneaker with dark brown side accent engineered for all-day urban movement.",
     price: "1,199",
     image: "/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png",
     images: [
       {
         url: "/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png",
-        altText: "SB Dunks - Front Hero View"
+        altText: "Cocoa Drift - Front Hero View"
       },
       {
         url: "/shoes/dunks/WhatsApp Image 2026-08-18 at 6.51.46 PM.jpeg",
-        altText: "SB Dunks - Studio Angle"
+        altText: "Cocoa Drift - Studio Angle"
       },
       {
         url: "/shoes/dunks/WhatsApp Image 2026-08-18 at 6.51.46 PM (1).jpeg",
-        altText: "SB Dunks - Side Profile"
+        altText: "Cocoa Drift - Side Profile"
       }
     ],
     badgeColor: "bg-bright-lime text-white",
   },
   {
-    id: "nb-sneakers",
-    title: "NB Sneakers",
-    handle: "nb-sneakers",
+    id: "dune-runner",
+    title: "Dune Runner",
+    handle: "dune-runner",
     category: "street-kicks",
     tag: "New Edition",
     spec: "Dual-Density EVA Midsole",
-    desc: "Street-forward retro athletic runner with dual-tone paneled leather.",
+    desc: "Cream/white retro low-top with grey suede overlays, gum sole, and dual-tone paneled leather.",
     price: "1,149",
     image: "/shoes/nb_sneakers/1.png",
     images: [
       {
         url: "/shoes/nb_sneakers/1.png",
-        altText: "NB Sneakers - Hero Angle"
+        altText: "Dune Runner - Hero Angle"
       }
     ],
     badgeColor: "bg-bright-coral text-white",
   },
   {
-    id: "waffle-brown",
-    title: "Waffle Brown",
-    handle: "waffle-brown",
+    id: "earthline",
+    title: "Earthline",
+    handle: "earthline",
     category: "street-kicks",
     tag: "Daily Essential",
     spec: "Waffle Lug Traction Sole",
-    desc: "Heritage runner styling reimagined in rich earthy tones with breathable mesh.",
+    desc: "Tan/brown retro sneaker with dark swoosh-like side accent, rich earthy suede, and gum sole.",
     price: "1,399",
     image: "/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png",
     images: [
       {
         url: "/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png",
-        altText: "Waffle Brown - Hero Profile"
+        altText: "Earthline - Hero Profile"
       }
     ],
     badgeColor: "bg-bright-amber text-white",
   },
   {
-    id: "lv-sneakers",
-    title: "LV Sneakers",
-    handle: "lv-sneakers",
+    id: "shadow-crest",
+    title: "Shadow Crest",
+    handle: "shadow-crest",
     category: "street-kicks",
     tag: "Premium Finish",
     spec: "Microfiber Leather Cupsole",
-    desc: "High-end urban fashion sneaker blending runway aesthetics with robust comfort.",
+    desc: "Black/grey low-top with suede overlays and chunky classic sole blending runway aesthetics with street comfort.",
     price: "1,099",
     image: "/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.46 PM.jpeg",
     images: [
       {
         url: "/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.46 PM.jpeg",
-        altText: "LV Sneakers - Studio View"
+        altText: "Shadow Crest - Studio View"
       },
       {
         url: "/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.47 PM.jpeg",
-        altText: "LV Sneakers - Side Profile"
+        altText: "Shadow Crest - Side Profile"
       },
       {
         url: "/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.47 PM (1).jpeg",
-        altText: "LV Sneakers - Detail Angle"
+        altText: "Shadow Crest - Detail Angle"
       }
     ],
     badgeColor: "bg-bright-coral text-white",
   },
   {
-    id: "sports",
-    title: "Sports",
-    handle: "sports",
+    id: "moss-velocity",
+    title: "Moss Velocity",
+    handle: "moss-velocity",
     category: "daily-walkers",
     tag: "Comfort Series",
     spec: "Ultra-Light Flexible EVA",
-    desc: "Ultra-lightweight everyday runner designed for daily commute and zero fatigue.",
+    desc: "Sage/olive green performance runner with futuristic sole designed for daily commute and zero fatigue wear.",
     price: "999",
     image: "/shoes/sports/1.jpeg",
     images: [
       {
         url: "/shoes/sports/1.jpeg",
-        altText: "Sports - Angle 1"
+        altText: "Moss Velocity - Angle 1"
       },
       {
         url: "/shoes/sports/2.jpeg",
-        altText: "Sports - Angle 2"
+        altText: "Moss Velocity - Angle 2"
       },
       {
         url: "/shoes/sports/3.jpeg",
-        altText: "Sports - Angle 3"
+        altText: "Moss Velocity - Angle 3"
       },
       {
         url: "/shoes/sports/4.jpeg",
-        altText: "Sports - Angle 4"
+        altText: "Moss Velocity - Angle 4"
       }
     ],
     badgeColor: "bg-bright-lime text-white",
   },
   {
-    id: "sketchers-sports",
-    title: "Sketchers Sports",
-    handle: "sketchers-sports",
+    id: "sand-drift",
+    title: "Sand Drift",
+    handle: "sand-drift",
     category: "daily-walkers",
     tag: "Plush Cushion",
     spec: "Segmented EVA Midsole",
-    desc: "Plush all-day walking shoe featuring high-rebound cushioning and responsive arch support.",
+    desc: "Beige/cream lightweight running shoe with white cushioned sole, high-rebound cushioning, and arch support.",
     price: "1,479",
     image: "/shoes/sketchers/Gemini_Generated_Image_iptr9iptr9iptr9i.png",
     images: [
       {
         url: "/shoes/sketchers/Gemini_Generated_Image_iptr9iptr9iptr9i.png",
-        altText: "Sketchers Sports - Hero View"
+        altText: "Sand Drift - Hero View"
       }
     ],
     badgeColor: "bg-bright-amber text-white",
   },
   {
-    id: "brooks",
-    title: "Brooks",
-    handle: "brooks",
+    id: "midnight-flow",
+    title: "Midnight Flow",
+    handle: "midnight-flow",
     category: "daily-walkers",
     tag: "Endurance Series",
     spec: "Bio-Cushioned Road Sole",
-    desc: "High-performance endurance walking shoe with structured heel stabilizer.",
+    desc: "Black performance runner with blue accent, chunky white cushioning, and structured heel stabilizer.",
     price: "1,349",
     image: "/shoes/brooks/Gemini_Generated_Image_7ol72i7ol72i7ol7.png",
     images: [
       {
         url: "/shoes/brooks/Gemini_Generated_Image_7ol72i7ol72i7ol7.png",
-        altText: "Brooks - Hero Studio Angle"
+        altText: "Midnight Flow - Hero Studio Angle"
       }
     ],
     badgeColor: "bg-bright-coral text-white",

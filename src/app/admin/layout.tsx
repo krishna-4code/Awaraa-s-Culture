@@ -7,9 +7,10 @@
  */
 
 import type { Metadata } from 'next'
+import { BRAND_NAME } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: "Admin — Awaraa's Culture",
+  title: `Admin — ${BRAND_NAME}`,
   robots: 'noindex, nofollow',  // Never index admin pages
 }
 

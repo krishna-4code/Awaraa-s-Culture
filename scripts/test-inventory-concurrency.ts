@@ -41,8 +41,8 @@ const orderParams1: CreateOrderParams = {
   channel: 'WEBSITE',
   customer: { name: 'Customer A', contact: 'custA@test.com' },
   items: [{
-    productId: 'product-nb-sports',
-    productName: 'NB Sports',
+    productId: 'product-aero-tide',
+    productName: 'Aero Tide',
     variantKey: '9-midnight-black',
     size: 'UK 9',
     color: 'Midnight Black',

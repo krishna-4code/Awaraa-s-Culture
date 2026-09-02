@@ -7,6 +7,7 @@ import { Feather, Clock, ShieldCheck, ShoppingBag, ArrowRight, Check, Plus, Minu
 import { CommerceProduct, CommerceVariant } from "@/lib/commerce/types";
 import { useCart } from "@/components/CartContext";
 import { getProductGalleryImages } from "@/lib/commerce/productImages";
+import { BRAND_NAME } from "@/lib/constants";
 import { SITE_URL } from "@/lib/site";
 
 export function ProductDetail({ product }: { product: CommerceProduct }) {
@@ -153,17 +154,31 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
         <div className="w-full md:w-2/5 p-6 md:p-16 flex flex-col sticky top-16 h-fit">
 
           {/* Breadcrumb */}
-          <Link
-            href="/#squad"
-            className="font-sans text-xs font-semibold uppercase tracking-widest text-bright-muted hover:text-bright-amber transition-colors duration-200 mb-6 inline-flex items-center gap-1"
-          >
-            ← Back to The Squad
-          </Link>
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-bright-muted">
+              <Link href="/" className="hover:text-bright-amber transition-colors">
+                Home
+              </Link>
+              <span>/</span>
+              <Link
+                href={product.collectionSlug ? `/collections/${product.collectionSlug}` : "/#squad"}
+                className="hover:text-bright-amber transition-colors"
+              >
+                {product.collectionSlug
+                  ? product.collectionSlug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+                  : "The Squad"}
+              </Link>
+              <span>/</span>
+              <span className="text-bright-ink font-bold truncate max-w-[160px] sm:max-w-none">
+                {product.name}
+              </span>
+            </div>
+          </nav>
 
           {/* Product Name & Price */}
           <div className="flex flex-col gap-2 mb-6">
             <span className="font-sans text-xs uppercase tracking-widest text-bright-amber font-bold">
-              ✦ Awaraa&apos;s Culture
+              ✦ {BRAND_NAME}
             </span>
             <h1 className="font-display font-extrabold text-4xl md:text-5xl uppercase tracking-tight text-bright-ink leading-tight">
               {product.name}
@@ -438,6 +453,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
             "@graph": [
               {
                 "@type": "BreadcrumbList",
+                "@id": `${SITE_URL}/products/${product.handle}#breadcrumb`,
                 "itemListElement": [
                   {
                     "@type": "ListItem",
@@ -445,25 +461,83 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     "name": "Home",
                     "item": SITE_URL
                   },
-                  {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": product.name,
-                    "item": `${SITE_URL}/products/${product.handle}`
-                  }
+                  ...(product.collectionSlug
+                    ? [
+                        {
+                          "@type": "ListItem",
+                          "position": 2,
+                          "name": product.collectionSlug
+                            .replace(/-/g, " ")
+                            .replace(/\b\w/g, (c) => c.toUpperCase()),
+                          "item": `${SITE_URL}/collections/${product.collectionSlug}`
+                        },
+                        {
+                          "@type": "ListItem",
+                          "position": 3,
+                          "name": product.name,
+                          "item": `${SITE_URL}/products/${product.handle}`
+                        }
+                      ]
+                    : [
+                        {
+                          "@type": "ListItem",
+                          "position": 2,
+                          "name": product.name,
+                          "item": `${SITE_URL}/products/${product.handle}`
+                        }
+                      ])
                 ]
               },
               {
                 "@type": "Product",
+                "@id": `${SITE_URL}/products/${product.handle}#product`,
                 "name": product.name,
-                "description": product.description,
-                "image": images[0]?.url,
+                "description": product.description || `${product.name} from ${BRAND_NAME}. Street-tested footwear crafted for Delhi NCR.`,
+                "image": images.map((img) => (img.url.startsWith("http") ? img.url : `${SITE_URL}${img.url}`)),
+                "brand": {
+                  "@type": "Brand",
+                  "name": BRAND_NAME
+                },
+                "sku": product.handle,
                 "offers": {
                   "@type": "Offer",
-                  "price": product.price.replace(/[^0-9.]/g, ''),
+                  "price": product.price.replace(/[^0-9.]/g, ""),
                   "priceCurrency": "INR",
                   "availability": activeVariant?.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-                  "url": `${SITE_URL}/products/${product.handle}`
+                  "url": `${SITE_URL}/products/${product.handle}`,
+                  "itemCondition": "https://schema.org/NewCondition",
+                  "seller": {
+                    "@id": `${SITE_URL}/#organization`
+                  },
+                  "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": "IN",
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                    "merchantReturnDays": 14,
+                    "returnMethod": "https://schema.org/ReturnByMail",
+                    "returnFees": "https://schema.org/FreeReturn"
+                  },
+                  "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                      "@type": "MonetaryAmount",
+                      "value": "100",
+                      "currency": "INR"
+                    },
+                    "shippingDestination": {
+                      "@type": "DefinedRegion",
+                      "addressCountry": "IN"
+                    },
+                    "deliveryTime": {
+                      "@type": "ShippingDeliveryTime",
+                      "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 1,
+                        "maxValue": 3,
+                        "unitCode": "DAY"
+                      }
+                    }
+                  }
                 }
               }
             ]

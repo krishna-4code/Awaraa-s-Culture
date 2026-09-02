@@ -51,22 +51,30 @@ export async function getCollection(): Promise<CommerceCollection[]> {
       id: "daily-walkers", 
       handle: "daily-walkers",
       title: "Daily Walkers", 
-      description: "Built for the daily commute and beyond. Lightweight EVA cushioning.",
+      description: "Built for the daily commute and beyond. Lightweight EVA cushioning and effortless movement for everyday routines.",
       imageUrl: "/shoes/nb_sports/1.png"
     },
     { 
       id: "street-kicks", 
       handle: "street-kicks",
       title: "Street Kicks", 
-      description: "Low-profile street silhouette crafted for NCR pavement.",
+      description: "Low-profile street silhouettes crafted for NCR pavement. Bold styling, durable materials, and zero hype markups.",
       imageUrl: "/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png"
     },
     { 
       id: "terrain-comfort", 
       handle: "terrain-comfort",
       title: "Terrain Comfort", 
-      description: "High-top stability with ergonomic heel cushion.",
+      description: "Ergonomic heel cushion and rugged traction built for diverse urban paths and extended exploration.",
       imageUrl: "/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png"
     }
   ];
 }
+
+export async function getCollectionByHandle(handle: string): Promise<CommerceCollection | null> {
+  const collections = await getCollection();
+  const normalized = handle.toLowerCase().trim();
+  const found = collections.find((c) => c.handle.toLowerCase() === normalized || c.id.toLowerCase() === normalized);
+  return found || null;
+}
+

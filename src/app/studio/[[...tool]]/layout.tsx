@@ -1,6 +1,12 @@
+import { BRAND_NAME } from '@/lib/constants'
+
 export const metadata = {
   title: 'Sanity Studio',
-  description: "Sanity Studio for Awaraa's Culture",
+  description: `Sanity Studio for ${BRAND_NAME}`,
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function StudioLayout({

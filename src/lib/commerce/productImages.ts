@@ -12,39 +12,39 @@ export interface ProductImageItem {
 }
 
 export const SHOE_GALLERIES: Record<string, ProductImageItem[]> = {
-  'sketchers-sports': [
-    { url: '/shoes/sketchers/Gemini_Generated_Image_iptr9iptr9iptr9i.png', altText: 'Sketchers Sports - Hero View' }
+  'sand-drift': [
+    { url: '/shoes/sketchers/Gemini_Generated_Image_iptr9iptr9iptr9i.png', altText: "Awaraa's Culture Sand Drift running shoe in beige/cream, white cushioned sole" }
   ],
-  'nb-sports': [
-    { url: '/shoes/nb_sports/1.png', altText: 'NB Sports - Angle 1' },
-    { url: '/shoes/nb_sports/2.jpeg', altText: 'NB Sports - Angle 2' },
-    { url: '/shoes/nb_sports/3.jpeg', altText: 'NB Sports - Angle 3' },
-    { url: '/shoes/nb_sports/4.jpeg', altText: 'NB Sports - Angle 4' }
+  'aero-tide': [
+    { url: '/shoes/nb_sports/1.png', altText: "Awaraa's Culture Aero Tide performance runner in white with aqua sculpted sole, hero profile" },
+    { url: '/shoes/nb_sports/2.jpeg', altText: "Awaraa's Culture Aero Tide runner, high-rebound EVA sole detail angle" },
+    { url: '/shoes/nb_sports/3.jpeg', altText: "Awaraa's Culture Aero Tide runner, breathable mesh toe box top angle" },
+    { url: '/shoes/nb_sports/4.jpeg', altText: "Awaraa's Culture Aero Tide runner, heel support and tread grip angle" }
   ],
-  'nb-sneakers': [
-    { url: '/shoes/nb_sneakers/1.png', altText: 'NB Sneakers - Hero Angle' }
+  'dune-runner': [
+    { url: '/shoes/nb_sneakers/1.png', altText: "Awaraa's Culture Dune Runner cream/white retro low-top, grey suede overlays, gum sole" }
   ],
-  'sb-dunks': [
-    { url: '/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png', altText: 'SB Dunks - Front Hero View' },
-    { url: '/shoes/dunks/WhatsApp Image 2026-08-18 at 6.51.46 PM.jpeg', altText: 'SB Dunks - Studio Angle' },
-    { url: '/shoes/dunks/WhatsApp Image 2026-08-18 at 6.51.46 PM (1).jpeg', altText: 'SB Dunks - Side Profile' }
+  'cocoa-drift': [
+    { url: '/shoes/dunks/Gemini_Generated_Image_upq1p1upq1p1upq1.png', altText: "Awaraa's Culture Cocoa Drift retro sneaker in cream/off-white with dark brown accent, front hero view" },
+    { url: '/shoes/dunks/WhatsApp Image 2026-08-18 at 6.51.46 PM.jpeg', altText: "Awaraa's Culture Cocoa Drift, studio angle" },
+    { url: '/shoes/dunks/WhatsApp Image 2026-08-18 at 6.51.46 PM (1).jpeg', altText: "Awaraa's Culture Cocoa Drift, side profile showing dual-density EVA outsole" }
   ],
-  'waffle-brown': [
-    { url: '/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png', altText: 'Waffle Brown - Hero Profile' }
+  'earthline': [
+    { url: '/shoes/waffel_brown/Gemini_Generated_Image_wosh4ywosh4ywosh.png', altText: "Awaraa's Culture Earthline tan/brown retro sneaker with dark swoosh-like side accent and gum sole" }
   ],
-  'lv-sneakers': [
-    { url: '/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.46 PM.jpeg', altText: 'LV Sneakers - Studio View' },
-    { url: '/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.47 PM.jpeg', altText: 'LV Sneakers - Side Profile' },
-    { url: '/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.47 PM (1).jpeg', altText: 'LV Sneakers - Detail Angle' }
+  'shadow-crest': [
+    { url: '/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.46 PM.jpeg', altText: "Awaraa's Culture Shadow Crest black/grey low-top, suede overlays, chunky classic sole" },
+    { url: '/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.47 PM.jpeg', altText: "Awaraa's Culture Shadow Crest, lateral side profile with monogram paneling" },
+    { url: '/shoes/lv/WhatsApp Image 2026-08-22 at 7.50.47 PM (1).jpeg', altText: "Awaraa's Culture Shadow Crest, close-up heel and cushioned cupsole angle" }
   ],
-  'brooks': [
-    { url: '/shoes/brooks/Gemini_Generated_Image_7ol72i7ol72i7ol7.png', altText: 'Brooks - Hero Studio Angle' }
+  'midnight-flow': [
+    { url: '/shoes/brooks/Gemini_Generated_Image_7ol72i7ol72i7ol7.png', altText: "Awaraa's Culture Midnight Flow black performance runner, blue accent, chunky white cushioning" }
   ],
-  'sports': [
-    { url: '/shoes/sports/1.jpeg', altText: 'Sports - Angle 1' },
-    { url: '/shoes/sports/2.jpeg', altText: 'Sports - Angle 2' },
-    { url: '/shoes/sports/3.jpeg', altText: 'Sports - Angle 3' },
-    { url: '/shoes/sports/4.jpeg', altText: 'Sports - Angle 4' }
+  'moss-velocity': [
+    { url: '/shoes/sports/1.jpeg', altText: "Awaraa's Culture Moss Velocity sage/olive green performance runner with futuristic sole" },
+    { url: '/shoes/sports/2.jpeg', altText: "Awaraa's Culture Moss Velocity runner, ultra-flexible EVA sole perspective" },
+    { url: '/shoes/sports/3.jpeg', altText: "Awaraa's Culture Moss Velocity runner, slip-on knit collar detail" },
+    { url: '/shoes/sports/4.jpeg', altText: "Awaraa's Culture Moss Velocity runner, rear traction grip angle" }
   ]
 };
 
@@ -53,41 +53,39 @@ function normalizeText(text?: string): string {
 }
 
 /**
- * Match specific shoe key without false substring collisions (e.g. 'sports' vs 'sketchers-sports').
+ * Match specific shoe key without false substring collisions (e.g. 'moss-velocity' vs 'aero-tide').
  */
 export function matchShoeKey(handleOrId: string, nameOrTitle: string): string | null {
   const h = normalizeText(handleOrId);
   const n = normalizeText(nameOrTitle);
 
-  // 1. Specific multi-word or distinct brand names first
-  if (h === 'sketchers-sports' || h === 'sketchers' || n.includes('sketcher') || n.includes('skecher')) {
-    return 'sketchers-sports';
+  // 1. Recommended Name & Handle matches
+  if (h === 'sand-drift' || n.includes('sand drift') || h === 'sketchers-sports' || h === 'skechers-sports' || h === 'sketchers' || h === 'skechers' || n.includes('sketcher') || n.includes('skecher')) {
+    return 'sand-drift';
   }
-  if (h === 'nb-sports' || (n.includes('nb') && n.includes('sport')) || n.includes('new balance sport')) {
-    return 'nb-sports';
+  if (h === 'aero-tide' || n.includes('aero tide') || h === 'nb-sports' || (n.includes('nb') && n.includes('sport')) || n.includes('new balance sport')) {
+    return 'aero-tide';
   }
-  if (h === 'nb-sneakers' || (n.includes('nb') && n.includes('sneaker')) || n.includes('new balance sneaker')) {
-    return 'nb-sneakers';
+  if (h === 'dune-runner' || n.includes('dune runner') || h === 'nb-sneakers' || (n.includes('nb') && n.includes('sneaker')) || n.includes('new balance sneaker')) {
+    return 'dune-runner';
   }
-  if (h === 'sb-dunks' || h === 'dunks' || n.includes('dunk')) {
-    return 'sb-dunks';
+  if (h === 'cocoa-drift' || n.includes('cocoa drift') || h === 'sb-dunks' || h === 'dunks' || n.includes('dunk')) {
+    return 'cocoa-drift';
   }
-  if (h === 'waffle-brown' || h.includes('waffel') || h.includes('waffle') || n.includes('waffle') || n.includes('waffel')) {
-    return 'waffle-brown';
+  if (h === 'earthline' || n.includes('earthline') || h === 'waffle-brown' || h.includes('waffel') || h.includes('waffle') || n.includes('waffle') || n.includes('waffel')) {
+    return 'earthline';
   }
-  if (h === 'lv-sneakers' || h === 'lv' || n.includes('lv') || n.includes('louis')) {
-    return 'lv-sneakers';
+  if (h === 'shadow-crest' || n.includes('shadow crest') || h === 'lv-sneakers' || h === 'lv' || n.includes('lv') || n.includes('louis')) {
+    return 'shadow-crest';
   }
-  if (h === 'brooks' || n.includes('brook')) {
-    return 'brooks';
+  if (h === 'midnight-flow' || n.includes('midnight flow') || h === 'brooks' || n.includes('brook')) {
+    return 'midnight-flow';
   }
-  
-  // 2. Pure standalone 'sports' only (when it is NOT Sketchers or NB)
-  if (h === 'sports' || n === 'sports' || n === 'sport' || n === 'daily sports') {
-    return 'sports';
+  if (h === 'moss-velocity' || n.includes('moss velocity') || h === 'sports' || n === 'sports' || n === 'sport' || n === 'daily sports') {
+    return 'moss-velocity';
   }
 
-  // 3. Exact key match fallback
+  // 2. Exact key match fallback
   for (const key of Object.keys(SHOE_GALLERIES)) {
     if (h === key) return key;
     const normalizedKey = key.replace(/[-_]/g, ' ');
@@ -108,7 +106,7 @@ export function getProductGalleryImages(product: {
   images?: Array<{ url: string; altText?: string }>;
   image?: string;
 } | null | undefined): ProductImageItem[] {
-  if (!product) return SHOE_GALLERIES['nb-sports'];
+  if (!product) return SHOE_GALLERIES['aero-tide'];
 
   const nameOrTitle = product.name || product.title || '';
   const handleOrId = product.handle || product.id || '';
@@ -150,7 +148,7 @@ export function getProductGalleryImages(product: {
     return [{ url: product.image, altText: product.name || product.title || 'Product Image' }];
   }
 
-  return SHOE_GALLERIES['nb-sports'];
+  return SHOE_GALLERIES['aero-tide'];
 }
 
 /**
@@ -167,3 +165,4 @@ export function getProductPrimaryImage(product: {
   const gallery = getProductGalleryImages(product);
   return gallery[0]?.url || '/shoes/nb_sports/1.png';
 }
+

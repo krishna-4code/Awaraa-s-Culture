@@ -7,6 +7,7 @@ import { useCart } from "./CartContext";
 import type { User } from "@supabase/supabase-js";
 import { logout } from "@/app/(main)/login/actions";
 import { Menu, X, ShoppingBag, User as UserIcon, LogOut, ArrowRight } from "lucide-react";
+import { BRAND_NAME } from "@/lib/constants";
 
 export function Nav({ user }: { user: User | null }) {
   const pathname = usePathname();
@@ -38,7 +39,7 @@ export function Nav({ user }: { user: User | null }) {
           href="/" 
           className="font-display font-extrabold text-[clamp(1rem,4.8vw,1.5rem)] tracking-tight text-bright-ink hover:text-bright-amber transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-amber rounded-xl flex-shrink-0 whitespace-nowrap"
         >
-          Awaraa&apos;s Culture<span className="text-bright-amber">.</span>
+          {BRAND_NAME}<span className="text-bright-amber">.</span>
         </Link>
 
         {/* Desktop Navigation Links */}

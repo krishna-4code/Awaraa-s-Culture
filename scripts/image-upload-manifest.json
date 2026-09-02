@@ -1,8 +1,8 @@
 [
   {
-    "product": "SB Dunks",
-    "slug": "sb-dunks",
-    "sku": "SBD-WHT-07",
+    "product": "Cocoa Drift",
+    "slug": "cocoa-drift",
+    "sku": "CCD-WHT-07",
     "size": "7",
     "color": "White",
     "images": [
@@ -11,9 +11,9 @@
     "missingImages": false
   },
   {
-    "product": "SB Dunks",
-    "slug": "sb-dunks",
-    "sku": "SBD-WHT-08",
+    "product": "Cocoa Drift",
+    "slug": "cocoa-drift",
+    "sku": "CCD-WHT-08",
     "size": "8",
     "color": "White",
     "images": [
@@ -22,9 +22,9 @@
     "missingImages": false
   },
   {
-    "product": "SB Dunks",
-    "slug": "sb-dunks",
-    "sku": "SBD-WHT-09",
+    "product": "Cocoa Drift",
+    "slug": "cocoa-drift",
+    "sku": "CCD-WHT-09",
     "size": "9",
     "color": "White",
     "images": [
@@ -33,9 +33,9 @@
     "missingImages": false
   },
   {
-    "product": "SB Dunks",
-    "slug": "sb-dunks",
-    "sku": "SBD-WHT-10",
+    "product": "Cocoa Drift",
+    "slug": "cocoa-drift",
+    "sku": "CCD-WHT-10",
     "size": "10",
     "color": "White",
     "images": [
@@ -44,9 +44,9 @@
     "missingImages": false
   },
   {
-    "product": "SB Dunks",
-    "slug": "sb-dunks",
-    "sku": "SBD-WHT-11",
+    "product": "Cocoa Drift",
+    "slug": "cocoa-drift",
+    "sku": "CCD-WHT-11",
     "size": "11",
     "color": "White",
     "images": [
@@ -55,9 +55,9 @@
     "missingImages": false
   },
   {
-    "product": "LV Sneakers",
-    "slug": "lv-sneakers",
-    "sku": "LVS-WHT-07",
+    "product": "Shadow Crest",
+    "slug": "shadow-crest",
+    "sku": "SHC-WHT-07",
     "size": "7",
     "color": "White",
     "images": [
@@ -66,9 +66,9 @@
     "missingImages": false
   },
   {
-    "product": "LV Sneakers",
-    "slug": "lv-sneakers",
-    "sku": "LVS-WHT-08",
+    "product": "Shadow Crest",
+    "slug": "shadow-crest",
+    "sku": "SHC-WHT-08",
     "size": "8",
     "color": "White",
     "images": [
@@ -77,9 +77,9 @@
     "missingImages": false
   },
   {
-    "product": "LV Sneakers",
-    "slug": "lv-sneakers",
-    "sku": "LVS-WHT-09",
+    "product": "Shadow Crest",
+    "slug": "shadow-crest",
+    "sku": "SHC-WHT-09",
     "size": "9",
     "color": "White",
     "images": [
@@ -88,9 +88,9 @@
     "missingImages": false
   },
   {
-    "product": "LV Sneakers",
-    "slug": "lv-sneakers",
-    "sku": "LVS-WHT-10",
+    "product": "Shadow Crest",
+    "slug": "shadow-crest",
+    "sku": "SHC-WHT-10",
     "size": "10",
     "color": "White",
     "images": [
@@ -99,9 +99,9 @@
     "missingImages": false
   },
   {
-    "product": "Waffle Brown",
-    "slug": "waffle-brown",
-    "sku": "WFB-TAN-07",
+    "product": "Earthline",
+    "slug": "earthline",
+    "sku": "ETL-TAN-07",
     "size": "7",
     "color": "Tan",
     "images": [
@@ -110,9 +110,9 @@
     "missingImages": false
   },
   {
-    "product": "Waffle Brown",
-    "slug": "waffle-brown",
-    "sku": "WFB-TAN-08",
+    "product": "Earthline",
+    "slug": "earthline",
+    "sku": "ETL-TAN-08",
     "size": "8",
     "color": "Tan",
     "images": [
@@ -121,9 +121,9 @@
     "missingImages": false
   },
   {
-    "product": "Waffle Brown",
-    "slug": "waffle-brown",
-    "sku": "WFB-TAN-09",
+    "product": "Earthline",
+    "slug": "earthline",
+    "sku": "ETL-TAN-09",
     "size": "9",
     "color": "Tan",
     "images": [
@@ -132,9 +132,9 @@
     "missingImages": false
   },
   {
-    "product": "Sports",
-    "slug": "sports",
-    "sku": "SPT-GRY-07",
+    "product": "Moss Velocity",
+    "slug": "moss-velocity",
+    "sku": "MSV-GRY-07",
     "size": "7",
     "color": "Grey",
     "images": [
@@ -143,9 +143,9 @@
     "missingImages": false
   },
   {
-    "product": "Sports",
-    "slug": "sports",
-    "sku": "SPT-GRY-08",
+    "product": "Moss Velocity",
+    "slug": "moss-velocity",
+    "sku": "MSV-GRY-08",
     "size": "8",
     "color": "Grey",
     "images": [
@@ -154,9 +154,9 @@
     "missingImages": false
   },
   {
-    "product": "Sports",
-    "slug": "sports",
-    "sku": "SPT-GRY-09",
+    "product": "Moss Velocity",
+    "slug": "moss-velocity",
+    "sku": "MSV-GRY-09",
     "size": "9",
     "color": "Grey",
     "images": [
@@ -165,9 +165,9 @@
     "missingImages": false
   },
   {
-    "product": "Sports",
-    "slug": "sports",
-    "sku": "SPT-GRY-10",
+    "product": "Moss Velocity",
+    "slug": "moss-velocity",
+    "sku": "MSV-GRY-10",
     "size": "10",
     "color": "Grey",
     "images": [
@@ -176,9 +176,9 @@
     "missingImages": false
   },
   {
-    "product": "Sketchers Sports",
-    "slug": "sketchers-sports",
-    "sku": "SKS-TAN-08",
+    "product": "Sand Drift",
+    "slug": "sand-drift",
+    "sku": "SND-TAN-08",
     "size": "8",
     "color": "Tan",
     "images": [
@@ -187,9 +187,9 @@
     "missingImages": false
   },
   {
-    "product": "Sketchers Sports",
-    "slug": "sketchers-sports",
-    "sku": "SKS-TAN-09",
+    "product": "Sand Drift",
+    "slug": "sand-drift",
+    "sku": "SND-TAN-09",
     "size": "9",
     "color": "Tan",
     "images": [
@@ -198,9 +198,9 @@
     "missingImages": false
   },
   {
-    "product": "Sketchers Sports",
-    "slug": "sketchers-sports",
-    "sku": "SKS-TAN-10",
+    "product": "Sand Drift",
+    "slug": "sand-drift",
+    "sku": "SND-TAN-10",
     "size": "10",
     "color": "Tan",
     "images": [
@@ -209,9 +209,9 @@
     "missingImages": false
   },
   {
-    "product": "Sketchers Sports",
-    "slug": "sketchers-sports",
-    "sku": "SKS-TAN-11",
+    "product": "Sand Drift",
+    "slug": "sand-drift",
+    "sku": "SND-TAN-11",
     "size": "11",
     "color": "Tan",
     "images": [
@@ -220,9 +220,9 @@
     "missingImages": false
   },
   {
-    "product": "Sketchers Sports",
-    "slug": "sketchers-sports",
-    "sku": "SKS-TAN-12",
+    "product": "Sand Drift",
+    "slug": "sand-drift",
+    "sku": "SND-TAN-12",
     "size": "12",
     "color": "Tan",
     "images": [
@@ -231,9 +231,9 @@
     "missingImages": false
   },
   {
-    "product": "Brooks",
-    "slug": "brooks",
-    "sku": "BRK-BLK-07",
+    "product": "Midnight Flow",
+    "slug": "midnight-flow",
+    "sku": "MDF-BLK-07",
     "size": "7",
     "color": "Black",
     "images": [
@@ -242,9 +242,9 @@
     "missingImages": false
   },
   {
-    "product": "Brooks",
-    "slug": "brooks",
-    "sku": "BRK-BLK-08",
+    "product": "Midnight Flow",
+    "slug": "midnight-flow",
+    "sku": "MDF-BLK-08",
     "size": "8",
     "color": "Black",
     "images": [
@@ -253,9 +253,9 @@
     "missingImages": false
   },
   {
-    "product": "Brooks",
-    "slug": "brooks",
-    "sku": "BRK-BLK-09",
+    "product": "Midnight Flow",
+    "slug": "midnight-flow",
+    "sku": "MDF-BLK-09",
     "size": "9",
     "color": "Black",
     "images": [
@@ -264,9 +264,9 @@
     "missingImages": false
   },
   {
-    "product": "Brooks",
-    "slug": "brooks",
-    "sku": "BRK-BLK-10",
+    "product": "Midnight Flow",
+    "slug": "midnight-flow",
+    "sku": "MDF-BLK-10",
     "size": "10",
     "color": "Black",
     "images": [
@@ -275,9 +275,9 @@
     "missingImages": false
   },
   {
-    "product": "NB Sports",
-    "slug": "nb-sports",
-    "sku": "NBS-WHT-07",
+    "product": "Aero Tide",
+    "slug": "aero-tide",
+    "sku": "ART-WHT-07",
     "size": "7",
     "color": "White",
     "images": [
@@ -293,9 +293,9 @@
     "missingImages": false
   },
   {
-    "product": "NB Sports",
-    "slug": "nb-sports",
-    "sku": "NBS-WHT-08",
+    "product": "Aero Tide",
+    "slug": "aero-tide",
+    "sku": "ART-WHT-08",
     "size": "8",
     "color": "White",
     "images": [
@@ -311,9 +311,9 @@
     "missingImages": false
   },
   {
-    "product": "NB Sports",
-    "slug": "nb-sports",
-    "sku": "NBS-WHT-09",
+    "product": "Aero Tide",
+    "slug": "aero-tide",
+    "sku": "ART-WHT-09",
     "size": "9",
     "color": "White",
     "images": [
@@ -329,9 +329,9 @@
     "missingImages": false
   },
   {
-    "product": "NB Sports",
-    "slug": "nb-sports",
-    "sku": "NBS-WHT-10",
+    "product": "Aero Tide",
+    "slug": "aero-tide",
+    "sku": "ART-WHT-10",
     "size": "10",
     "color": "White",
     "images": [
@@ -347,9 +347,9 @@
     "missingImages": false
   },
   {
-    "product": "NB Sneakers",
-    "slug": "nb-sneakers",
-    "sku": "NBN-WHT-07",
+    "product": "Dune Runner",
+    "slug": "dune-runner",
+    "sku": "DNR-WHT-07",
     "size": "7",
     "color": "White",
     "images": [
@@ -358,9 +358,9 @@
     "missingImages": false
   },
   {
-    "product": "NB Sneakers",
-    "slug": "nb-sneakers",
-    "sku": "NBN-WHT-08",
+    "product": "Dune Runner",
+    "slug": "dune-runner",
+    "sku": "DNR-WHT-08",
     "size": "8",
     "color": "White",
     "images": [
@@ -369,9 +369,9 @@
     "missingImages": false
   },
   {
-    "product": "NB Sneakers",
-    "slug": "nb-sneakers",
-    "sku": "NBN-WHT-09",
+    "product": "Dune Runner",
+    "slug": "dune-runner",
+    "sku": "DNR-WHT-09",
     "size": "9",
     "color": "White",
     "images": [
@@ -380,9 +380,9 @@
     "missingImages": false
   },
   {
-    "product": "NB Sneakers",
-    "slug": "nb-sneakers",
-    "sku": "NBN-WHT-10",
+    "product": "Dune Runner",
+    "slug": "dune-runner",
+    "sku": "DNR-WHT-10",
     "size": "10",
     "color": "White",
     "images": [
