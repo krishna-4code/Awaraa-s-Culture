@@ -36,7 +36,7 @@ export function Nav({ user }: { user: User | null }) {
         {/* Brand Logo */}
         <Link 
           href="/" 
-          className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-bright-ink hover:text-bright-amber transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-amber rounded-xl flex-shrink-0"
+          className="font-display font-extrabold text-[clamp(1rem,4.8vw,1.5rem)] tracking-tight text-bright-ink hover:text-bright-amber transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bright-amber rounded-xl flex-shrink-0 whitespace-nowrap"
         >
           Awaraa&apos;s Culture<span className="text-bright-amber">.</span>
         </Link>

@@ -63,6 +63,7 @@ const config: Config = {
       animation: {
         "marquee-infinite": "marquee 22s linear infinite",
         "sticker-float": "float 3.5s ease-in-out infinite",
+        "cart-illustration-float": "cartIllustrationFloat 4s ease-in-out infinite",
         "spring-pop": "springPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
         "slideInRight": "slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "fadeIn": "fadeIn 0.2s ease-out forwards",
@@ -75,6 +76,10 @@ const config: Config = {
         float: {
           "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
           "50%": { transform: "translateY(-8px) rotate(1.5deg)" },
+        },
+        cartIllustrationFloat: {
+          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+          "50%": { transform: "translateY(-14px) rotate(3deg)" },
         },
         springPop: {
           "0%": { transform: "scale(0.94)", opacity: "0" },

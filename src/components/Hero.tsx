@@ -25,7 +25,7 @@ export function Hero() {
         </div>
 
         {/* Poster-Style Headline with Reusable MarkerUnderline */}
-        <h1 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-bright-ink leading-[0.95] mb-6 uppercase">
+        <h1 className="font-display font-extrabold text-[clamp(1.5rem,10.5vw,6rem)] tracking-tight text-bright-ink leading-[0.95] mb-6 uppercase text-balance [overflow-wrap:anywhere]">
           Wander Without LIMITS.
         </h1>
 
