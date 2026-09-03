@@ -5,10 +5,10 @@ import { Collection } from "@/components/Collection";
 import { Community } from "@/components/Community";
 import { getProducts } from "@/lib/commerce/products";
 import { getCollection } from "@/lib/commerce/collections";
-import { BRAND_NAME, BRAND_TAGLINE, BRAND_DESCRIPTION } from "@/lib/constants";
+import { BRAND_NAME, BRAND_DESCRIPTION } from "@/lib/constants";
 
 export const metadata = {
-  title: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+  title: { absolute: BRAND_NAME },
   description: BRAND_DESCRIPTION,
   alternates: {
     canonical: '/',

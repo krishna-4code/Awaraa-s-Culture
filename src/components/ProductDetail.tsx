@@ -11,7 +11,7 @@ import { BRAND_NAME } from "@/lib/constants";
 import { SITE_URL } from "@/lib/site";
 
 export function ProductDetail({ product }: { product: CommerceProduct }) {
-  const { cart, addItem, updateItem, removeItem, openCart } = useCart();
+  const { cart, isLoading, addItem, updateItem, removeItem, openCart } = useCart();
   const [addedToCart, setAddedToCart] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -60,8 +60,18 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
   // Find if active variant is in cart
   const activeCartLine = useMemo(() => {
     if (!cart?.lines || !activeVariant) return null;
-    return cart.lines.find((l) => l.merchandise.id === activeVariant.id) || null;
-  }, [cart?.lines, activeVariant]);
+    return (
+      cart.lines.find(
+        (l) =>
+          l.merchandise.id === activeVariant.id ||
+          (l.merchandise.product.handle === product.handle &&
+            (l.merchandise.title === activeVariant.title ||
+              l.merchandise.title === (activeVariant.size || activeVariant.title) ||
+              l.merchandise.id.endsWith(`__${activeVariant.id}`) ||
+              activeVariant.id.endsWith(`__${l.merchandise.id}`)))
+      ) || null
+    );
+  }, [cart?.lines, activeVariant, product.handle]);
 
   const inCartQty = activeCartLine ? activeCartLine.quantity : 0;
   // Inventory cap for the active variant (unlimited when stock is unknown)
@@ -69,14 +79,14 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
   const atStockLimit = inCartQty >= activeStock;
 
   const handleAddToCart = async () => {
-    if (!activeVariant || !activeVariant.available || atStockLimit) return;
+    if (!activeVariant || !activeVariant.available || atStockLimit || isLoading) return;
     await addItem(activeVariant.id, 1, false, product, activeVariant);
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 1800);
   };
 
   const handleIncrement = async () => {
-    if (!activeVariant || atStockLimit) return;
+    if (!activeVariant || atStockLimit || isLoading) return;
     if (activeCartLine) {
       await updateItem(activeCartLine.id, activeCartLine.quantity + 1);
     } else {
@@ -85,7 +95,7 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
   };
 
   const handleDecrement = async () => {
-    if (!activeCartLine) return;
+    if (!activeCartLine || isLoading) return;
     if (activeCartLine.quantity <= 1) {
       await removeItem(activeCartLine.id);
     } else {
@@ -330,7 +340,8 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     <button
                       type="button"
                       onClick={handleDecrement}
-                      className="w-8 h-8 rounded-full bg-bright-card hover:bg-bright-ink hover:text-white text-bright-ink flex items-center justify-center text-xs font-bold transition-all active:scale-90"
+                      disabled={isLoading}
+                      className={`w-8 h-8 rounded-full bg-bright-card hover:bg-bright-ink hover:text-white text-bright-ink flex items-center justify-center text-xs font-bold transition-all active:scale-90 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                       aria-label="Decrease quantity in cart"
                     >
                       <Minus className="w-3.5 h-3.5" />
@@ -341,9 +352,9 @@ export function ProductDetail({ product }: { product: CommerceProduct }) {
                     <button
                       type="button"
                       onClick={handleIncrement}
-                      disabled={atStockLimit}
+                      disabled={atStockLimit || isLoading}
                       className={`w-8 h-8 rounded-full bg-bright-amber text-white flex items-center justify-center text-xs font-bold transition-all active:scale-90 ${
-                        atStockLimit
+                        atStockLimit || isLoading
                           ? "opacity-40 cursor-not-allowed"
                           : "hover:bg-bright-ink"
                       }`}

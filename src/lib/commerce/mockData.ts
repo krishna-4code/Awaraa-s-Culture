@@ -37,7 +37,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Aero Tide - Angle 4"
       }
     ],
-    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+    shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe clean with a damp cloth. Air dry naturally away from direct heat."
   },
@@ -74,7 +74,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Cocoa Drift - Side Profile"
       }
     ],
-    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+    shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe clean with a damp cloth. Use standard sneaker cleaner for scuffs. Air dry only."
   },
@@ -101,7 +101,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Earthline - Hero Profile"
       }
     ],
-    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+    shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe with damp cloth and use dedicated suede foam cleaner."
   },
@@ -137,7 +137,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Shadow Crest - Detail Angle"
       }
     ],
-    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+    shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe gently with leather cleaning wipe. Do not machine wash."
   },
@@ -165,7 +165,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Dune Runner - Hero Angle"
       }
     ],
-    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+    shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Wipe clean with a damp cloth. Air dry in shade."
   },
@@ -205,7 +205,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Moss Velocity - Angle 4"
       }
     ],
-    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+    shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Machine washable on delicate cold cycle. Air dry only."
   },
@@ -234,7 +234,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Sand Drift - Hero View"
       }
     ],
-    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+    shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Spot clean with damp cloth and mild soap. Air dry."
   },
@@ -262,7 +262,7 @@ export const MOCK_PRODUCTS: CommerceProduct[] = [
         altText: "Midnight Flow - Hero Studio Angle"
       }
     ],
-    shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+    shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
     returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
     careInstructions: "Hand wash with mild detergent. Air dry away from heat sources."
   }

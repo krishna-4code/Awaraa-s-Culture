@@ -4,6 +4,8 @@ import { urlForImage } from '@/sanity/image';
 import { findMockProduct, MOCK_PRODUCTS } from './mockData';
 import { getProductGalleryImages } from './productImages';
 
+const SHIPPING_POLICY = 'Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)';
+
 const SINGLE_PRODUCT_QUERY = `
   *[_type == "product" && (slug.current == $handle || _id == $handle) && !isPlaceholder][0] {
     _id,
@@ -124,7 +126,7 @@ function mapSanityProduct(doc: any): CommerceProduct {
     materials: doc.materials || mockFallback?.materials || ['Full-grain leather', 'Dual-density EVA midsole', 'Rubber outsole'],
     variants,
     images,
-    shippingPolicy: doc.shippingPolicy || 'Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.',
+    shippingPolicy: SHIPPING_POLICY,
     returnPolicy: doc.returnPolicy || '14-day returns for unworn products.',
     careInstructions: doc.careInstructions || 'Wipe clean with a damp cloth. Avoid direct heat.',
     collectionSlug: doc.collectionSlug || mockFallback?.collectionSlug,

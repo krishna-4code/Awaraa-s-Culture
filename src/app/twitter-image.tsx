@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
-import { BRAND_NAME, BRAND_TAGLINE } from '@/lib/constants';
+import { BRAND_NAME } from '@/lib/constants';
  
-export const alt = `${BRAND_NAME} — ${BRAND_TAGLINE}`;
+export const alt = BRAND_NAME;
 export const size = {
   width: 1200,
   height: 600,
@@ -46,7 +46,7 @@ export default async function Image() {
             fontWeight: 600,
           }}
         >
-          {BRAND_TAGLINE}
+          {BRAND_NAME}
         </div>
       </div>
     ),

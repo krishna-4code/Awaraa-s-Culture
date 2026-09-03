@@ -214,6 +214,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const updateItem = async (lineId: string, quantity: number) => {
     if (!cart) return;
+    if (quantity <= 0) {
+      await removeItem(lineId);
+      return;
+    }
     setIsLoading(true);
     try {
       const updatedCart = await updateCart(cart.id, lineId, quantity);
@@ -231,6 +235,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const updatedCart = await removeCartItem(cart.id, lineId);
       setCart(updatedCart);
+      if (updatedCart && updatedCart.lines.length === 0) {
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem(PROMO_STORAGE_KEY);
+        }
+        setAppliedPromo(null);
+      }
     } catch (e) {
       console.error("Failed to remove cart item", e);
     } finally {

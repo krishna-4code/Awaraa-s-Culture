@@ -122,7 +122,7 @@ export const productType = defineType({
       name: 'shippingPolicy',
       title: 'Shipping Policy',
       type: 'string',
-      initialValue: 'Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.',
+      initialValue: 'Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)',
     }),
 
     defineField({

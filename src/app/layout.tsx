@@ -4,7 +4,7 @@ import "./globals.css";
 import { CartProvider } from "@/components/CartContext";
 import { CartDrawer } from "@/components/CartDrawer";
 import { FloatingShoeParticles } from "@/components/FloatingShoeParticles";
-import { BRAND_NAME, BRAND_NAME_ALT, BRAND_TAGLINE, BRAND_DESCRIPTION } from "@/lib/constants";
+import { BRAND_NAME, BRAND_NAME_ALT, BRAND_DESCRIPTION } from "@/lib/constants";
 import { SITE_URL } from "@/lib/site";
 
 const syne = Syne({
@@ -40,7 +40,7 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+    default: BRAND_NAME,
     template: `%s — ${BRAND_NAME}`,
   },
   description: BRAND_DESCRIPTION,
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+    title: BRAND_NAME,
     description: BRAND_DESCRIPTION,
     url: SITE_URL,
     siteName: BRAND_NAME,
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+    title: BRAND_NAME,
     description: BRAND_DESCRIPTION,
   }
 };

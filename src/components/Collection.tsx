@@ -223,6 +223,7 @@ function ShoeCardItem({
   product,
   inCartQty,
   addedItem,
+  isLoading,
   onQuickAdd,
   onIncrement,
   onDecrement,
@@ -230,6 +231,7 @@ function ShoeCardItem({
   product: ShoeCardProduct;
   inCartQty: number;
   addedItem: string | null;
+  isLoading: boolean;
   onQuickAdd: (product: ShoeCardProduct, e: React.MouseEvent) => void;
   onIncrement: (product: ShoeCardProduct, e: React.MouseEvent) => void;
   onDecrement: (productId: string, handle: string, e: React.MouseEvent) => void;
@@ -411,8 +413,9 @@ function ShoeCardItem({
           <div className="flex items-center gap-1 bg-bright-card border border-bright-ink/20 rounded-full p-1 shadow-sm">
             <button
               type="button"
+              disabled={isLoading}
               onClick={(e) => onDecrement(product.id, product.handle, e)}
-              className="w-7 h-7 rounded-full bg-white hover:bg-bright-ink hover:text-white text-bright-ink flex items-center justify-center text-xs font-bold shadow-sm transition-all active:scale-90"
+              className={`w-7 h-7 rounded-full bg-white hover:bg-bright-ink hover:text-white text-bright-ink flex items-center justify-center text-xs font-bold shadow-sm transition-all active:scale-90 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
               aria-label={`Decrease quantity of ${product.title}`}
             >
               <Minus className="w-3.5 h-3.5" />
@@ -422,8 +425,9 @@ function ShoeCardItem({
             </span>
             <button
               type="button"
+              disabled={isLoading}
               onClick={(e) => onIncrement(product, e)}
-              className="w-7 h-7 rounded-full bg-bright-amber hover:bg-bright-ink text-white flex items-center justify-center text-xs font-bold shadow-sm transition-all active:scale-90"
+              className={`w-7 h-7 rounded-full bg-bright-amber hover:bg-bright-ink text-white flex items-center justify-center text-xs font-bold shadow-sm transition-all active:scale-90 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
               aria-label={`Increase quantity of ${product.title}`}
             >
               <Plus className="w-3.5 h-3.5" />
@@ -432,8 +436,9 @@ function ShoeCardItem({
         ) : (
           <button
             type="button"
+            disabled={isLoading}
             onClick={(e) => onQuickAdd(product, e)}
-            className={`font-sans text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-full transition-all duration-200 shadow-sm active:scale-90 cursor-pointer ${
+            className={`font-sans text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-full transition-all duration-200 shadow-sm active:scale-90 cursor-pointer ${isLoading ? "opacity-50 cursor-not-allowed" : ""} ${
               addedItem === product.id
                 ? "bg-bright-lime text-white scale-105"
                 : "bg-bright-amber text-white hover:bg-bright-ink hover:scale-105"
@@ -457,7 +462,7 @@ export function Collection({
 }) {
   const [activeFilter, setActiveFilter] = useState("all");
   const [addedItem, setAddedItem] = useState<string | null>(null);
-  const { cart, addItem, updateItem, removeItem } = useCart();
+  const { cart, isLoading, addItem, updateItem, removeItem } = useCart();
 
   // Map products from CMS or use fallback
   const displayProducts: ShoeCardProduct[] = initialProducts && initialProducts.length > 0
@@ -508,7 +513,10 @@ export function Collection({
           l.merchandise.product.id === productId ||
           l.merchandise.product.id === handle ||
           l.merchandise.product.handle === handle ||
-          l.merchandise.product.handle === productId
+          l.merchandise.product.handle === productId ||
+          (l.merchandise.product as any)._sanityId === productId ||
+          l.merchandise.id.startsWith(productId) ||
+          (handle && l.merchandise.id.startsWith(handle))
       ) || null
     );
   };
@@ -521,7 +529,10 @@ export function Collection({
           l.merchandise.product.id === productId ||
           l.merchandise.product.id === handle ||
           l.merchandise.product.handle === handle ||
-          l.merchandise.product.handle === productId
+          l.merchandise.product.handle === productId ||
+          (l.merchandise.product as any)._sanityId === productId ||
+          l.merchandise.id.startsWith(productId) ||
+          (handle && l.merchandise.id.startsWith(handle))
       )
       .reduce((sum, line) => sum + line.quantity, 0);
   };
@@ -556,7 +567,7 @@ export function Collection({
         { id: `${product.id}__default`, title: "Standard", available: true, size: "8" }
       ],
       images: directImages,
-      shippingPolicy: "Delhi delivery: ₹100 flat. Outside Delhi: Book Porter on own charges.",
+      shippingPolicy: "Delhi: ₹100 delivery • Outside Delhi: Book Porter (own charges)",
       returnPolicy: "14-day hassle-free returns & exchanges for unworn pairs.",
       careInstructions: "Wipe clean with a damp cloth."
     };
@@ -565,6 +576,7 @@ export function Collection({
   const handleQuickAdd = async (product: ShoeCardProduct, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (isLoading) return;
     const productObj = buildCommerceProduct(product);
     const variantObj = productObj.variants[0] || { id: `${product.id}__default`, title: "Standard", available: true };
     
@@ -576,6 +588,7 @@ export function Collection({
   const handleIncrement = async (product: ShoeCardProduct, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (isLoading) return;
     const line = getProductCartLine(product.id, product.handle);
     if (line) {
       await updateItem(line.id, line.quantity + 1);
@@ -589,6 +602,7 @@ export function Collection({
   const handleDecrement = async (productId: string, handle: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (isLoading) return;
     const line = getProductCartLine(productId, handle);
     if (!line) return;
     if (line.quantity <= 1) {
@@ -653,6 +667,7 @@ export function Collection({
                 product={product}
                 inCartQty={inCartQty}
                 addedItem={addedItem}
+                isLoading={isLoading}
                 onQuickAdd={handleQuickAdd}
                 onIncrement={handleIncrement}
                 onDecrement={handleDecrement}

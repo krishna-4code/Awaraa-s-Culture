@@ -257,11 +257,12 @@ function resolveProductAndVariant(
 // Stock-aware quantity clamp: never lets a cart quantity exceed the inventory
 // available for that variant (returns the quantity untouched when stock is unknown).
 function clampQuantityToStock(quantity: number, product: CommerceProduct, variantId: string): number {
-  const variant = product.variants?.find(v => v.id === variantId || v.title === variantId);
+  if (quantity <= 0) return 0;
+  const variant = product?.variants?.find(v => v.id === variantId || v.title === variantId);
   const stock = typeof variant?.stock === 'number' ? variant.stock : undefined;
-  if (typeof stock !== 'number') return Math.max(1, quantity);
+  if (typeof stock !== 'number') return quantity;
   if (stock <= 0) return 0;
-  return Math.max(1, Math.min(quantity, stock));
+  return Math.min(quantity, stock);
 }
 
 function createLocalCart(
@@ -343,7 +344,7 @@ function addLocalItem(
 
 function updateLocalItem(cart: CommerceCart, lineId: string, quantity: number): CommerceCart {
   let newLines = cart.lines.map(line => {
-    if (line.id === lineId) {
+    if (line.id === lineId || line.merchandise.id === lineId) {
       const cappedQty = clampQuantityToStock(quantity, line.merchandise.product, line.merchandise.id);
       return { ...line, quantity: cappedQty };
     }
@@ -442,11 +443,18 @@ export async function addToCart(
     }
   }
 
-  const currentCart = getStoredMockCart() || createLocalCart(variantId, quantity, productOverride, variantOverride);
-  return addLocalItem(currentCart, variantId, quantity, productOverride, variantOverride);
+  const storedCart = getStoredMockCart();
+  if (!storedCart || storedCart.lines.length === 0) {
+    return createLocalCart(variantId, quantity, productOverride, variantOverride);
+  }
+  return addLocalItem(storedCart, variantId, quantity, productOverride, variantOverride);
 }
 
 export async function updateCart(cartId: string, lineId: string, quantity: number): Promise<CommerceCart | null> {
+  if (quantity <= 0) {
+    return removeCartItem(cartId, lineId);
+  }
+
   if (isShopifyConfigured()) {
     try {
       const { body } = await commerceFetch<any>({
@@ -471,7 +479,59 @@ export async function updateCart(cartId: string, lineId: string, quantity: numbe
 }
 
 export async function removeCartItem(cartId: string, lineId: string): Promise<CommerceCart | null> {
-  return updateCart(cartId, lineId, 0);
+  if (isShopifyConfigured()) {
+    try {
+      const removeLinesMutation = `
+        mutation removeCartLines($cartId: ID!, $lineIds: [ID!]!) {
+          cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+            cart {
+              id
+              checkoutUrl
+              cost {
+                subtotalAmount { amount currencyCode }
+                totalAmount { amount currencyCode }
+              }
+              lines(first: 100) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        title
+                        product {
+                          id
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+      const { body } = await commerceFetch<any>({
+        query: removeLinesMutation,
+        variables: {
+          cartId,
+          lineIds: [lineId]
+        },
+        cache: 'no-store'
+      });
+
+      const cart = body.data?.cartLinesRemove?.cart;
+      if (cart) return mapShopifyCart(cart);
+    } catch (e) {
+      console.warn('Shopify removeCartItem failed, falling back to local cart:', e);
+    }
+  }
+
+  const currentCart = getStoredMockCart();
+  if (!currentCart) return null;
+  return updateLocalItem(currentCart, lineId, 0);
 }
 
 export async function clearCart(cartId: string): Promise<CommerceCart | null> {

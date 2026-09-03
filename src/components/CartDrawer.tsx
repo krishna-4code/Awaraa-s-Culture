@@ -10,6 +10,7 @@ import { getProductPrimaryImage } from "@/lib/commerce/productImages";
 export function CartDrawer() {
   const {
     cart,
+    isLoading,
     isCartOpen,
     closeCart,
     updateItem,
@@ -186,8 +187,11 @@ export function CartDrawer() {
                         </Link>
                         <button
                           type="button"
+                          disabled={isLoading}
                           onClick={() => removeItem(line.id)}
-                          className="text-bright-muted/60 hover:text-bright-coral p-1 transition-colors"
+                          className={`text-bright-muted/60 hover:text-bright-coral p-1 transition-colors ${
+                            isLoading ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
                           aria-label="Remove item"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -203,8 +207,18 @@ export function CartDrawer() {
                       <div className="flex items-center border border-bright-ink/20 rounded-full bg-white px-1 py-0.5 shadow-sm">
                         <button
                           type="button"
-                          onClick={() => updateItem(line.id, line.quantity - 1)}
-                          className="w-6 h-6 rounded-full flex items-center justify-center text-bright-muted hover:text-bright-ink hover:bg-bright-card transition-all text-xs font-bold"
+                          disabled={isLoading}
+                          onClick={() => {
+                            if (isLoading) return;
+                            if (line.quantity <= 1) {
+                              removeItem(line.id);
+                            } else {
+                              updateItem(line.id, line.quantity - 1);
+                            }
+                          }}
+                          className={`w-6 h-6 rounded-full flex items-center justify-center text-bright-muted hover:text-bright-ink hover:bg-bright-card transition-all text-xs font-bold ${
+                            isLoading ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
                           aria-label="Decrease quantity"
                         >
                           <Minus className="w-3 h-3" />
@@ -215,12 +229,12 @@ export function CartDrawer() {
                         <button
                           type="button"
                           onClick={() => {
-                            if (atLineStockLimit) return;
+                            if (atLineStockLimit || isLoading) return;
                             updateItem(line.id, line.quantity + 1);
                           }}
-                          disabled={atLineStockLimit}
+                          disabled={atLineStockLimit || isLoading}
                           className={`w-6 h-6 rounded-full flex items-center justify-center text-bright-muted transition-all text-xs font-bold ${
-                            atLineStockLimit
+                            atLineStockLimit || isLoading
                               ? "opacity-40 cursor-not-allowed"
                               : "hover:text-bright-ink hover:bg-bright-card"
                           }`}
