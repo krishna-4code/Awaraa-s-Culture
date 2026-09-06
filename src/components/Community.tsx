@@ -35,8 +35,8 @@ const MOODBOARD_PHOTOS = [
 
 export function Community() {
   return (
-    <section className="w-full bg-transparent text-bright-ink py-24 px-6 relative overflow-hidden border-t border-bright-ink/10">
-      <div className="max-w-7xl mx-auto flex flex-col gap-12 relative z-10">
+    <section data-panel className="sticky bottom-0 z-[5] relative w-full overflow-hidden bg-bright-card text-bright-ink px-6 py-24">
+      <div data-panel-content className="max-w-7xl mx-auto flex flex-col gap-12 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-bright-ink/10 pb-8">

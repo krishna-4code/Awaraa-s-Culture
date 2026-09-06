@@ -37,7 +37,9 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  overflow-x: hidden;
+  /* Use overflow-x: clip instead of hidden so position: sticky keeps working
+     on descendants (hidden would turn body into a non-scrolling scroll container). */
+  overflow-x: clip;
 }
 
 /* Hide browser-native password reveal buttons (Edge, Chrome, WebKit)

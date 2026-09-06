@@ -12,13 +12,14 @@ export function Hero() {
     <section
       onMouseEnter={() => setTrailActive(true)}
       onMouseLeave={() => setTrailActive(false)}
-      className="relative w-full pt-28 pb-20 px-6 bg-transparent text-bright-ink overflow-hidden"
+      data-panel
+      className="sticky bottom-0 z-[1] relative w-full overflow-hidden bg-bright-canvas text-bright-ink px-6 pt-28 pb-20"
     >
       {/* Background Decorative Playful Blobs */}
       <div className="absolute top-10 left-1/4 w-96 h-96 bg-bright-sun/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-bright-coral/15 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
+      <div data-panel-content className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
         
         {/* Floating CPG Sticker Badges (Bricolage Grotesque font-accent) */}
         <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
@@ -118,7 +119,7 @@ export function Hero() {
       </div>
 
       {/* Marquee Ticker */}
-      <div className="mt-16 -mx-6 bg-bright-ink text-white py-3.5 overflow-hidden border-y border-bright-amber" aria-hidden="true">
+      <div className="relative z-[9999] mt-16 -mx-6 bg-bright-ink text-white py-3.5 overflow-hidden border-y border-bright-amber" aria-hidden="true">
         <div className="flex whitespace-nowrap animate-marquee-infinite font-sans text-xs md:text-sm font-bold uppercase tracking-widest gap-8">
           <span>✦ REAL COMFORT FIRST</span>
           <span>✦ DUAL-DENSITY EVA FOAM</span>

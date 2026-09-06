@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export function BrandStory() {
   return (
-    <section className="relative w-full bg-transparent text-bright-ink py-24 px-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center relative z-10">
+    <section data-panel className="sticky bottom-0 z-[2] relative w-full overflow-hidden bg-bright-card text-bright-ink px-6 py-24">
+      <div data-panel-content className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center relative z-10">
         
         {/* LEFT COLUMN: Text Content & Values */}
         <div className="w-full lg:w-1/2 flex flex-col gap-8">

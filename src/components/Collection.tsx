@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "./CartContext";
@@ -462,7 +462,15 @@ export function Collection({
 }) {
   const [activeFilter, setActiveFilter] = useState("all");
   const [addedItem, setAddedItem] = useState<string | null>(null);
+  const [hydrated, setHydrated] = useState(false);
   const { cart, isLoading, addItem, updateItem, removeItem } = useCart();
+
+  // Only reflect live cart loading state after hydration so the SSR output
+  // (disabled/className on add-to-cart buttons) matches the first client render.
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+  const displayLoading = isLoading && hydrated;
 
   // Map products from CMS or use fallback
   const displayProducts: ShoeCardProduct[] = initialProducts && initialProducts.length > 0
@@ -617,8 +625,8 @@ export function Collection({
     : displayProducts.filter(p => p.category === activeFilter);
 
   return (
-    <section id="squad" className="w-full bg-transparent text-bright-ink py-24 px-6 relative overflow-hidden border-t border-bright-ink/10">
-      <div className="max-w-7xl mx-auto flex flex-col gap-12">
+    <section id="squad" data-panel className="sticky bottom-0 z-[4] relative w-full overflow-hidden bg-bright-canvas text-bright-ink px-6 py-24">
+      <div data-panel-content className="max-w-7xl mx-auto flex flex-col gap-12">
         
         {/* Section Header with MarkerUnderline */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-bright-ink/10 pb-8">
@@ -667,7 +675,7 @@ export function Collection({
                 product={product}
                 inCartQty={inCartQty}
                 addedItem={addedItem}
-                isLoading={isLoading}
+                isLoading={displayLoading}
                 onQuickAdd={handleQuickAdd}
                 onIncrement={handleIncrement}
                 onDecrement={handleDecrement}

@@ -50,8 +50,8 @@ export function Craft() {
   ];
 
   return (
-    <section id="matrix" className="w-full bg-bright-card text-bright-ink py-12 sm:py-20 md:py-24 px-4 sm:px-6 relative overflow-hidden border-t border-bright-ink/10">
-      <div className="max-w-7xl mx-auto flex flex-col gap-10 sm:gap-16">
+    <section id="matrix" data-panel className="sticky bottom-0 z-[3] relative w-full overflow-hidden bg-bright-card text-bright-ink px-4 sm:px-6 py-12 sm:py-20 md:py-24">
+    <div data-panel-content className="max-w-7xl mx-auto flex flex-col gap-10 sm:gap-16">
         
         {/* Section Header with MarkerUnderline */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-bright-ink/10 pb-8">
